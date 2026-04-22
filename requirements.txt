@@ -1,0 +1,30 @@
+# INF 232 EC2 — Dépendances Python
+# Installation : pip install -r requirements.txt
+
+# Manipulation de données
+pandas>=1.5.3
+numpy>=1.23.5
+
+# Visualisation
+matplotlib>=3.7.0
+seaborn>=0.12.2
+plotly>=5.13.0
+
+# Machine Learning
+scikit-learn>=1.2.2
+
+# Application web
+streamlit>=1.20.0
+
+# Sauvegarde modèles
+joblib>=1.2.0
+
+# Tests unitaires
+pytest>=7.2.1
+
+# Statistiques avancées
+scipy>=1.10.0
+statsmodels>=0.13.5
+
+# Génération de données
+faker>=18.3.0

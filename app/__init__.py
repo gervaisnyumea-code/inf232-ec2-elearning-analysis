@@ -1,0 +1,1 @@
+# INF232 EC2 - Streamlit Application

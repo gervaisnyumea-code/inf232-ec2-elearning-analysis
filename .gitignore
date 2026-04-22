@@ -28,9 +28,10 @@ env/
 *.ipynb
 
 # Data
-*.csv
 *.sqlite
 *.db
+# Keep dataset for the project
+!data/raw/elearning_dataset.csv
 
 # Models
 *.pkl
