@@ -14,8 +14,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.data_cleaning import load_raw_data, full_pipeline, get_feature_matrix
 from src.models import RegressionModel, ClassificationModel
-from src.visualization import plot_histogram_kde, plot_pie_chart
-from src.visualization_extra import plot_bar_chart_interactive, plot_boxplot_multi, plot_correlation_heatmap, plot_scatter_regression, plot_oscillating_progression
+from src.visualization import plot_histogram_kde, plot_pie_chart, plot_heatmap_correlation
+from src.visualization_extra import plot_bar_chart_interactive, plot_boxplot_multi, plot_scatter_regression, plot_oscillating_progression
 
 # Configuration de la page
 st.set_page_config(
@@ -363,4 +363,6 @@ elif page == "Visualisation":
 # MAIN
 # ============================================================
 if __name__ == "__main__":
-    st.run()
+    # Streamlit apps are launched via the CLI: `streamlit run app/main.py`.
+    # No action is required here; avoid calling non-existent st.run().
+    pass
