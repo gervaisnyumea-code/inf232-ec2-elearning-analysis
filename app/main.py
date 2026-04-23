@@ -389,6 +389,7 @@ elif page == "EDA":
             from src.orchestration import BrainNet
             from src.data_streaming import read_live_data
             from src.reporting import generate_report
+            import time
             bn = BrainNet(auto_load=True)
             df_live = read_live_data(100000)
             if df_live.empty:
