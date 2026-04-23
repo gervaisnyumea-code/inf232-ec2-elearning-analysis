@@ -123,6 +123,7 @@ class ClassificationModel:
         self.model_type = model_type
         self.scaler = StandardScaler()
         self.model = self._get_model()
+        self.feature_names = None
 
     def _get_model(self):
         if self.model_type == 'knn':
@@ -131,6 +132,8 @@ class ClassificationModel:
 
     def fit(self, X: pd.DataFrame, y: pd.Series) -> 'ClassificationModel':
         """Entraîne le modèle."""
+        # Store feature names to allow safe prediction later
+        self.feature_names = X.columns.tolist()
         X_scaled = self.scaler.fit_transform(X)
         self.model.fit(X_scaled, y)
         return self
@@ -181,8 +184,19 @@ class ClassificationModel:
     def save(self, filepath: str) -> None:
         """Sauvegarde le modèle."""
         Path(filepath).parent.mkdir(parents=True, exist_ok=True)
-        joblib.dump({'model': self.model, 'scaler': self.scaler}, filepath)
+        # Save model along with scaler and feature names for safe loading/prediction
+        joblib.dump({'model': self.model, 'scaler': self.scaler, 'feature_names': getattr(self, 'feature_names', None)}, filepath)
         print(f"✅ Modèle sauvegardé : {filepath}")
+
+    @classmethod
+    def load(cls, filepath: str) -> 'ClassificationModel':
+        """Charge un modèle de classification (si sauvegardé sous forme dict)."""
+        data = joblib.load(filepath)
+        inst = cls()
+        inst.model = data.get('model')
+        inst.scaler = data.get('scaler')
+        inst.feature_names = data.get('feature_names', None)
+        return inst
 
 
 # ============================================================
