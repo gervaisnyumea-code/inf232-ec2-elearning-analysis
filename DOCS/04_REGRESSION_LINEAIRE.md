@@ -199,7 +199,7 @@ class RegressionLinéaire:
             'normal':    p_value > 0.05
         }
         print(f"Shapiro-Wilk : W={stat:.4f}, p={p_value:.4f}")
-        print(f"→ Normalité {'vérifiée ✅' if result['normal'] else 'douteuse ⚠️'}")
+        print(f"→ Normalité {'vérifiée <img src=app/static/icons/check.svg alt=check width=18/>' if result['normal'] else 'douteuse <img src=app/static/icons/warning.svg alt=warning width=18/>'}")
         return result
     
     def test_durbin_watson(self) -> float:
@@ -213,9 +213,9 @@ class RegressionLinéaire:
         dw = durbin_watson(self.residuals)
         print(f"Durbin-Watson = {dw:.3f}")
         if 1.5 <= dw <= 2.5:
-            print("→ Pas d'autocorrélation détectée ✅")
+            print("→ Pas d'autocorrélation détectée <img src=app/static/icons/check.svg alt=check width=18/>")
         else:
-            print("→ Autocorrélation possible ⚠️")
+            print("→ Autocorrélation possible <img src=app/static/icons/warning.svg alt=warning width=18/>")
         return dw
     
     # ── Visualisations ───────────────────────────────────────
@@ -365,7 +365,7 @@ class RegressionLinéaire:
         """Sérialise le modèle entraîné."""
         Path(filepath).parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(self, filepath)
-        print(f"✅ Modèle sauvegardé : {filepath}")
+        print(f"<img src=app/static/icons/check.svg alt=check width=18/> Modèle sauvegardé : {filepath}")
 
 
 # ════════════════════════════════════════════════════════════
@@ -388,7 +388,7 @@ def run_regression_pipeline(df_clean: pd.DataFrame) -> RegressionLinéaire:
     """
     from src.data_cleaning import get_feature_matrix
     
-    print("🔁 Démarrage pipeline régression linéaire...")
+    print("<img src=app/static/icons/loop.svg alt=loop width=18/> Démarrage pipeline régression linéaire...")
     
     X, y_reg, _ = get_feature_matrix(df_clean)
     

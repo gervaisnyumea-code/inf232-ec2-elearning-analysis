@@ -50,7 +50,7 @@ streamlit run app/main.py
 pytest tests/ -v
 ```
 
-## 📊 Phases du Projet
+## <img src=app/static/icons/chart.svg alt=chart width=18/> Phases du Projet
 
 | Phase | Description |
 |-------|-------------|

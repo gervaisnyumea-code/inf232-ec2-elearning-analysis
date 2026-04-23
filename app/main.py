@@ -17,10 +17,27 @@ from src.models import RegressionModel, ClassificationModel
 from src.visualization import plot_histogram_kde, plot_pie_chart, plot_heatmap_correlation
 from src.visualization_extra import plot_bar_chart_interactive, plot_boxplot_multi, plot_scatter_regression, plot_oscillating_progression
 
+# SVG icon helper
+import urllib.parse as _urllib_parse
+
+def _svg_data_uri(name):
+    p = Path(__file__).parent / 'static' / 'icons' / f'{name}.svg'
+    if p.exists():
+        svg = p.read_text()
+        return f"data:image/svg+xml;utf8,{_urllib_parse.quote(svg)}"
+    return ''
+
+
+def icon_html(name, width=18):
+    uri = _svg_data_uri(name)
+    if uri:
+        return f"<img src='{uri}' width='{width}' style='vertical-align:middle'/> "
+    return ''
+
 # Configuration de la page
 st.set_page_config(
     page_title="INF232 - E-Learning Analysis",
-    page_icon="📚",
+    page_icon=None,
     layout="wide"
 )
 
@@ -152,7 +169,7 @@ def load_models():
 # ============================================================
 # SIDEBAR - Navigation
 # ============================================================
-st.sidebar.title("📚 INF232 EC2")
+st.sidebar.markdown(icon_html("chart",16) + " INF232 EC2", unsafe_allow_html=True)
 st.sidebar.markdown("## Navigation")
 
 page = st.sidebar.radio(
@@ -169,7 +186,7 @@ st.sidebar.markdown("**Problématique:** Quels comportements influencent la réu
 # PAGE D'ACCUEIL
 # ============================================================
 if page == "Accueil":
-    st.title("📚 Analyse de la Performance Académique en E-Learning")
+    st.markdown(icon_html("chart",24) + " Analyse de la Performance Académique en E-Learning", unsafe_allow_html=True)
 
     st.markdown("""
     ## Bienvenue dans l'application INF232 EC2
@@ -191,7 +208,7 @@ if page == "Accueil":
     """)
 
     st.markdown("---")
-    st.info("👈 Utilisez le menu latéral pour naviguer entre les pages")
+    st.info("Utilisez le menu latéral pour naviguer entre les pages")
 
     # Quick stats
     df = load_data()
@@ -335,6 +352,31 @@ elif page == "EDA":
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
     corr_with_success = df[numeric_cols].corr()['reussite'].sort_values(ascending=False)
     st.bar_chart(corr_with_success)
+
+    # Live streaming quick demo (simulé)
+    st.markdown("""### Flux de données en temps réel (simulation)
+    Utilisez le simulateur pour injecter des données continues et rafraîchissez le graphique.
+    """)
+    col_a, col_b = st.columns([1,3])
+    with col_a:
+        if st.button("Démarrer simulateur de données"):
+            import subprocess, sys, os
+            os.makedirs('logs', exist_ok=True)
+            with open('logs/streamer.log','a') as out, open('logs/streamer.err','a') as err:
+                subprocess.Popen([sys.executable, 'scripts/data_stream_simulator.py'], stdout=out, stderr=err)
+            st.success('Simulateur démarré (voir logs/streamer.log)')
+        if st.button("Arrêter simulateur"):
+            st.info('Arrêt manuel non implémenté; utilisez kill sur le processus (démo).')
+    with col_b:
+        from src.data_streaming import read_live_data
+        df_live = read_live_data(500)
+        if df_live.empty:
+            st.write('Aucune donnée de streaming détectée. Cliquez sur "Démarrer simulateur de données".')
+        else:
+            import plotly.express as px
+            fig = px.line(df_live, x='t', y='value1', title='Courbe oscillante (value1)')
+            st.plotly_chart(fig, use_container_width=True)
+
 
 
 # ============================================================

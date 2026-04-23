@@ -101,7 +101,7 @@ class ClassificationSupervisée:
         self.X_train_sc = self.scaler.fit_transform(self.X_train)
         self.X_test_sc  = self.scaler.transform(self.X_test)
         
-        print(f"✅ Données préparées | Train: {len(self.X_train)} | Test: {len(self.X_test)}")
+        print(f"<img src=app/static/icons/check.svg alt=check width=18/> Données préparées | Train: {len(self.X_train)} | Test: {len(self.X_test)}")
         print(f"   Taux réussite train: {self.y_train.mean():.1%} | test: {self.y_test.mean():.1%}")
     
     def define_models(self) -> None:
@@ -296,7 +296,7 @@ class ClassificationSupervisée:
         Path("data/models").mkdir(parents=True, exist_ok=True)
         joblib.dump(best_model, "data/models/classifier_model.pkl")
         joblib.dump(self.scaler, "data/models/scaler.pkl")
-        print(f"✅ Meilleur modèle ({best_name}) sauvegardé.")
+        print(f"<img src=app/static/icons/check.svg alt=check width=18/> Meilleur modèle ({best_name}) sauvegardé.")
 
 
 # ════════════════════════════════════════════════════════════
@@ -344,7 +344,7 @@ class ClusteringNonSupervisé:
         
         # Optimal k selon silhouette
         self.optimal_k = k_range[np.argmax(silhouette_scores)]
-        print(f"✅ K optimal (silhouette) : {self.optimal_k}")
+        print(f"<img src=app/static/icons/check.svg alt=check width=18/> K optimal (silhouette) : {self.optimal_k}")
         return self.elbow_data
     
     def fit_kmeans(self, X_scaled: np.ndarray, k: Optional[int] = None) -> np.ndarray:
@@ -550,9 +550,9 @@ if __name__ == "__main__":
 
 | Cluster | Profil | Caractéristiques | Note Finale Moy. | Réussite |
 |---------|--------|------------------|------------------|----------|
-| **C0** | 🟢 Étudiant engagé | Temps > 15h, devoirs rendus ≥ 9, exercices > 80% | ~15.2 | ~95% |
+| **C0** | <img src=app/static/icons/circle_green.svg alt=circle_green width=18/> Étudiant engagé | Temps > 15h, devoirs rendus ≥ 9, exercices > 80% | ~15.2 | ~95% |
 | **C1** | 🟡 Étudiant moyen | Temps ~10h, devoirs ~7, exercices ~65% | ~11.0 | ~58% |
-| **C2** | 🔴 Étudiant à risque | Temps < 7h, absences > 6, exercices < 40% | ~6.5 | ~12% |
+| **C2** | <img src=app/static/icons/circle_red.svg alt=circle_red width=18/> Étudiant à risque | Temps < 7h, absences > 6, exercices < 40% | ~6.5 | ~12% |
 
 ---
 

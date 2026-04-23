@@ -135,7 +135,7 @@ def load_raw_data(filepath: str = "data/raw/elearning_dataset.csv") -> pd.DataFr
     if not path.exists():
         raise FileNotFoundError(f"Fichier introuvable : {filepath}")
     df = pd.read_csv(path, encoding='utf-8')
-    print(f"✅ Données chargées : {df.shape}")
+    print(f"<img src=app/static/icons/check.svg alt=check width=18/> Données chargées : {df.shape}")
     return df
 
 
@@ -273,7 +273,7 @@ def full_pipeline(filepath: str = "data/raw/elearning_dataset.csv") -> pd.DataFr
     print("🔧 Démarrage du pipeline de nettoyage...")
     df = load_raw_data(filepath)
     
-    print("\n📊 Rapport valeurs manquantes :")
+    print("\n<img src=app/static/icons/chart.svg alt=chart width=18/> Rapport valeurs manquantes :")
     print(report_missing_values(df).to_string())
     
     df = handle_missing_values(df)
@@ -282,12 +282,12 @@ def full_pipeline(filepath: str = "data/raw/elearning_dataset.csv") -> pd.DataFr
     # Supprimer les doublons
     n_before = len(df)
     df.drop_duplicates(inplace=True)
-    print(f"\n🔍 Doublons supprimés : {n_before - len(df)}")
+    print(f"\n<img src=app/static/icons/search.svg alt=search width=18/> Doublons supprimés : {n_before - len(df)}")
     
     # Sauvegarder
     Path("data/processed").mkdir(parents=True, exist_ok=True)
     df.to_csv("data/processed/elearning_clean.csv", index=False)
-    print(f"\n✅ Dataset nettoyé sauvegardé ({df.shape})")
+    print(f"\n<img src=app/static/icons/check.svg alt=check width=18/> Dataset nettoyé sauvegardé ({df.shape})")
     
     return df
 ```
@@ -324,7 +324,7 @@ def save_model(model: Any, filepath: str) -> None:
     """
     pathlib.Path(filepath).parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, filepath)
-    print(f"✅ Modèle sauvegardé : {filepath}")
+    print(f"<img src=app/static/icons/check.svg alt=check width=18/> Modèle sauvegardé : {filepath}")
 
 
 def load_model(filepath: str) -> Any:

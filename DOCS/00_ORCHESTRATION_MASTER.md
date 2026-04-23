@@ -3,7 +3,7 @@
 
 ---
 
-## 🎯 VISION DU PROJET
+## <img src=app/static/icons/target.svg alt=target width=18/> VISION DU PROJET
 
 **Titre :** Application web de collecte et d'analyse de la performance académique des étudiants en ligne  
 **Secteur choisi :** Éducation numérique & E-learning  
@@ -104,7 +104,7 @@ INF232_PROJET/
 
 ---
 
-## 📊 CATALOGUE COMPLET DES DIAGRAMMES ATTENDUS
+## <img src=app/static/icons/chart.svg alt=chart width=18/> CATALOGUE COMPLET DES DIAGRAMMES ATTENDUS
 
 | # | Type de Diagramme | Technique | Bibliothèque | Section du rapport |
 |---|-------------------|-----------|--------------|-------------------|
@@ -170,7 +170,7 @@ pytest tests/ -v
 
 ---
 
-## 📌 JUSTIFICATION DU SECTEUR CHOISI
+## <img src=app/static/icons/pin.svg alt=pin width=18/> JUSTIFICATION DU SECTEUR CHOISI
 
 Le secteur de **l'éducation numérique** est retenu pour les raisons suivantes :
 

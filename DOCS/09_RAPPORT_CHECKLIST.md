@@ -213,9 +213,9 @@ $$F_1 = \frac{2 \times Précision \times Rappel}{Précision + Rappel}$$
 
 | Cluster | Label | n | Temps/sem | Devoirs | Exercices | Absences | Note moy. | Réussite |
 |---------|-------|---|-----------|---------|-----------|----------|-----------|----------|
-| C0 | 🟢 Engagé | 152 | 17.2h | 9.1 | 82% | 1.8 | 15.4 | 96% |
+| C0 | <img src=app/static/icons/circle_green.svg alt=circle_green width=18/> Engagé | 152 | 17.2h | 9.1 | 82% | 1.8 | 15.4 | 96% |
 | C1 | 🟡 Moyen | 214 | 11.8h | 7.3 | 67% | 3.1 | 10.9 | 56% |
-| C2 | 🔴 À risque | 134 | 6.5h | 5.2 | 42% | 6.4 | 6.8 | 12% |
+| C2 | <img src=app/static/icons/circle_red.svg alt=circle_red width=18/> À risque | 134 | 6.5h | 5.2 | 42% | 6.4 | 6.8 | 12% |
 
 ---
 
@@ -254,7 +254,7 @@ $$F_1 = \frac{2 \times Précision \times Rappel}{Précision + Rappel}$$
 - [ ] Toutes les fonctions ont des **docstrings** explicites
 - [ ] **Type hints** utilisés sur toutes les fonctions
 - [ ] **Aucun fichier sensible** dans le dépôt (`.gitignore` correct)
-- [ ] Tests passent sans erreur : `pytest tests/ -v` ✅
+- [ ] Tests passent sans erreur : `pytest tests/ -v` <img src=app/static/icons/check.svg alt=check width=18/>
 - [ ] Application Streamlit se lance sans erreur : `streamlit run app/main.py`
 - [ ] Dataset généré et nettoyé disponible dans `data/`
 - [ ] Modèles sérialisés disponibles dans `data/models/`
@@ -331,10 +331,10 @@ $$F_1 = \frac{2 \times Précision \times Rappel}{Précision + Rappel}$$
 
 | Critère | Points | Évaluation |
 |---------|--------|------------|
-| Code Python (modularité, docs, tests) | /30 | ✅ Complet |
-| Rapport technique | /30 | ✅ Complet |
-| Application Streamlit | /25 | ✅ Complète |
-| Visualisations et interprétations | /15 | ✅ 24 diagrammes |
+| Code Python (modularité, docs, tests) | /30 | <img src=app/static/icons/check.svg alt=check width=18/> Complet |
+| Rapport technique | /30 | <img src=app/static/icons/check.svg alt=check width=18/> Complet |
+| Application Streamlit | /25 | <img src=app/static/icons/check.svg alt=check width=18/> Complète |
+| Visualisations et interprétations | /15 | <img src=app/static/icons/check.svg alt=check width=18/> 24 diagrammes |
 | **TOTAL** | **/100** | |
 
 ---

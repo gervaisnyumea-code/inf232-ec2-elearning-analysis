@@ -68,7 +68,7 @@ def load_data() -> pd.DataFrame:
         df = pd.read_csv("data/processed/elearning_clean.csv")
         return df
     except FileNotFoundError:
-        st.warning("⚠️ Dataset non trouvé. Génération automatique en cours...")
+        st.warning("<img src=app/static/icons/warning.svg alt=warning width=18/> Dataset non trouvé. Génération automatique en cours...")
         from src.data_generation import generate_student_dataset, save_dataset
         from src.data_cleaning import full_pipeline
         df_raw = generate_student_dataset(n_samples=500)
@@ -96,9 +96,9 @@ def main():
     
     # Navigation
     menu = st.sidebar.selectbox(
-        "📌 Navigation",
+        "<img src=app/static/icons/pin.svg alt=pin width=18/> Navigation",
         ["🏠 Accueil", "📥 Collecte de données",
-         "📊 Analyse exploratoire", "🤖 Modélisation",
+         "<img src=app/static/icons/chart.svg alt=chart width=18/> Analyse exploratoire", "🤖 Modélisation",
          "🔬 Réduction de dimension", "🔮 Prédiction"],
         index=0
     )
@@ -111,7 +111,7 @@ def main():
         page_accueil(df)
     elif menu == "📥 Collecte de données":
         page_collecte(df)
-    elif menu == "📊 Analyse exploratoire":
+    elif menu == "<img src=app/static/icons/chart.svg alt=chart width=18/> Analyse exploratoire":
         page_eda(df)
     elif menu == "🤖 Modélisation":
         page_modelisation(df, models)
@@ -133,9 +133,9 @@ def page_accueil(df: pd.DataFrame) -> None:
     with col1:
         st.metric("📚 Étudiants", f"{len(df):,}")
     with col2:
-        st.metric("✅ Taux de réussite", f"{df['reussite'].mean():.1%}")
+        st.metric("<img src=app/static/icons/check.svg alt=check width=18/> Taux de réussite", f"{df['reussite'].mean():.1%}")
     with col3:
-        st.metric("📈 Note moyenne", f"{df['note_finale'].mean():.2f}/20")
+        st.metric("<img src=app/static/icons/up.svg alt=up width=18/> Note moyenne", f"{df['note_finale'].mean():.2f}/20")
     with col4:
         st.metric("⏱️ Temps étude moyen", f"{df['temps_etude_hebdo'].mean():.1f}h/sem")
     
@@ -153,13 +153,13 @@ def page_accueil(df: pd.DataFrame) -> None:
         )
     
     with col_right:
-        st.subheader("📊 Statistiques clés")
+        st.subheader("<img src=app/static/icons/chart.svg alt=chart width=18/> Statistiques clés")
         stats_display = df[['temps_etude_hebdo', 'note_finale', 
                             'exercices_completes_pct', 'nombre_absences']].describe()
         st.dataframe(stats_display.round(2), use_container_width=True)
     
     # Distribution des notes
-    st.subheader("📈 Distribution des notes finales")
+    st.subheader("<img src=app/static/icons/up.svg alt=up width=18/> Distribution des notes finales")
     fig = plot_histogram_kde(df, 'note_finale', 'Distribution des notes finales')
     st.pyplot(fig)
     plt.close()
@@ -199,7 +199,7 @@ def page_collecte(df: pd.DataFrame) -> None:
         forums = c8.number_input("Messages forums", 0, 50, 5)
         devoirs = c9.number_input("Devoirs rendus (sur 10)", 0, 10, 7)
         
-        st.subheader("📊 Contexte")
+        st.subheader("<img src=app/static/icons/chart.svg alt=chart width=18/> Contexte")
         c10, c11, c12 = st.columns(3)
         revenu = c10.selectbox("Revenu famille", ['Bas', 'Moyen', 'Élevé'])
         motivation = c11.slider("Motivation (1-10)", 1.0, 10.0, 6.5, 0.1)
@@ -234,7 +234,7 @@ def page_collecte(df: pd.DataFrame) -> None:
             header = not Path(output_path).exists()
             new_obs.to_csv(output_path, mode='a', header=header, index=False)
             
-            st.success(f"✅ Observation enregistrée ! (ID: {len(df) + 1})")
+            st.success(f"<img src=app/static/icons/check.svg alt=check width=18/> Observation enregistrée ! (ID: {len(df) + 1})")
             st.dataframe(new_obs)
 
 
@@ -244,11 +244,11 @@ def page_collecte(df: pd.DataFrame) -> None:
 
 def page_eda(df: pd.DataFrame) -> None:
     """Dashboard d'analyse exploratoire."""
-    st.header("📊 Analyse Exploratoire des Données (EDA)")
+    st.header("<img src=app/static/icons/chart.svg alt=chart width=18/> Analyse Exploratoire des Données (EDA)")
     
     tab1, tab2, tab3, tab4 = st.tabs([
-        "📈 Distributions", "📊 Catégorielles",
-        "🌡️ Corrélations", "📉 Évolution"
+        "<img src=app/static/icons/up.svg alt=up width=18/> Distributions", "<img src=app/static/icons/chart.svg alt=chart width=18/> Catégorielles",
+        "<img src=app/static/icons/thermometer.svg alt=thermometer width=18/> Corrélations", "<img src=app/static/icons/down.svg alt=down width=18/> Évolution"
     ])
     
     with tab1:
@@ -321,7 +321,7 @@ def page_modelisation(df: pd.DataFrame, models: dict) -> None:
     """Résultats des modèles entraînés."""
     st.header("🤖 Modélisation — Régression & Classification")
     
-    tab1, tab2 = st.tabs(["📈 Régression Linéaire", "🎯 Classification"])
+    tab1, tab2 = st.tabs(["<img src=app/static/icons/up.svg alt=up width=18/> Régression Linéaire", "<img src=app/static/icons/target.svg alt=target width=18/> Classification"])
     
     with tab1:
         st.subheader("Régression Linéaire Multiple — Prédiction de la note finale")
@@ -350,7 +350,7 @@ def page_modelisation(df: pd.DataFrame, models: dict) -> None:
             fig5 = reg.plot_learning_curve()
             st.pyplot(fig5); plt.close()
         else:
-            st.warning("⚠️ Modèle non trouvé. Exécutez `python src/models.py` d'abord.")
+            st.warning("<img src=app/static/icons/warning.svg alt=warning width=18/> Modèle non trouvé. Exécutez `python src/models.py` d'abord.")
     
     with tab2:
         st.subheader("Classification — Prédiction de la réussite")
@@ -359,9 +359,9 @@ def page_modelisation(df: pd.DataFrame, models: dict) -> None:
         if 'classifier' in models:
             clf = models['classifier']
             # Affichage des résultats stockés en cache
-            st.success("Modèle chargé avec succès ✅")
+            st.success("Modèle chargé avec succès <img src=app/static/icons/check.svg alt=check width=18/>")
         else:
-            st.warning("⚠️ Modèle non trouvé. Exécutez `python src/classification.py` d'abord.")
+            st.warning("<img src=app/static/icons/warning.svg alt=warning width=18/> Modèle non trouvé. Exécutez `python src/classification.py` d'abord.")
 
 
 # ════════════════════════════════════════════════════════════
@@ -387,7 +387,7 @@ def page_reduction(df: pd.DataFrame) -> None:
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_sub)
     
-    tab1, tab2, tab3 = st.tabs(["📐 ACP", "🌌 t-SNE", "🎯 LDA"])
+    tab1, tab2, tab3 = st.tabs(["📐 ACP", "🌌 t-SNE", "<img src=app/static/icons/target.svg alt=target width=18/> LDA"])
     
     with tab1:
         with st.spinner("Calcul ACP..."):
@@ -435,7 +435,7 @@ def page_prediction(models: dict) -> None:
     st.header("🔮 Prédiction — Profil d'un Étudiant")
     
     if 'regression' not in models or 'classifier' not in models:
-        st.error("❌ Modèles non disponibles. Exécutez le pipeline d'entraînement.")
+        st.error("<img src=app/static/icons/cross.svg alt=cross width=18/> Modèles non disponibles. Exécutez le pipeline d'entraînement.")
         return
     
     st.subheader("Entrez le profil de l'étudiant :")
@@ -474,12 +474,12 @@ def page_prediction(models: dict) -> None:
         col_res1, col_res2, col_res3 = st.columns(3)
         
         with col_res1:
-            st.metric("📊 Note Finale Prédite", f"{note_pred:.2f} / 20")
+            st.metric("<img src=app/static/icons/chart.svg alt=chart width=18/> Note Finale Prédite", f"{note_pred:.2f} / 20")
         with col_res2:
-            badge = "✅ RÉUSSITE" if reussite_pred == 1 else "❌ ÉCHEC"
-            st.metric("🎯 Prédiction Réussite", badge)
+            badge = "<img src=app/static/icons/check.svg alt=check width=18/> RÉUSSITE" if reussite_pred == 1 else "<img src=app/static/icons/cross.svg alt=cross width=18/> ÉCHEC"
+            st.metric("<img src=app/static/icons/target.svg alt=target width=18/> Prédiction Réussite", badge)
         with col_res3:
-            st.metric("📈 Probabilité de réussite", f"{reussite_proba:.1%}")
+            st.metric("<img src=app/static/icons/up.svg alt=up width=18/> Probabilité de réussite", f"{reussite_proba:.1%}")
         
         # Jauge
         st.progress(min(int(note_pred / 20 * 100), 100))
@@ -487,7 +487,7 @@ def page_prediction(models: dict) -> None:
         # Recommandation
         if reussite_pred == 0:
             st.warning(
-                "⚠️ **Étudiant à risque d'échec.** Recommandations :\n"
+                "<img src=app/static/icons/warning.svg alt=warning width=18/> **Étudiant à risque d'échec.** Recommandations :\n"
                 "- Augmenter le temps d'étude hebdomadaire\n"
                 "- Réduire les absences\n"
                 "- Compléter plus d'exercices pratiques"
@@ -527,7 +527,7 @@ streamlit run app/main.py
 │              SIDEBAR NAVIGATION                         │
 │  🏠 Accueil        ← KPIs + aperçu dataset              │
 │  📥 Collecte       ← Formulaire saisie + SQLite/CSV     │
-│  📊 EDA            ← Histos, Pie, Barres, Heatmap, Osc. │
+│  <img src=app/static/icons/chart.svg alt=chart width=18/> EDA            ← Histos, Pie, Barres, Heatmap, Osc. │
 │  🤖 Modélisation   ← Régression + Classification        │
 │  🔬 Réduction      ← ACP + t-SNE + LDA                  │
 │  🔮 Prédiction     ← Interface de prédiction temps réel  │

@@ -259,7 +259,7 @@ def save_dataset(df: pd.DataFrame, output_dir: str = "data/raw") -> None:
     Path(output_dir).mkdir(parents=True, exist_ok=True)
     output_path = Path(output_dir) / "elearning_dataset.csv"
     df.to_csv(output_path, index=False, encoding='utf-8')
-    print(f"✅ Dataset sauvegardé : {output_path}")
+    print(f"<img src=app/static/icons/check.svg alt=check width=18/> Dataset sauvegardé : {output_path}")
     print(f"   Dimensions : {df.shape[0]} lignes × {df.shape[1]} colonnes")
     print(f"   Taux de réussite : {df['reussite'].mean():.1%}")
 
@@ -267,9 +267,9 @@ def save_dataset(df: pd.DataFrame, output_dir: str = "data/raw") -> None:
 if __name__ == "__main__":
     df = generate_student_dataset(n_samples=500, random_state=42)
     save_dataset(df)
-    print("\n📊 Aperçu des 5 premières observations :")
+    print("\n<img src=app/static/icons/chart.svg alt=chart width=18/> Aperçu des 5 premières observations :")
     print(df.head().to_string())
-    print("\n📈 Statistiques descriptives :")
+    print("\n<img src=app/static/icons/up.svg alt=up width=18/> Statistiques descriptives :")
     print(df.describe().round(2).to_string())
 ```
 
@@ -392,7 +392,7 @@ def inject_missing_values(
         missing_indices = rng.choice(len(df_dirty), size=n_missing, replace=False)
         df_dirty.loc[missing_indices, col] = np.nan
     
-    print(f"📊 Valeurs manquantes injectées :")
+    print(f"<img src=app/static/icons/chart.svg alt=chart width=18/> Valeurs manquantes injectées :")
     print(df_dirty[cols_to_corrupt].isnull().sum().to_string())
     return df_dirty
 ```

@@ -333,7 +333,7 @@ class VisualisationTSNE:
         """
         print(f"Calcul t-SNE (perplexity={self.perplexity}, n_iter={self.n_iter})...")
         self.X_tsne = self.tsne.fit_transform(X_scaled)
-        print(f"✅ t-SNE calculé — KL divergence finale : {self.tsne.kl_divergence_:.4f}")
+        print(f"<img src=app/static/icons/check.svg alt=check width=18/> t-SNE calculé — KL divergence finale : {self.tsne.kl_divergence_:.4f}")
         return self.X_tsne
     
     # ── Diagramme 20 — t-SNE scatter ────────────────────────
@@ -376,7 +376,7 @@ class VisualisationTSNE:
         )
         ax.legend(fontsize=10, markerscale=1.5)
         ax.text(0.02, 0.02,
-               "⚠️ Les distances absolues ne sont pas interprétables en t-SNE",
+               "<img src=app/static/icons/warning.svg alt=warning width=18/> Les distances absolues ne sont pas interprétables en t-SNE",
                transform=ax.transAxes, fontsize=8, color='gray')
         plt.tight_layout()
         return fig
@@ -558,9 +558,9 @@ if __name__ == "__main__":
 | **Type** | Non supervisée | Non supervisée | Supervisée |
 | **Linéarité** | Linéaire | Non linéaire | Linéaire |
 | **Objectif** | Max variance | Préserver voisinage | Max séparabilité |
-| **Reproductibilité** | ✅ Déterministe | ⚠️ Stochastique | ✅ Déterministe |
+| **Reproductibilité** | <img src=app/static/icons/check.svg alt=check width=18/> Déterministe | <img src=app/static/icons/warning.svg alt=warning width=18/> Stochastique | <img src=app/static/icons/check.svg alt=check width=18/> Déterministe |
 | **Interprétabilité** | Bonne (loadings) | Faible | Bonne (coefs) |
-| **Scalabilité** | ✅ Excellente | ⚠️ O(n²) | ✅ Bonne |
+| **Scalabilité** | <img src=app/static/icons/check.svg alt=check width=18/> Excellente | <img src=app/static/icons/warning.svg alt=warning width=18/> O(n²) | <img src=app/static/icons/check.svg alt=check width=18/> Bonne |
 | **Utilisation ici** | Réduction + Biplot | Visualisation clusters | Séparation réussite/échec |
 
 ---
