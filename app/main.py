@@ -403,7 +403,23 @@ elif page == "EDA":
             if auto_refresh:
                 import time
                 time.sleep(refresh_interval)
-                st.experimental_rerun()
+                try:
+                    rerun = getattr(st, 'experimental_rerun', None)
+                    if callable(rerun):
+                        # Preferred method when available
+                        rerun()
+                    else:
+                        # Fallback: tweak query params to force a rerun (works without experimental_rerun)
+                        try:
+                            params = st.experimental_get_query_params()
+                            params['_autorefresh'] = str(time.time())
+                            st.experimental_set_query_params(**params)
+                        except Exception:
+                            # If even query params are unavailable, skip silently
+                            pass
+                except Exception:
+                    # Any unexpected error should not crash the app
+                    pass
 
 
 
