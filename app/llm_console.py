@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import streamlit as st
+import pandas as pd
 
 from src.llm_integration import LLMClient
 from src.llm_orchestrator import LLMOrchestrator
@@ -121,6 +122,43 @@ def render_llm_console():
         st.sidebar.markdown('### Conversation en mémoire')
         for msg in st.session_state['convo']:
             st.sidebar.write(f"({msg['round']}) {msg['provider']}: {msg['text'][:120]}...")
+
+    # Detailed usage history and exports
+    st.markdown('---')
+    st.subheader('Historique détaillé des appels LLM')
+    usage_file = Path(os.getenv('LLM_USAGE_FILE', 'logs/llm_usage.json'))
+    try:
+        entries = json.loads(usage_file.read_text()) if usage_file.exists() else []
+    except Exception:
+        entries = []
+
+    if not entries:
+        st.info('Aucun enregistrement d\'usage pour le moment.')
+    else:
+        df_usage = pd.DataFrame(entries)
+        if 'ts' in df_usage.columns:
+            df_usage['ts'] = pd.to_datetime(df_usage['ts'], unit='s')
+        if 'extra' in df_usage.columns:
+            df_usage['error'] = df_usage['extra'].apply(lambda e: e.get('error') if isinstance(e, dict) else None)
+            df_usage['api_prompt_tokens'] = df_usage['extra'].apply(lambda e: (e.get('api_usage') or {}).get('prompt_tokens') if isinstance(e, dict) else None)
+            df_usage['api_completion_tokens'] = df_usage['extra'].apply(lambda e: (e.get('api_usage') or {}).get('completion_tokens') if isinstance(e, dict) else None)
+        provider_options = ['Tous'] + sorted(df_usage['provider'].dropna().unique().tolist())
+        provider_filter = st.selectbox('Filtrer par provider', provider_options)
+        n_rows = st.number_input('Lignes affichées', min_value=10, max_value=1000, value=200)
+        if provider_filter != 'Tous':
+            df_show = df_usage[df_usage['provider'] == provider_filter]
+        else:
+            df_show = df_usage
+        st.dataframe(df_show.sort_values('ts', ascending=False).head(n_rows), use_container_width=True)
+        csv_bytes = df_show.to_csv(index=False).encode('utf-8')
+        st.download_button("Télécharger historique CSV", csv_bytes, file_name='llm_usage_history.csv', mime='text/csv')
+
+    if st.button('Effacer historique usage (main)'):
+        try:
+            usage_file.write_text('[]')
+            st.success('Logs usage effacés')
+        except Exception:
+            st.error('Impossible d\'effacer les logs')
 
 
 if __name__ == '__main__':

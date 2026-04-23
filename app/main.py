@@ -647,10 +647,55 @@ elif page == "LLM BrainNet":
     with col_a:
         enable = st.checkbox("Activer appels LLM (globaux)", value=(os.getenv('LLM_CALLS_ENABLED','false').lower() in ('1','true','yes')))
         max_calls = st.number_input("Max appels / heure", min_value=1, max_value=10000, value=int(os.getenv('LLM_MAX_CALLS_PER_HOUR','60')))
+        mistral_cost = st.number_input("Coût Mistral (USD / 1k tokens)", min_value=0.0, max_value=100.0, value=float(os.getenv('MISTRAL_COST_PER_1K','0.002')), format="%.6f")
+        gemini_cost = st.number_input("Coût Gemini (USD / 1k tokens)", min_value=0.0, max_value=100.0, value=float(os.getenv('GEMINI_COST_PER_1K','0.03')), format="%.6f")
+        groq_cost = st.number_input("Coût Groq (USD / 1k tokens)", min_value=0.0, max_value=100.0, value=float(os.getenv('GROQ_COST_PER_1K','0.02')), format="%.6f")
         if st.button("Appliquer paramètres LLM"):
             os.environ['LLM_CALLS_ENABLED'] = 'true' if enable else 'false'
             os.environ['LLM_MAX_CALLS_PER_HOUR'] = str(max_calls)
-            st.success("Paramètres LLM appliqués pour ce processus.")
+            os.environ['MISTRAL_COST_PER_1K'] = str(mistral_cost)
+            os.environ['GEMINI_COST_PER_1K'] = str(gemini_cost)
+            os.environ['GROQ_COST_PER_1K'] = str(groq_cost)
+            # Persist to .env
+            def _update_env_file(updates, path=Path(__file__).parent.parent / '.env'):
+                try:
+                    p = path
+                    if p.exists():
+                        lines = p.read_text().splitlines()
+                    else:
+                        lines = []
+                    new_lines = []
+                    found = set()
+                    for line in lines:
+                        if line.strip().startswith('#') or '=' not in line:
+                            new_lines.append(line)
+                            continue
+                        key = line.split('=',1)[0].strip()
+                        if key in updates:
+                            new_lines.append(f"{key}={updates[key]}")
+                            found.add(key)
+                        else:
+                            new_lines.append(line)
+                    for k,v in updates.items():
+                        if k not in found:
+                            new_lines.append(f"{k}={v}")
+                    p.write_text("\n".join(new_lines)+"\n")
+                    return True
+                except Exception as e:
+                    st.error(f"Impossible d'écrire .env: {e}")
+                    return False
+
+            success = _update_env_file({
+                'LLM_CALLS_ENABLED': 'true' if enable else 'false',
+                'LLM_MAX_CALLS_PER_HOUR': str(max_calls),
+                'MISTRAL_COST_PER_1K': str(mistral_cost),
+                'GEMINI_COST_PER_1K': str(gemini_cost),
+                'GROQ_COST_PER_1K': str(groq_cost)
+            })
+            if success:
+                st.success("Paramètres LLM appliqués et sauvegardés dans .env.")
+            else:
+                st.warning("Paramètres appliqués en mémoire mais échec de la sauvegarde sur disque.")
 
     # Charger et exécuter la console (module importable)
     try:

@@ -141,6 +141,7 @@ class LLMClient:
 
         def _process_resp(resp):
             out_text = None
+            api_usage = None
             if isinstance(resp, dict):
                 out_text = resp.get('output') or resp.get('text')
                 if not out_text and 'choices' in resp and isinstance(resp['choices'], list) and resp['choices']:
@@ -151,19 +152,33 @@ class LLMClient:
                         out_text = str(first)
                 if not out_text and 'body' in resp and isinstance(resp['body'], str):
                     out_text = resp['body']
+
+                # extract usage if provider returns it
+                usage = resp.get('usage') or resp.get('token_usage') or (resp.get('meta', {}) or {}).get('usage')
+                if isinstance(usage, dict):
+                    api_prompt = usage.get('prompt_tokens') or usage.get('input_tokens') or usage.get('prompt')
+                    api_completion = usage.get('completion_tokens') or usage.get('output_tokens') or usage.get('completion')
+                    api_usage = {'prompt_tokens': api_prompt, 'completion_tokens': api_completion, 'raw': usage}
+
             else:
                 out_text = str(resp)
 
-            completion_tokens = estimate_tokens(out_text) if out_text else 0
-            cost = (prompt_tokens + completion_tokens) / 1000.0 * get_cost_per_1k(provider)
+            prompt_tokens_to_log = int(api_usage['prompt_tokens']) if api_usage and api_usage.get('prompt_tokens') is not None else prompt_tokens
+            completion_tokens = int(api_usage['completion_tokens']) if api_usage and api_usage.get('completion_tokens') is not None else (estimate_tokens(out_text) if out_text else 0)
+            cost = (prompt_tokens_to_log + completion_tokens) / 1000.0 * get_cost_per_1k(provider)
             success = not (isinstance(resp, dict) and 'error' in resp)
+            extra = {'success': success}
+            if isinstance(resp, dict) and 'error' in resp:
+                extra['error'] = resp.get('error')
+            if api_usage is not None:
+                extra['api_usage'] = api_usage
             try:
-                log_usage(provider, 'summarize', prompt_tokens, completion_tokens, cost, {'success': success, 'error': resp.get('error') if isinstance(resp, dict) else None})
+                log_usage(provider, 'summarize', prompt_tokens_to_log, completion_tokens, cost, extra)
             except Exception:
                 pass
 
             if isinstance(resp, dict):
-                return resp.get('output') or resp.get('text') or (resp.get('choices')[0]['text'] if 'choices' in resp and resp.get('choices') and isinstance(resp.get('choices')[0], dict) and 'text' in resp.get('choices')[0] else str(resp))
+                return out_text or (resp.get('output') or resp.get('text') or str(resp))
             return str(resp)
 
         # Prefer Mistral for summarization (if configured)
@@ -231,6 +246,7 @@ class LLMClient:
 
         def _process_resp(resp):
             out_text = None
+            api_usage = None
             if isinstance(resp, dict):
                 out_text = resp.get('output') or resp.get('text')
                 if not out_text and 'choices' in resp and isinstance(resp['choices'], list) and resp['choices']:
@@ -241,19 +257,33 @@ class LLMClient:
                         out_text = str(first)
                 if not out_text and 'body' in resp and isinstance(resp['body'], str):
                     out_text = resp['body']
+
+                # extract usage if provider returns it
+                usage = resp.get('usage') or resp.get('token_usage') or (resp.get('meta', {}) or {}).get('usage')
+                if isinstance(usage, dict):
+                    api_prompt = usage.get('prompt_tokens') or usage.get('input_tokens') or usage.get('prompt')
+                    api_completion = usage.get('completion_tokens') or usage.get('output_tokens') or usage.get('completion')
+                    api_usage = {'prompt_tokens': api_prompt, 'completion_tokens': api_completion, 'raw': usage}
+
             else:
                 out_text = str(resp)
 
-            completion_tokens = estimate_tokens(out_text) if out_text else 0
-            cost = (prompt_tokens + completion_tokens) / 1000.0 * get_cost_per_1k(self.provider or 'none')
+            prompt_tokens_to_log = int(api_usage['prompt_tokens']) if api_usage and api_usage.get('prompt_tokens') is not None else prompt_tokens
+            completion_tokens = int(api_usage['completion_tokens']) if api_usage and api_usage.get('completion_tokens') is not None else (estimate_tokens(out_text) if out_text else 0)
+            cost = (prompt_tokens_to_log + completion_tokens) / 1000.0 * get_cost_per_1k(self.provider or 'none')
             success = not (isinstance(resp, dict) and 'error' in resp)
+            extra = {'success': success}
+            if isinstance(resp, dict) and 'error' in resp:
+                extra['error'] = resp.get('error')
+            if api_usage is not None:
+                extra['api_usage'] = api_usage
             try:
-                log_usage(self.provider or 'none', 'generate_report_text', prompt_tokens, completion_tokens, cost, {'success': success, 'error': resp.get('error') if isinstance(resp, dict) else None})
+                log_usage(self.provider or 'none', 'generate_report_text', prompt_tokens_to_log, completion_tokens, cost, extra)
             except Exception:
                 pass
 
             if isinstance(resp, dict):
-                return resp.get('output') or resp.get('text') or (resp.get('choices')[0]['text'] if 'choices' in resp and resp.get('choices') and isinstance(resp.get('choices')[0], dict) and 'text' in resp.get('choices')[0] else str(resp))
+                return out_text or (resp.get('output') or resp.get('text') or str(resp))
             return str(resp)
 
         # Prefer Gemini for narrative generation
