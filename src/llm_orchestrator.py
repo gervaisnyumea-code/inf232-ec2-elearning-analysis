@@ -15,10 +15,16 @@ Notes
 
 import os
 import json
+import logging
 from pathlib import Path
 from typing import Optional, Dict
+
+# CRITICAL: Import llm_init FIRST to ensure .env is loaded before any LLMClient
+from src.llm_init import ensure_env_loaded
+# Force load .env NOW before creating any clients
+ensure_env_loaded(override=True)
+
 from src.llm_integration import LLMClient
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -43,18 +49,9 @@ class LLMOrchestrator:
         self._discover_providers()
 
     def _discover_providers(self):
-        # instantiate clients for available providers (prefer Mistral for summarization)
-        # If environment keys are not present in the current process, try loading .env
-        try:
-            if not any(os.getenv(k) for k in ['MISTRAL_API_KEY_1','MISTRAL_API_KEY_2','GEMINI_API_KEY_1','GEMINI_API_KEY_2','GROQ_API_KEY_1','GROQ_API_KEY_2']):
-                try:
-                    from src.env_loader import load_dotenv
-                    load_dotenv()
-                except Exception:
-                    pass
-        except Exception:
-            pass
-
+        # NOTE: .env is now loaded by llm_init at import time (see top of file)
+        # This method only discovers and instantiates clients
+        
         # MISTRAL
         if os.getenv('MISTRAL_API_KEY_1') or os.getenv('MISTRAL_API_KEY_2'):
             self.clients['mistral'] = LLMClient('mistral')
@@ -67,6 +64,12 @@ class LLMOrchestrator:
         if os.getenv('GROQ_API_KEY_1') or os.getenv('GROQ_API_KEY_2'):
             self.clients['groq'] = LLMClient('groq')
             logger.info('GROQ client initialized')
+        
+        # Log discovery results
+        if self.clients:
+            logger.info(f"Discovered LLM providers: {list(self.clients.keys())}")
+        else:
+            logger.warning("No LLM providers discovered - check .env file")
 
     def available_providers(self):
         return list(self.clients.keys())

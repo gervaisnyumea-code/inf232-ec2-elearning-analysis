@@ -8,6 +8,8 @@ This module prefers provider endpoints defined by environment variables:
 To enable actual network calls set LLM_CALLS_ENABLED=true in .env.
 Quota is enforced by LLM_MAX_CALLS_PER_HOUR (default 60).
 If network calls are not available or quota is exhausted, the client returns deterministic placeholders.
+
+IMPORTANT: Import src.llm_init FIRST before this module to ensure .env is loaded.
 """
 import json
 import os
@@ -17,6 +19,11 @@ from pathlib import Path
 from typing import Optional, Dict, Any
 from urllib.error import URLError, HTTPError
 from urllib.request import Request, urlopen
+
+# CRITICAL: Ensure .env is loaded before any provider checks
+from src.llm_init import ensure_env_loaded
+ensure_env_loaded(override=False)  # Don't override, just ensure loaded
+
 from src.llm_usage import ensure_usage_file, estimate_tokens, get_cost_per_1k, log_usage
 
 logger = logging.getLogger(__name__)
@@ -93,19 +100,19 @@ class LLMClient:
 
     def _get_api_config(self, provider: str) -> Dict[str, Optional[str]]:
         """Get URL, API key, and default model for a provider with sensible defaults."""
-        # Default API URLs for common providers
+        # Default API URLs for common providers (CORRECT endpoints)
         defaults = {
             'mistral': {
                 'url': 'https://api.mistral.ai/v1/chat/completions',
-                'model': os.getenv('MISTRAL_MODEL', 'mistral-tiny-latest')
+                'model': os.getenv('MISTRAL_MODEL', 'mistral-small-latest')
             },
             'gemini': {
-                'url': 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent',
-                'model': os.getenv('GEMINI_MODEL', 'gemini-1.5-flash-latest')
+                'url': 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+                'model': os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')
             },
             'groq': {
-                'url': 'https://api.groq.ai/v1/chat/completions',
-                'model': os.getenv('GROQ_MODEL', 'llama3-8b-8192')
+                'url': 'https://api.groq.com/openai/v1/chat/completions',
+                'model': os.getenv('GROQ_MODEL', 'llama-3.1-70b-versatile')
             }
         }
         

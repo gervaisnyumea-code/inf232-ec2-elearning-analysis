@@ -1,0 +1,38 @@
+{
+  "question": "Analyse les donnees",
+  "data_summary": "No live data available for analysis. Check: 1) live_data.csv exists, 2) timestamps are valid, 3) data_streaming module can access the file.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: Analyse les donnees  Data context: No live data available for analysis. Check: 1) live_data.csv exis...]"
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: Analyse les donnees  Data context: No live data available for analysis. Check: 1) live_data.csv exis...]"
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: Analyse les donnees  Data context: No live data available for analysis. Check: 1) live_data.csv exis...]"
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: Question: Analyse les donnees Data context: No live data available for analysis. Check: 1) live_data...]"
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: Question: Analyse les donnees Data context: No live data available for analysis. Check: 1) live_data...]"
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: Question: Analyse les donnees Data context: No live data available for analysis. Check: 1) live_data...]"
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summarize by mistral - ERROR: HTTPError 405: Method Not Allowed. Input preview: You are a conciliator. Question: Analyse les donnees Data context: No live data available for analys...]"
+}

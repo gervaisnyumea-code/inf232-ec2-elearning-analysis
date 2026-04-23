@@ -95,11 +95,21 @@ def read_live_data(limit: int = 500, last_seconds: Optional[int] = None, since_t
             df = df.sort_values('timestamp', ascending=True)
         
         if last_seconds is not None and 'timestamp' in df.columns:
-            # Use local naive timestamp to match parsed CSV timestamps (avoid tz-aware vs tz-naive mismatch)
-            # add a small epsilon to account for parsing/timing jitter
-            now = pd.Timestamp.now()
-            cutoff = now - pd.Timedelta(seconds=int(last_seconds)) - pd.Timedelta(seconds=1)
+            import datetime
+            now = datetime.datetime.now()
+            now = pd.Timestamp(now)
+            cutoff = now - pd.Timedelta(seconds=int(last_seconds))
             df = df[df['timestamp'] >= cutoff]
+            # FALLBACK: si pas de données après filter (data old), lire quand même sans filter
+            if len(df) == 0:
+                # Re-read without time filter
+                df_full = pd.read_csv(path)
+                if 'timestamp' in df_full.columns:
+                    df_full['timestamp'] = pd.to_datetime(df_full['timestamp'])
+                    df_full = df_full.sort_values('timestamp', ascending=True)
+                    df = df_full.tail(limit) if limit else df_full
+                else:
+                    df = df_full.tail(limit) if limit else df_full
             logger.debug(f"Filtered to last {last_seconds}s. Cutoff: {cutoff}, remaining rows: {len(df)}")
         
         if since_t is not None and 't' in df.columns:

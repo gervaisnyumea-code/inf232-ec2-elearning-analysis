@@ -3605,5 +3605,1676 @@
         }
       }
     }
+  },
+  {
+    "ts": 1776958510,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 14,
+    "completion_tokens": 2,
+    "cost": 3.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 14,
+          "total_tokens": 16,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776958510,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 14,
+    "completion_tokens": 2,
+    "cost": 3.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 14,
+          "total_tokens": 16,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776958511,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 14,
+    "completion_tokens": 2,
+    "cost": 3.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 14,
+          "total_tokens": 16,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776958739,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 14,
+    "completion_tokens": 2,
+    "cost": 3.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 14,
+          "total_tokens": 16,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776958740,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 14,
+    "completion_tokens": 2,
+    "cost": 3.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 14,
+          "total_tokens": 16,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776958741,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 14,
+    "completion_tokens": 2,
+    "cost": 3.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 14,
+          "total_tokens": 16,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776958894,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958895,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0013199999999999998,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958898,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0008799999999999999,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958899,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958899,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958900,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0013199999999999998,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958903,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0008799999999999999,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958903,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958904,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958905,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0013199999999999998,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958909,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0008799999999999999,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958909,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958910,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 8,
+    "cost": 0.000326,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958911,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 0,
+    "cost": 0.00465,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958914,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 0,
+    "cost": 0.0031,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958915,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 8,
+    "cost": 0.000326,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958923,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 8,
+    "cost": 0.000328,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958923,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 0,
+    "cost": 0.00468,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958927,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 0,
+    "cost": 0.00312,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958927,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 8,
+    "cost": 0.000328,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958927,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 8,
+    "cost": 0.000328,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958928,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 0,
+    "cost": 0.00468,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958931,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 0,
+    "cost": 0.00312,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958932,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 8,
+    "cost": 0.000328,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958933,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 8,
+    "cost": 0.0007920000000000001,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958935,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 0,
+    "cost": 0.01164,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958949,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 0,
+    "cost": 0.00776,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776958949,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 8,
+    "cost": 0.0007920000000000001,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959018,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959019,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0013199999999999998,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959026,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0008799999999999999,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959027,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959028,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959029,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0013199999999999998,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959033,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0008799999999999999,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959034,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959034,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959036,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0013199999999999998,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959039,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0008799999999999999,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959040,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 8,
+    "cost": 0.000104,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959040,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 8,
+    "cost": 0.000326,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959041,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 0,
+    "cost": 0.00465,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959044,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 0,
+    "cost": 0.0031,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959045,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 8,
+    "cost": 0.000326,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959045,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 8,
+    "cost": 0.000326,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959046,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 0,
+    "cost": 0.00465,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959049,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 0,
+    "cost": 0.0031,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959049,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 155,
+    "completion_tokens": 8,
+    "cost": 0.000326,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959051,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 8,
+    "cost": 0.000328,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959052,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 0,
+    "cost": 0.00468,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959055,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 0,
+    "cost": 0.00312,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959056,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 156,
+    "completion_tokens": 8,
+    "cost": 0.000328,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959057,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 8,
+    "cost": 0.0007920000000000001,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959058,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 0,
+    "cost": 0.01164,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 404: Not Found",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959061,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 0,
+    "cost": 0.00776,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959061,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 8,
+    "cost": 0.0007920000000000001,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 405: Method Not Allowed",
+      "error_type": null
+    }
+  },
+  {
+    "ts": 1776959260,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 21,
+    "completion_tokens": 5,
+    "cost": 5.2e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 5,
+        "raw": {
+          "prompt_tokens": 21,
+          "total_tokens": 26,
+          "completion_tokens": 5,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959262,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 21,
+    "completion_tokens": 7,
+    "cost": 5.6e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 7,
+        "raw": {
+          "prompt_tokens": 21,
+          "total_tokens": 28,
+          "completion_tokens": 7,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959263,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 21,
+    "completion_tokens": 7,
+    "cost": 5.6e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 21,
+        "completion_tokens": 7,
+        "raw": {
+          "prompt_tokens": 21,
+          "total_tokens": 28,
+          "completion_tokens": 7,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959265,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 54,
+    "completion_tokens": 7,
+    "cost": 0.000122,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 54,
+        "completion_tokens": 7,
+        "raw": {
+          "prompt_tokens": 54,
+          "total_tokens": 61,
+          "completion_tokens": 7,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959267,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 3,
+    "cost": 0.00011,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 3,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 55,
+          "completion_tokens": 3,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959268,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 4,
+    "cost": 0.000112,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 4,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 56,
+          "completion_tokens": 4,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959269,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 121,
+    "completion_tokens": 7,
+    "cost": 0.000256,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 121,
+        "completion_tokens": 7,
+        "raw": {
+          "prompt_tokens": 121,
+          "total_tokens": 128,
+          "completion_tokens": 7,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959279,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 655,
+    "completion_tokens": 50,
+    "cost": 0.00141,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 655,
+        "completion_tokens": 50,
+        "raw": {
+          "prompt_tokens": 655,
+          "total_tokens": 705,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959280,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 655,
+    "completion_tokens": 50,
+    "cost": 0.00141,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 655,
+        "completion_tokens": 50,
+        "raw": {
+          "prompt_tokens": 655,
+          "total_tokens": 705,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959281,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 655,
+    "completion_tokens": 50,
+    "cost": 0.00141,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 655,
+        "completion_tokens": 50,
+        "raw": {
+          "prompt_tokens": 655,
+          "total_tokens": 705,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 624
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959282,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 776,
+    "completion_tokens": 13,
+    "cost": 0.0015780000000000002,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 13,
+        "raw": {
+          "prompt_tokens": 776,
+          "total_tokens": 789,
+          "completion_tokens": 13,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959283,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 776,
+    "completion_tokens": 12,
+    "cost": 0.0015760000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 12,
+        "raw": {
+          "prompt_tokens": 776,
+          "total_tokens": 788,
+          "completion_tokens": 12,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959284,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 776,
+    "completion_tokens": 9,
+    "cost": 0.00157,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 9,
+        "raw": {
+          "prompt_tokens": 776,
+          "total_tokens": 785,
+          "completion_tokens": 9,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959285,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 911,
+    "completion_tokens": 12,
+    "cost": 0.0018460000000000002,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 911,
+        "completion_tokens": 12,
+        "raw": {
+          "prompt_tokens": 911,
+          "total_tokens": 923,
+          "completion_tokens": 12,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959496,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 23,
+    "completion_tokens": 2,
+    "cost": 5e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 23,
+          "total_tokens": 25,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959497,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 23,
+    "completion_tokens": 2,
+    "cost": 5e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 23,
+          "total_tokens": 25,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959498,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 23,
+    "completion_tokens": 2,
+    "cost": 5e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 23,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 23,
+          "total_tokens": 25,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959498,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 45,
+    "completion_tokens": 2,
+    "cost": 9.400000000000001e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 45,
+          "total_tokens": 47,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959499,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 45,
+    "completion_tokens": 2,
+    "cost": 9.400000000000001e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 45,
+          "total_tokens": 47,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959501,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 45,
+    "completion_tokens": 2,
+    "cost": 9.400000000000001e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 45,
+          "total_tokens": 47,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959501,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 101,
+    "completion_tokens": 2,
+    "cost": 0.000206,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 101,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 101,
+          "total_tokens": 103,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959519,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 20,
+    "completion_tokens": 2,
+    "cost": 4.4e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 20,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 20,
+          "total_tokens": 22,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959519,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 20,
+    "completion_tokens": 2,
+    "cost": 4.4e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 20,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 20,
+          "total_tokens": 22,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959520,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 20,
+    "completion_tokens": 2,
+    "cost": 4.4e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 20,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 20,
+          "total_tokens": 22,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959521,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 43,
+    "completion_tokens": 2,
+    "cost": 8.999999999999999e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 43,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 43,
+          "total_tokens": 45,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959523,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 43,
+    "completion_tokens": 2,
+    "cost": 8.999999999999999e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 43,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 43,
+          "total_tokens": 45,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959524,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 43,
+    "completion_tokens": 2,
+    "cost": 8.999999999999999e-05,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 43,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 43,
+          "total_tokens": 45,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959525,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 99,
+    "completion_tokens": 2,
+    "cost": 0.000202,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 99,
+        "completion_tokens": 2,
+        "raw": {
+          "prompt_tokens": 99,
+          "total_tokens": 101,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959612,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 654,
+    "completion_tokens": 256,
+    "cost": 0.00182,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 654,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 654,
+          "total_tokens": 910,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959614,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 654,
+    "completion_tokens": 256,
+    "cost": 0.00182,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 654,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 654,
+          "total_tokens": 910,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959616,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 654,
+    "completion_tokens": 256,
+    "cost": 0.00182,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 654,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 654,
+          "total_tokens": 910,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959619,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1188,
+    "completion_tokens": 256,
+    "cost": 0.002888,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1188,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1188,
+          "total_tokens": 1444,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959623,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1186,
+    "completion_tokens": 256,
+    "cost": 0.002884,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1186,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1186,
+          "total_tokens": 1442,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959625,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1187,
+    "completion_tokens": 256,
+    "cost": 0.002886,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1187,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1187,
+          "total_tokens": 1443,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776959628,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 2277,
+    "completion_tokens": 512,
+    "cost": 0.0055780000000000005,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 2277,
+        "completion_tokens": 512,
+        "raw": {
+          "prompt_tokens": 2277,
+          "total_tokens": 2789,
+          "completion_tokens": 512,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
   }
 ]
