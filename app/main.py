@@ -342,55 +342,88 @@ elif page == "Collecte":
             # Option IA: demander recommandations personnalisées via BrainNet
             use_llm_rec = st.checkbox('Demander recommandation IA personnalisée pour cet étudiant', value=False, key='collect_llm')
             if use_llm_rec:
-                rounds_llm = st.number_input('Rounds LLM pour cette recommandation', min_value=1, max_value=3, value=1, key='collect_llm_rounds')
-                st.info('Consultation IA en cours... (respect des quotas)')
-                try:
-                    import importlib
-                    # Reload llm_integration FIRST so LLMClient picks up force_real param
-                    import src.llm_integration as llm_int_mod
-                    importlib.reload(llm_int_mod)
-                    import src.llm_orchestrator as llm_orch_mod
-                    importlib.reload(llm_orch_mod)
-                    orch = llm_orch_mod.LLMOrchestrator()
-                except Exception:
+                col_r1, col_r2 = st.columns([1, 2])
+                with col_r1:
+                    rounds_llm = st.number_input('Rounds LLM', min_value=1, max_value=3, value=2, key='collect_llm_rounds')
+                with col_r2:
+                    generate_rec = st.button('Générer les recommandations IA', key='generate_llm_btn')
+                
+                if generate_rec:
+                    st.info('🤖 Consultation IA en cours...')
                     try:
-                        from src.llm_orchestrator import LLMOrchestrator
+                        from src.llm_orchestrator import LLMOrchestrator, get_conversation_memory
+                        from src.env_loader import load_dotenv
+                        load_dotenv()
+                        
                         orch = LLMOrchestrator()
+                        mem = get_conversation_memory()
                     except Exception as e:
                         orch = None
                         st.error(f'Orchestrateur LLM non disponible: {e}')
 
-                if orch:
-                    # build a concise prompt with the student profile and a short dataset summary
-                    profile = { 'age': age, 'genre': genre, 'niveau': niveau, 'connections': connections, 'study_time': study_time,
-                               'exercises': exercises, 'videos': videos, 'forums': forums, 'homework': homework,
-                               'revenus': revenus, 'motivation': motivation, 'absences': absences, 'internet': internet }
-                    # small dataset summary
-                    try:
-                        df_summary = load_data()
-                        dsum_lines = [f"rows={len(df_summary)}"]
-                        numc = df_summary.select_dtypes(include=['number']).columns.tolist()
-                        for c in numc[:4]:
-                            s = df_summary[c].describe()
-                            dsum_lines.append(f"{c}: mean={s['mean']:.2f}, std={s['std']:.2f}")
-                        data_summary_text = "\n".join(dsum_lines)
-                    except Exception:
-                        data_summary_text = 'Aucune donnée résumé disponible.'
+                    if orch:
+                        profile = { 'age': age, 'genre': genre, 'niveau': niveau, 
+                                   'connections': connections, 'study_time': study_time,
+                                   'exercises': exercises, 'videos': videos, 'forums': forums, 
+                                   'homework': homework, 'revenus': revenus, 'motivation': motivation, 
+                                   'absences': absences, 'internet': internet }
+                        try:
+                            df_summary = load_data()
+                            dsum_lines = [f"Données: {len(df_summary)} étudiants"]
+                            numc = df_summary.select_dtypes(include=['number']).columns.tolist()
+                            for c in numc[:6]:
+                                s = df_summary[c].describe()
+                                dsum_lines.append(f"{c}: mean={s['mean']:.2f}, std={s['std']:.2f}")
+                            data_summary_text = "\n".join(dsum_lines)
+                        except Exception:
+                            data_summary_text = f"Profil étudiant: {profile}"
 
-                    question = f"Profil étudiant: {profile}\nContexte: {data_summary_text}\nDonne 5 recommandations pédagogiques priorisées, actionnables et courtes."
-                    try:
-                        res = orch.concert_and_merge(question, rounds=int(rounds_llm), include_data=False, data_window_sec=3600, max_tokens=512, force_real=(os.getenv('LLM_CALLS_ENABLED','false').lower() in ('1','true','yes')))
-                        st.markdown('### Recommandations IA')
-                        st.write(res.get('merged', ''))
-                        # save conversation
-                        out_dir = Path(os.getenv('EXPORT_DIR', 'reports'))
-                        out_dir.mkdir(parents=True, exist_ok=True)
-                        ts = int(time.time())
-                        out_path = out_dir / f'llm_reco_collect_{ts}.json'
-                        out_path.write_text(json.dumps(res, ensure_ascii=False, indent=2))
-                        st.success(f'Recommandations sauvegardées -> {out_path}')
-                    except Exception as e:
-                        st.error(f'Erreur lors de la concertation IA: {e}')
+                        question = f"Profil étudiant: {profile}\nContexte: {data_summary_text}\nDonne 5 recommandations pédagogiques priorisées, actionnables et détaillées en français."
+
+                        try:
+                            res = orch.concert_and_merge(
+                                question, 
+                                rounds=rounds_llm,
+                                include_data=True,
+                                data_window_sec=40000,
+                                max_tokens=1024,
+                                force_real=True,
+                                use_memory=True,
+                                cache_data=True
+                            )
+                            
+                            # Afficher les contributions repliables avec un EXPANDER
+                            st.markdown("---")
+                            st.markdown("### 🤖 Réflexions des IA (cliquez pour développer)")
+                            
+                            # Créer un expandeur pour chaque tour
+                            for tour in range(rounds_llm + 1):
+                                contributions_tour = [c for c in res.get('rounds', []) if c['round'] == tour]
+                                if contributions_tour:
+                                    exp_label = f"📊 Tour {tour} - Contributions des {len(contributions_tour)} IA"
+                                    with st.expander(exp_label, expanded=False):
+                                        for c in contributions_tour:
+                                            provider = c.get('provider', 'unknown')
+                                            text = c.get('text', '')
+                                            st.markdown(f"**{provider.upper()}:**")
+                                            st.markdown(text)
+                                            st.markdown("---")
+                            
+                            # La réponse FUSIONNÉE toujours visible (pas dans un expander)
+                            st.markdown("---")
+                            st.markdown("### ✅ Recommandations Fusionnées")
+                            st.markdown(res.get('merged', 'Aucune recommandation'))
+                            
+                            # Sauvegarder
+                            out_dir = Path(os.getenv('EXPORT_DIR', 'reports'))
+                            out_dir.mkdir(parents=True, exist_ok=True)
+                            ts = int(time.time())
+                            out_path = out_dir / f'llm_reco_collect_{ts}.json'
+                            out_path.write_text(json.dumps(res, ensure_ascii=False, indent=2))
+                            st.success(f'Recommandations sauvegardées -> {out_path}')
+                            
+                        except Exception as e:
+                            st.error(f'Erreur lors de la concertation IA: {e}')
 
 
 # ============================================================

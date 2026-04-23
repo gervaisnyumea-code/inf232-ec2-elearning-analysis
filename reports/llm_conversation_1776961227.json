@@ -1,0 +1,99 @@
+{
+  "question": "Donnees moi des representation entre ces donnees avec des graphiques \n",
+  "data_summary": "=== DATASET: 2000 lignes, 4 colonnes ===\nColonnes: timestamp, t, value1, value2\n\n📊 STATISTIQUES DÉTAILLÉES:\n\n--- t ---\n  count: 2000.0\n  mean: 32601.7500\n  std: 897.9045\n  min: 31466.0000\n  25%: 31715.8750\n  50%: 32601.7500\n  75%: 33487.6250\n  max: 33737.5000\n\n--- value1 ---\n  count: 2000.0\n  mean: 0.0038\n  std: 0.7204\n  min: -1.1881\n  25%: -0.6937\n  50%: -0.0004\n  75%: 0.7085\n  max: 1.1941\n\n--- value2 ---\n  count: 2000.0\n  mean: -0.0002\n  std: 0.7063\n  min: -1.0249\n  25%: -0.7046\n  50%: 0.0013\n  75%: 0.7010\n  max: 1.0242\n\n⏰ TEMPS:\n  Début: 2026-04-23 16:12:07.233615\n  Fin: 2026-04-23 16:20:27.274012\n  Durée: 0 days 00:08:20.040397\n\n📝 EXEMPLE (5 premières lignes):\n  Row 0: timestamp=2026-04-23 16:12:07.233615, t=31466.000, value1=-0.228, value2=1.001\n  Row 1: timestamp=2026-04-23 16:12:07.307603, t=33238.000, value1=-0.047, value2=-1.013\n  Row 2: timestamp=2026-04-23 16:12:07.733957, t=31466.500, value1=0.337, value2=0.975\n  Row 3: timestamp=2026-04-23 16:12:07.807920, t=33238.500, value1=0.425, value2=-0.970\n  Row 4: timestamp=2026-04-23 16:12:08.234263, t=31467.000, value1=0.532, value2=0.995",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summarize by mistral - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]"
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summarize by gemini - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]"
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summarize by groq - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]"
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summarize by mistral - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]"
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summarize by gemini - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]"
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summarize by groq - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]"
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summarize by groq - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un CONCILIATEUR expert. Ta misión: 1. Synthétiser toutes les contributions ci-dessous 2. Ident...]",
+  "memory": [
+    {
+      "role": "mistral",
+      "content": "[LLM summarize by mistral - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]",
+      "timestamp": 1776961227.8041863,
+      "metadata": {
+        "round": 0,
+        "question": "Donnees moi des representation entre ces donnees avec des graphiques \n"
+      }
+    },
+    {
+      "role": "gemini",
+      "content": "[LLM summarize by gemini - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]",
+      "timestamp": 1776961227.8111036,
+      "metadata": {
+        "round": 0,
+        "question": "Donnees moi des representation entre ces donnees avec des graphiques \n"
+      }
+    },
+    {
+      "role": "groq",
+      "content": "[LLM summarize by groq - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]",
+      "timestamp": 1776961227.8215442,
+      "metadata": {
+        "round": 0,
+        "question": "Donnees moi des representation entre ces donnees avec des graphiques \n"
+      }
+    },
+    {
+      "role": "mistral",
+      "content": "[LLM summarize by mistral - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]",
+      "timestamp": 1776961227.8285525,
+      "metadata": {
+        "round": 1
+      }
+    },
+    {
+      "role": "gemini",
+      "content": "[LLM summarize by gemini - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]",
+      "timestamp": 1776961227.8371348,
+      "metadata": {
+        "round": 1
+      }
+    },
+    {
+      "role": "groq",
+      "content": "[LLM summarize by groq - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un analyste de données pédagogiques expert. Ton rôle est d'analyser les données d'étudiants e-...]",
+      "timestamp": 1776961227.846456,
+      "metadata": {
+        "round": 1
+      }
+    },
+    {
+      "role": "merged",
+      "content": "[LLM summarize by groq - QUOTA EXHAUSTED: Max 100 calls/hour reached. Input preview: Tu es un CONCILIATEUR expert. Ta misión: 1. Synthétiser toutes les contributions ci-dessous 2. Ident...]",
+      "timestamp": 1776961227.853693,
+      "metadata": {
+        "type": "final"
+      }
+    }
+  ]
+}

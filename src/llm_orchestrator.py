@@ -11,13 +11,20 @@ Design / Strategy
 Notes
 - This module uses src.llm_integration.LLMClient which will call real APIs if enabled in .env.
 - Data is loaded via src.data_streaming.read_live_data() which handles timestamp adjustments.
+
+IMPROVEMENTS:
+- Context caching: data is cached and reused across calls
+- Conversation memory: history is stored and passed to LLMs
+- Extended tokens: max_tokens increased for complete responses
 """
 
 import os
 import json
 import logging
+import time
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, List
+from collections import defaultdict
 
 # CRITICAL: Import llm_init FIRST to ensure .env is loaded before any LLMClient
 from src.llm_init import ensure_env_loaded
@@ -34,6 +41,65 @@ PROVIDER_ROLES = {
     'gemini': 'narrative',
     'groq': 'reasoning',
 }
+
+
+class ConversationMemory:
+    """Persistent conversation memory for LLM context."""
+    
+    def __init__(self, max_history: int = 20):
+        self.max_history = max_history
+        self.history: List[Dict] = []
+        self._cache: Dict = {}
+        self._last_data_load = 0
+        self._data_cache_ttl = 300  # 5 minutes cache
+    
+    def add(self, role: str, content: str, metadata: Dict = None):
+        """Add a message to history."""
+        self.history.append({
+            'role': role,
+            'content': content,
+            'timestamp': time.time(),
+            'metadata': metadata or {}
+        })
+        # Keep only last max_history messages
+        if len(self.history) > self.max_history:
+            self.history = self.history[-self.max_history:]
+    
+    def get_context(self, include_history: bool = True) -> str:
+        """Get formatted context from history."""
+        if not include_history or not self.history:
+            return ""
+        
+        lines = ["=== HISTORY (recent conversations) ==="]
+        for msg in self.history[-5:]:  # Last 5 messages
+            lines.append(f"[{msg['role']}]: {msg['content'][:200]}...")
+        return "\n".join(lines)
+    
+    def cache_data(self, key: str, data: str):
+        """Cache data summary."""
+        self._cache[key] = data
+        self._last_data_load = time.time()
+    
+    def get_cached_data(self, key: str) -> Optional[str]:
+        """Get cached data if not expired."""
+        if key in self._cache and (time.time() - self._last_data_load) < self._data_cache_ttl:
+            return self._cache[key]
+        return None
+    
+    def clear(self):
+        """Clear all memory."""
+        self.history = []
+        self._cache = {}
+
+
+# Global conversation memory
+_conversation_memory = ConversationMemory(max_history=20)
+
+
+def get_conversation_memory() -> ConversationMemory:
+    """Get the global conversation memory instance."""
+    global _conversation_memory
+    return _conversation_memory
 
 
 class LLMOrchestrator:
@@ -179,7 +245,7 @@ class LLMOrchestrator:
         
         return "\n".join(lines)
 
-    def _safe_summarize(self, client, text: str, max_tokens: int = 256, force_real=None) -> str:
+    def _safe_summarize(self, client, text: str, max_tokens: int = 1024, force_real=None) -> str:
         """Call client.summarize with force_real, falling back without it if TypeError."""
         try:
             return client.summarize(text, max_tokens=max_tokens, force_real=force_real)
@@ -187,125 +253,251 @@ class LLMOrchestrator:
             # Fallback: stale LLMClient without force_real parameter
             return client.summarize(text, max_tokens=max_tokens)
 
-    def concert_and_merge(self, question: str, rounds: int = 1, include_data: bool = True, data_window_sec: int = 3600, max_tokens: int = 256, force_real: Optional[bool] = None) -> Dict:
+    def concert_and_merge(
+        self, 
+        question: str, 
+        rounds: int = 2,
+        include_data: bool = True, 
+        data_window_sec: int = 40000,
+        max_tokens: int = 1024,
+        force_real: Optional[bool] = None,
+        use_memory: bool = True,
+        cache_data: bool = True
+    ) -> Dict:
         """Run a multi-round concertation among available providers and produce a merged answer.
 
-        Returns a dict with keys: question, data_summary, rounds (list of contributions), aggregator, merged.
+        Args:
+            question: The question/prompt to ask
+            rounds: Number of debate rounds (default 2)
+            include_data: Include live data context
+            data_window_sec: Time window for data (default 40000 = ~11 hours)
+            max_tokens: Max tokens for response (default 1024 for complete answers)
+            force_real: Force real API calls
+            use_memory: Include conversation history
+            cache_data: Cache data for reuse
+
+        Returns:
+            dict with keys: question, data_summary, rounds, aggregator, merged, memory
         """
+        global _conversation_memory
+        
         data_summary = ''
         df_ctx = None
-        if include_data:
+        cache_key = f'data_{data_window_sec}'
+        
+        # USE CACHE if available
+        if cache_data:
+            cached = _conversation_memory.get_cached_data(cache_key)
+            if cached:
+                data_summary = cached
+                logger.info("Using cached data summary")
+        
+        if include_data and not data_summary:
             try:
                 from src.data_streaming import read_live_data
-                # Use absolute path to ensure file is found
-                # __file__ is in src/llm_orchestrator.py, so parents[1] is project root
                 project_root = Path(__file__).resolve().parents[1]
                 data_path = str(project_root / 'data' / 'stream' / 'live_data.csv')
-                df_ctx = read_live_data(last_seconds=data_window_sec, limit=1000, path=data_path)
+                df_ctx = read_live_data(last_seconds=data_window_sec, limit=2000, path=data_path)
                 
                 if df_ctx is not None and not df_ctx.empty:
-                    # Format data for LLM consumption
-                    data_summary = self._format_dataframe_for_llm(df_ctx)
-                    logger.info(f"Loaded {len(df_ctx)} rows of live data for LLM analysis")
+                    # ENHANCED data formatting with MORE details
+                    data_summary = self._format_dataframe_extended(df_ctx)
+                    # CACHE it
+                    if cache_data:
+                        _conversation_memory.cache_data(cache_key, data_summary)
+                    logger.info(f"Loaded {len(df_ctx)} rows for LLM analysis")
                 else:
-                    data_summary = "No live data available for analysis. Check: 1) live_data.csv exists, 2) timestamps are valid, 3) data_streaming module can access the file."
-                    logger.warning("No live data available - check file path and timestamps")
+                    data_summary = "No live data available."
             except Exception as e:
-                data_summary = f"Error reading live data: {e}. Please check data/stream/live_data.csv exists and is readable."
-                logger.error(f"Error loading live data: {e}", exc_info=True)
+                data_summary = f"Error: {e}"
 
-        # ensure providers discovered
+        # Get providers
         if not self.clients:
             self._discover_providers()
         providers = list(self.clients.keys())
-        # Note: force_real is now passed to individual calls, not set on client.enabled
+
+        # Get conversation history for context
+        history_context = ""
+        if use_memory:
+            history_context = _conversation_memory.get_context()
 
         conversation = []
-        # initial round
+        
+        # IMPROVED system prompt for better analysis
+        system_prompt = """Tu es un analyste de données pédagogiques expert.
+Ton rôle est d'analyser les données d'étudiants e-learning et fournir des recommandations ACTIONNABLES.
+Réponds en français, de manière DÉTAILLÉE et STRUCTURÉE.
+Utilise des listes numérotées et des sections claires."""
+
+        # Initial round
         for p in providers:
             client = self.clients[p]
-            prompt = question
-            if include_data and data_summary:
-                prompt = f"{prompt}\n\nData context:\n{data_summary}"
+            
+            # Build ENHANCED prompt with history + data + question
+            prompt_parts = [system_prompt]
+            if history_context:
+                prompt_parts.append(f"\n{history_context}")
+            prompt_parts.append(f"\n=== DONNÉES ===\n{data_summary}" if data_summary else "\nAucune donnée disponible.")
+            prompt_parts.append(f"\n=== QUESTION ===\n{question}")
+            prompt_parts.append("\n\nRéponds de façon COMPLETE avec与分析 détaillée.")
+            
+            full_prompt = "\n".join(prompt_parts)
+            
             try:
-                ans = self._safe_summarize(
-                    client, prompt,
-                    max_tokens=max_tokens, force_real=force_real
-                )
+                ans = self._safe_summarize(client, full_prompt, max_tokens=max_tokens, force_real=force_real)
             except Exception as e:
-                ans = f"[Error calling {p}: {e}]"
-            conversation.append({
-                'round': 0, 'provider': p, 'text': ans
-            })
+                ans = f"[Erreur {p}: {e}]"
+            
+            conversation.append({'round': 0, 'provider': p, 'text': ans})
+            # ADD to memory
+            if use_memory:
+                _conversation_memory.add(p, ans[:500], {'round': 0, 'question': question})
 
-        # debate rounds
+        # Debate rounds
         for r in range(1, rounds + 1):
-            prev_texts = {
-                m['provider']: m['text']
-                for m in conversation if m['round'] == r - 1
-            }
+            prev_texts = {m['provider']: m['text'] for m in conversation if m['round'] == r - 1}
+            
             for p in providers:
                 client = self.clients[p]
-                others = "\n".join([
-                    f"{other}: {txt}"
-                    for other, txt in prev_texts.items()
-                    if other != p
-                ])
-                prompt = (
-                    f"Question: {question}\n"
-                    f"Data context:\n{data_summary}\n"
-                    f"Contributions:\n{others}\n"
-                    f"Please respond succinctly."
-                )
-                try:
-                    ans = self._safe_summarize(
-                        client, prompt,
-                        max_tokens=max_tokens, force_real=force_real
-                    )
-                except Exception as e:
-                    ans = f"[Error calling {p}: {e}]"
-                conversation.append({
-                    'round': r, 'provider': p, 'text': ans
-                })
+                
+                others = "\n".join([f"=== {other.upper()} ===\n{txt[:300]}" for other, txt in prev_texts.items() if other != p])
+                
+                prompt = f"""{system_prompt}
 
-        # aggregator selection and merge
+{history_context}
+
+=== DONNÉES ===
+{data_summary}
+
+=== QUESTION ===
+{question}
+
+=== CONTRIBUTIONS PRÉCÉDENTES ===
+{others}
+
+Ta tâche:
+1. Synthétise les insights des autres providers
+2. Apporte une ANALYSE COMPLÉMENTAIRE
+3. Propose des RECOMMANDATIONS SPÉCIFIQUES
+
+Réponds de façon COMPLETE et détaillée."""
+
+                try:
+                    ans = self._safe_summarize(client, prompt, max_tokens=max_tokens, force_real=force_real)
+                except Exception as e:
+                    ans = f"[Erreur {p}: {e}]"
+                
+                conversation.append({'round': r, 'provider': p, 'text': ans})
+                if use_memory:
+                    _conversation_memory.add(p, ans[:500], {'round': r})
+
+        # Aggregator selection - use GROQ for best reasoning
         aggregator = None
         for ag in ['groq', 'gemini', 'mistral']:
             if ag in self.clients:
                 aggregator = ag
                 break
+        
         merged = ''
         if aggregator:
             ag_client = self.clients[aggregator]
-            all_texts = "\n".join([
-                f"({c['round']}) {c['provider']}: {c['text']}"
+            
+            all_texts = "\n=== SYNTHÈSE DES CONTRIBUTIONS ===\n" + "\n\n".join([
+                f"[{c['provider']} Tour {c['round']}]:\n{c['text']}"
                 for c in conversation
             ])
-            agg_prompt = (
-                f"You are a conciliator. Question: {question}\n"
-                f"Data context:\n{data_summary}\n"
-                f"Synthesize the contributions below and produce "
-                f"a final consolidated recommendation.\n\n"
-                f"Contributions:\n{all_texts}\n\n"
-                f"Provide a concise merged answer."
-            )
+            
+            agg_prompt = f"""Tu es un CONCILIATEUR expert. Ta misión:
+1. Synthétiser toutes les contributions ci-dessous
+2. Identifier les points CONSENSUS
+3. Produire une RÉPONSE FINALE COMPLÈTE et structurée
+
+CONTEXT: Données e-learning étudiants
+QUESTION: {question}
+
+{all_texts}
+
+=== RÉPONSE FINALE ===
+Produis une réponse complète en français avec:
+- Résumé Executive
+- Analyse détaillée (par section)
+- Recommandations numérotées
+- Conclusion
+
+Rends la réponse LA PLUS COMPLÈTE possible."""
+
             try:
-                merged = self._safe_summarize(
-                    ag_client, agg_prompt,
-                    max_tokens=512, force_real=force_real
-                )
+                merged = self._safe_summarize(ag_client, agg_prompt, max_tokens=max_tokens * 2, force_real=force_real)
             except Exception as e:
-                merged = f"[Error in aggregation by {aggregator}: {e}]"
-        else:
-            merged = "[No aggregator configured.]"
+                merged = f"[Erreur aggregation: {e}]"
+
+        # ADD final to memory
+        if use_memory:
+            _conversation_memory.add('merged', merged[:500], {'type': 'final'})
 
         return {
             'question': question,
             'data_summary': data_summary,
             'rounds': conversation,
             'aggregator': aggregator,
-            'merged': merged
+            'merged': merged,
+            'memory': _conversation_memory.history if use_memory else []
         }
+
+    def _format_dataframe_extended(self, df) -> str:
+        """Enhanced dataframe formatting with MORE details for better LLM context."""
+        if df is None or df.empty:
+            return "No data available."
+        
+        lines = []
+        lines.append(f"=== DATASET: {len(df)} lignes, {len(df.columns)} colonnes ===")
+        lines.append(f"Colonnes: {', '.join(df.columns.tolist())}")
+        
+        # Numeric statistics - MORE DETAILED
+        num_cols = df.select_dtypes(include=['number']).columns.tolist()
+        if num_cols:
+            lines.append("\n📊 STATISTIQUES DÉTAILLÉES:")
+            for c in num_cols:
+                try:
+                    s = df[c].describe()
+                    lines.append(f"\n--- {c} ---")
+                    lines.append(f"  count: {s.get('count', 0)}")
+                    lines.append(f"  mean: {s.get('mean', 0):.4f}")
+                    lines.append(f"  std: {s.get('std', 0):.4f}")
+                    lines.append(f"  min: {s.get('min', 0):.4f}")
+                    lines.append(f"  25%: {s.get('25%', 0):.4f}")
+                    lines.append(f"  50%: {s.get('50%', 0):.4f}")
+                    lines.append(f"  75%: {s.get('75%', 0):.4f}")
+                    lines.append(f"  max: {s.get('max', 0):.4f}")
+                    
+                    # Add correlation with other numeric cols
+                    if len(num_cols) > 1:
+                        corr_with = df[num_cols].corr()[c].sort_values(ascending=False)
+                        top_corr = corr_with[abs(corr_with) > 0.3].index.tolist()
+                        if c in top_corr: top_corr.remove(c)
+                        if top_corr:
+                            lines.append(f"  corrélations fortes: {top_corr[:3]}")
+                except Exception as e:
+                    lines.append(f"  Erreur: {e}")
+        
+        # Time info
+        if 'timestamp' in df.columns:
+            try:
+                lines.append("\n⏰ TEMPS:")
+                lines.append(f"  Début: {df['timestamp'].min()}")
+                lines.append(f"  Fin: {df['timestamp'].max()}")
+                dur = df['timestamp'].max() - df['timestamp'].min()
+                lines.append(f"  Durée: {dur}")
+            except Exception:
+                pass
+        
+        # Sample
+        lines.append("\n📝 EXEMPLE (5 premières lignes):")
+        for i, row in df.head(5).iterrows():
+            vals = ", ".join(f"{c}={row[c]:.3f}" if isinstance(row[c], float) else f"{c}={row[c]}" for c in df.columns[:4])
+            lines.append(f"  Row {i}: {vals}")
+        
+        return "\n".join(lines)
 
     def run_full_pipeline(self, df_live, force_real: Optional[bool] = None) -> Dict:
         """Run full LLM pipeline on a live-data snapshot.

@@ -228,23 +228,36 @@ def render_llm_console():
                     res = None
             if res:
                 st.markdown('### Contexte de données')
-                st.code(res.get('data_summary', ''))
+                with st.expander("📊 Voir les données contextuelles", expanded=False):
+                    st.code(res.get('data_summary', ''))
 
-                st.markdown('### Contributions par tour')
-                for msg in res.get('rounds', []):
-                    text = msg['text']
-                    # Style placeholder messages to make them clearly visible
-                    if text.startswith('['):
-                        st.warning(f"({msg['round']}) **{msg['provider']}**: {text}")
-                    else:
-                        st.success(f"({msg['round']}) **{msg['provider']}**: {text}")
+                # Afficher les contributions repliables par TOUR
+                st.markdown('### 🤖 Réflexions des IA')
+                rounds_list = res.get('rounds', [])
+                max_round = max([r.get('round', 0) for r in rounds_list]) if rounds_list else 0
+                
+                for tour in range(max_round + 1):
+                    contributions_tour = [c for c in rounds_list if c.get('round') == tour]
+                    if contributions_tour:
+                        exp_label = f"📊 Tour {tour} - {len(contributions_tour)} IA(s)"
+                        with st.expander(exp_label, expanded=False):
+                            for c in contributions_tour:
+                                provider = c.get('provider', 'unknown').upper()
+                                text = c.get('text', '')
+                                # Style selon le provider
+                                color = {'mistral': '🟠', 'gemini': '🔵', 'groq': '🟢'}.get(provider.lower(), '⚪')
+                                st.markdown(f"**{color} {provider}:**")
+                                st.markdown(text)
+                                st.markdown("---")
 
-                st.markdown('### Réponse fusionnée')
+                # La réponse fusionnée TOUJOURS VISIBLE (pas dans un expander)
+                st.markdown('---')
+                st.markdown('### ✅ Réponse Fusionnée')
                 merged = res.get('merged', '')
                 if merged.startswith('['):
                     st.warning(merged)
                 else:
-                    st.info(merged)
+                    st.markdown(merged)
 
                 out_dir = project_root / 'reports'
                 out_dir.mkdir(parents=True, exist_ok=True)
