@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.data_cleaning import load_raw_data, full_pipeline, get_feature_matrix
 from src.models import RegressionModel, ClassificationModel
+from src.orchestration import BrainNet
 from src.visualization import plot_histogram_kde, plot_pie_chart, plot_heatmap_correlation
 from src.visualization_extra import plot_bar_chart_interactive, plot_boxplot_multi, plot_scatter_regression, plot_oscillating_progression
 
@@ -466,7 +467,7 @@ elif page == "Modélisation":
             - AUC : Area Under ROC Curve
             """)
 
-            # Importance des features (si disponible)
+                # Importance des features (si disponible)
             try:
                 X_feat, _, _ = get_feature_matrix(load_data())
                 importances = None
@@ -488,6 +489,48 @@ elif page == "Modélisation":
                         st.markdown(icon_html("warning",12) + " Impossible d'afficher l'importance des variables.", unsafe_allow_html=True)
             except Exception:
                 st.markdown(icon_html("warning",12) + " Erreur lors du calcul de l'importance des variables.", unsafe_allow_html=True)
+
+            # Orchestrateur BrainNet — configuration des poids
+            try:
+                bn = BrainNet(auto_load=True)
+                model_names = bn.get_model_names()
+                st.markdown("### Orchestrateur BrainNet")
+                st.write("Modèles détectés:", model_names)
+                current_weights = getattr(bn, 'weights', None) or {}
+
+                with st.expander("Configurer les poids (weights) des modèles"):
+                    with st.form("weights_form"):
+                        weight_inputs = {}
+                        for name in model_names:
+                            default_w = float(current_weights.get(name, 1.0))
+                            # use a stable key per model name
+                            weight_inputs[name] = st.number_input(f"Poids - {name}", min_value=0.0, max_value=10.0, value=default_w, step=0.1, key=f"w_{name}")
+                        submitted = st.form_submit_button("Enregistrer les poids")
+                        if submitted:
+                            # persist weights
+                            try:
+                                weights_dict = {k: float(v) for k, v in weight_inputs.items()}
+                                bn.set_weights(weights_dict, persist=True)
+                                st.success("Poids enregistrés")
+                            except Exception:
+                                st.error("Erreur lors de l'enregistrement des poids")
+
+                # Aperçu des prédictions avec les poids appliqués
+                try:
+                    sample = X_feat.sample(min(5, len(X_feat)))
+                    preds, probs = bn.ensemble_predict_classification(sample)
+                    st.markdown("### Exemple de prédictions de l'ensemble (5 observations)")
+                    df_preds = sample.reset_index(drop=True).copy()
+                    if preds is not None:
+                        df_preds['ensemble_pred'] = list(preds)
+                    if probs is not None:
+                        df_preds['ensemble_proba'] = list(probs)
+                    st.dataframe(df_preds, use_container_width=True)
+                except Exception:
+                    st.write("Impossible d'exécuter l'ensemble d'exemple.")
+
+            except Exception as e:
+                st.write("BrainNet non initialisé:", e)
     else:
         st.markdown(icon_html("cross",20) + " <span style='color:#e74c3c;font-weight:bold'>Modèles non disponibles. Veuillez les entraîner d'abord.</span>", unsafe_allow_html=True)
 
