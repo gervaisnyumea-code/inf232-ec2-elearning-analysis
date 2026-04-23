@@ -367,9 +367,9 @@ elif page == "EDA":
             st.success('Simulateur démarré (voir logs/streamer.log)')
         if st.button("Arrêter simulateur"):
             st.info('Arrêt manuel non implémenté; utilisez kill sur le processus (démo).')
-        auto_refresh = st.checkbox("Auto-refresh (rafraîchir automatiquement)", value=False)
-        refresh_interval = st.slider("Intervalle (s)", min_value=1, max_value=10, value=2)
-        csv_limit = st.number_input("Points affichés", min_value=50, max_value=10000, value=500, step=50)
+        stream_auto_refresh = st.checkbox("Auto-refresh (rafraîchir automatiquement)", value=False, key='stream_auto_refresh')
+        refresh_interval = st.slider("Intervalle (s)", min_value=1, max_value=10, value=2, key='stream_refresh_interval')
+        csv_limit = st.number_input("Points affichés", min_value=50, max_value=10000, value=500, step=50, key='stream_csv_limit')
         if st.button("Exporter CSV live"):
             from src.data_streaming import read_live_data
             df_live = read_live_data(100000)
@@ -385,6 +385,42 @@ elif page == "EDA":
                     st.download_button("Télécharger rapport (ZIP)", f.read(), file_name=Path(rpt_path).name)
             except Exception:
                 st.write('Erreur lors de la génération du rapport.')
+        if st.button("Exécuter ensemble sur live + rapport"):
+            from src.orchestration import BrainNet
+            from src.data_streaming import read_live_data
+            from src.reporting import generate_report
+            bn = BrainNet(auto_load=True)
+            df_live = read_live_data(100000)
+            if df_live.empty:
+                st.write("Aucune donnée de streaming pour l'ensemble.")
+            else:
+                ensembled_csv = bn.save_ensemble_predictions(df_live, out_csv=f'reports/ensemble_live_{int(time.time())}.csv')
+                rpt = generate_report(df_live, out_dir='reports')
+                st.success("Ensemble et rapport générés.")
+                try:
+                    with open(ensembled_csv, 'rb') as fe:
+                        st.download_button("Télécharger preds (CSV)", fe.read(), file_name=Path(ensembled_csv).name)
+                except Exception:
+                    pass
+                try:
+                    with open(rpt, 'rb') as fr:
+                        st.download_button("Télécharger rapport (ZIP)", fr.read(), file_name=Path(rpt).name)
+                except Exception:
+                    pass
+        if st.button("Créer un résumé LLM du snapshot"):
+            from src.llm_integration import LLMClient
+            from src.data_streaming import read_live_data
+            from src.reporting import find_periodic_points
+            df_live = read_live_data(100000)
+            if df_live.empty:
+                st.write("Aucune donnée live disponible pour synthèse.")
+            else:
+                peaks = find_periodic_points(df_live, 't', 'value1')
+                summary_text = f"Snapshot rows={len(df_live)}, mean(value1)={df_live['value1'].mean():.4f}, peaks={len(peaks)}"
+                client = LLMClient()
+                llm_summary = client.summarize(summary_text)
+                st.markdown("### Résumé LLM")
+                st.write(llm_summary)
     with col_b:
         from src.data_streaming import read_live_data
         df_live = read_live_data(csv_limit)
@@ -401,25 +437,21 @@ elif page == "EDA":
                 st.markdown(icon_html('pin',12) + f" **Points périodiques détectés (value1):** {len(peaks)}", unsafe_allow_html=True)
                 st.dataframe(peaks)
             # Auto refresh
-            if auto_refresh:
+            if stream_auto_refresh:
                 import time
                 time.sleep(refresh_interval)
                 try:
                     rerun = getattr(st, 'experimental_rerun', None)
                     if callable(rerun):
-                        # Preferred method when available
                         rerun()
                     else:
-                        # Fallback: tweak query params to force a rerun (works without experimental_rerun)
                         try:
                             params = st.experimental_get_query_params()
                             params['_autorefresh'] = str(time.time())
                             st.experimental_set_query_params(**params)
                         except Exception:
-                            # If even query params are unavailable, skip silently
                             pass
                 except Exception:
-                    # Any unexpected error should not crash the app
                     pass
 
 
