@@ -1,0 +1,38 @@
+{
+  "question": "Analyse les donnees , en francais\n",
+  "data_summary": "No live data available for analysis. Check: 1) live_data.csv exists, 2) timestamps are valid, 3) data_streaming module can access the file.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vous assurer que le fichier \"live\\_data.csv\" existe, que les timestamps sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vérifier que le fichier \"live\\_data.csv\" existe, que les timestamps sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vous assurer que le fichier \"live\\_data.csv\" existe, que les timbres sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vérifier que le fichier \"live\\_data.csv\" existe, que les timestamps sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vous assurer que le fichier \"live\\_data.csv\" existe, que les timestamps sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vérifier que le fichier \"live\\_data.csv\" existe, que les timestamps sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "Je suis désolé, mais je ne peux pas analyser les données car il n'y a pas de données en direct disponibles pour l'analyse. Veuillez vous assurer que le fichier \"live\\_data.csv\" existe, que les timestamps sont valides et que le module \"data\\_streaming\" peut accéder au fichier."
+}

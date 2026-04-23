@@ -3067,5 +3067,543 @@
     "extra": {
       "skipped": "quota"
     }
+  },
+  {
+    "ts": 1776955647,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776955768,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 4,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776955768,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 4,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776955768,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 4,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776955768,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 152,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776955972,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 72,
+    "cost": 0.000248,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 72,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 124,
+          "completion_tokens": 72,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776955974,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 70,
+    "cost": 0.000244,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 70,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 122,
+          "completion_tokens": 70,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776955975,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 71,
+    "cost": 0.000246,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 71,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 123,
+          "completion_tokens": 71,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776955976,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 208,
+    "completion_tokens": 69,
+    "cost": 0.000554,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 208,
+        "completion_tokens": 69,
+        "raw": {
+          "prompt_tokens": 208,
+          "total_tokens": 277,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776955977,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 210,
+    "completion_tokens": 58,
+    "cost": 0.000536,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 210,
+        "completion_tokens": 58,
+        "raw": {
+          "prompt_tokens": 210,
+          "total_tokens": 268,
+          "completion_tokens": 58,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776955978,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 209,
+    "completion_tokens": 69,
+    "cost": 0.0005560000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 209,
+        "completion_tokens": 69,
+        "raw": {
+          "prompt_tokens": 209,
+          "total_tokens": 278,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776955979,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 524,
+    "completion_tokens": 58,
+    "cost": 0.0011639999999999999,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 524,
+        "completion_tokens": 58,
+        "raw": {
+          "prompt_tokens": 524,
+          "total_tokens": 582,
+          "completion_tokens": 58,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956095,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 48,
+    "completion_tokens": 256,
+    "cost": 0.000608,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 48,
+          "total_tokens": 304,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956099,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 48,
+    "completion_tokens": 193,
+    "cost": 0.000482,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 193,
+        "raw": {
+          "prompt_tokens": 48,
+          "total_tokens": 241,
+          "completion_tokens": 193,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956100,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 48,
+    "completion_tokens": 256,
+    "cost": 0.000608,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 48,
+          "total_tokens": 304,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956102,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 525,
+    "completion_tokens": 136,
+    "cost": 0.001322,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 525,
+        "completion_tokens": 136,
+        "raw": {
+          "prompt_tokens": 525,
+          "total_tokens": 661,
+          "completion_tokens": 136,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956104,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 587,
+    "completion_tokens": 256,
+    "cost": 0.001686,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 587,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 587,
+          "total_tokens": 843,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956105,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 526,
+    "completion_tokens": 21,
+    "cost": 0.0010940000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 526,
+        "completion_tokens": 21,
+        "raw": {
+          "prompt_tokens": 526,
+          "total_tokens": 547,
+          "completion_tokens": 21,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956107,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1253,
+    "completion_tokens": 380,
+    "cost": 0.0032660000000000002,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1253,
+        "completion_tokens": 380,
+        "raw": {
+          "prompt_tokens": 1253,
+          "total_tokens": 1633,
+          "completion_tokens": 380,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956163,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 69,
+    "cost": 0.000242,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 69,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 121,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956164,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 68,
+    "cost": 0.00024,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 68,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 120,
+          "completion_tokens": 68,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956165,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 52,
+    "completion_tokens": 70,
+    "cost": 0.000244,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 52,
+        "completion_tokens": 70,
+        "raw": {
+          "prompt_tokens": 52,
+          "total_tokens": 122,
+          "completion_tokens": 70,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956166,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 204,
+    "completion_tokens": 68,
+    "cost": 0.0005440000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 204,
+        "completion_tokens": 68,
+        "raw": {
+          "prompt_tokens": 204,
+          "total_tokens": 272,
+          "completion_tokens": 68,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956166,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 205,
+    "completion_tokens": 69,
+    "cost": 0.0005480000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 205,
+        "completion_tokens": 69,
+        "raw": {
+          "prompt_tokens": 205,
+          "total_tokens": 274,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956168,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 203,
+    "completion_tokens": 68,
+    "cost": 0.0005420000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 203,
+        "completion_tokens": 68,
+        "raw": {
+          "prompt_tokens": 203,
+          "total_tokens": 271,
+          "completion_tokens": 68,
+          "prompt_tokens_details": {
+            "cached_tokens": 64
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776956169,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 526,
+    "completion_tokens": 69,
+    "cost": 0.0011899999999999999,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 526,
+        "completion_tokens": 69,
+        "raw": {
+          "prompt_tokens": 526,
+          "total_tokens": 595,
+          "completion_tokens": 69,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
   }
 ]

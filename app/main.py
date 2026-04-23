@@ -9,6 +9,7 @@ import numpy as np
 import sys
 import os
 import time
+import json
 from pathlib import Path
 
 # Ajouter le chemin du projet
@@ -192,8 +193,7 @@ st.sidebar.markdown("---")
 autoref = st.sidebar.checkbox("Auto-refresh global (rafraîchir toutes les pages)", value=(os.getenv('GLOBAL_AUTORELOAD','false').lower() in ('1','true','yes')), key='global_autorefresh')
 if autoref:
     interval = st.sidebar.number_input("Intervalle auto-refresh (s)", min_value=1, max_value=3600, value=int(os.getenv('GLOBAL_AUTORELOAD_INTERVAL','5')))
-    import streamlit.components.v1 as components
-    components.html(f"<script>setTimeout(()=>location.reload(), {int(interval)*1000});</script>", height=0)
+    st.html(f"<script>setTimeout(()=>location.reload(), {int(interval)*1000});</script>")
 
 st.sidebar.markdown("**Projet:** Analyse de la performance académique")
 st.sidebar.markdown("**Problématique:** Quels comportements influencent la réussite?")
@@ -328,7 +328,8 @@ elif page == "Collecte":
                 st.markdown(icon_html("warning",20) + " **Risque d'échec - Consulter les recommandations**", unsafe_allow_html=True)
 
             # Recommandations statiques
-            st.markdown(icon_html("search",16) + " ### Recommandations", unsafe_allow_html=True)
+            st.markdown("---")
+            st.markdown(icon_html("search",16) + " <h4 style='display:inline;vertical-align:middle;margin:0'>Recommandations</h4>", unsafe_allow_html=True)
             if study_time < 10:
                 st.markdown(icon_html('target',12) + " Augmenter le temps d'étude hebdomadaire", unsafe_allow_html=True)
             if exercises < 70:
@@ -345,6 +346,9 @@ elif page == "Collecte":
                 st.info('Consultation IA en cours... (respect des quotas)')
                 try:
                     import importlib
+                    # Reload llm_integration FIRST so LLMClient picks up force_real param
+                    import src.llm_integration as llm_int_mod
+                    importlib.reload(llm_int_mod)
                     import src.llm_orchestrator as llm_orch_mod
                     importlib.reload(llm_orch_mod)
                     orch = llm_orch_mod.LLMOrchestrator()

@@ -176,6 +176,14 @@ class LLMOrchestrator:
         
         return "\n".join(lines)
 
+    def _safe_summarize(self, client, text: str, max_tokens: int = 256, force_real=None) -> str:
+        """Call client.summarize with force_real, falling back without it if TypeError."""
+        try:
+            return client.summarize(text, max_tokens=max_tokens, force_real=force_real)
+        except TypeError:
+            # Fallback: stale LLMClient without force_real parameter
+            return client.summarize(text, max_tokens=max_tokens)
+
     def concert_and_merge(self, question: str, rounds: int = 1, include_data: bool = True, data_window_sec: int = 3600, max_tokens: int = 256, force_real: Optional[bool] = None) -> Dict:
         """Run a multi-round concertation among available providers and produce a merged answer.
 
@@ -217,23 +225,45 @@ class LLMOrchestrator:
             if include_data and data_summary:
                 prompt = f"{prompt}\n\nData context:\n{data_summary}"
             try:
-                ans = client.summarize(prompt, max_tokens=max_tokens, force_real=force_real)
+                ans = self._safe_summarize(
+                    client, prompt,
+                    max_tokens=max_tokens, force_real=force_real
+                )
             except Exception as e:
                 ans = f"[Error calling {p}: {e}]"
-            conversation.append({'round': 0, 'provider': p, 'text': ans})
+            conversation.append({
+                'round': 0, 'provider': p, 'text': ans
+            })
 
         # debate rounds
         for r in range(1, rounds + 1):
-            prev_texts = {m['provider']: m['text'] for m in conversation if m['round'] == r-1}
+            prev_texts = {
+                m['provider']: m['text']
+                for m in conversation if m['round'] == r - 1
+            }
             for p in providers:
                 client = self.clients[p]
-                others = "\n".join([f"{other}: {txt}" for other, txt in prev_texts.items() if other != p])
-                prompt = f"Question: {question}\nData context:\n{data_summary}\nContributions:\n{others}\nPlease respond succinctly with your view and a recommendation."
+                others = "\n".join([
+                    f"{other}: {txt}"
+                    for other, txt in prev_texts.items()
+                    if other != p
+                ])
+                prompt = (
+                    f"Question: {question}\n"
+                    f"Data context:\n{data_summary}\n"
+                    f"Contributions:\n{others}\n"
+                    f"Please respond succinctly."
+                )
                 try:
-                    ans = client.summarize(prompt, max_tokens=max_tokens, force_real=force_real)
+                    ans = self._safe_summarize(
+                        client, prompt,
+                        max_tokens=max_tokens, force_real=force_real
+                    )
                 except Exception as e:
                     ans = f"[Error calling {p}: {e}]"
-                conversation.append({'round': r, 'provider': p, 'text': ans})
+                conversation.append({
+                    'round': r, 'provider': p, 'text': ans
+                })
 
         # aggregator selection and merge
         aggregator = None
@@ -244,16 +274,35 @@ class LLMOrchestrator:
         merged = ''
         if aggregator:
             ag_client = self.clients[aggregator]
-            all_texts = "\n".join([f"({c['round']}) {c['provider']}: {c['text']}" for c in conversation])
-            agg_prompt = f"You are a conciliator. Question: {question}\nData context:\n{data_summary}\nSynthesize the contributions below, list agreements and disagreements, and produce a final consolidated recommendation.\n\nContributions:\n{all_texts}\n\nProvide a concise merged answer."
+            all_texts = "\n".join([
+                f"({c['round']}) {c['provider']}: {c['text']}"
+                for c in conversation
+            ])
+            agg_prompt = (
+                f"You are a conciliator. Question: {question}\n"
+                f"Data context:\n{data_summary}\n"
+                f"Synthesize the contributions below and produce "
+                f"a final consolidated recommendation.\n\n"
+                f"Contributions:\n{all_texts}\n\n"
+                f"Provide a concise merged answer."
+            )
             try:
-                merged = ag_client.summarize(agg_prompt, max_tokens=512, force_real=force_real)
+                merged = self._safe_summarize(
+                    ag_client, agg_prompt,
+                    max_tokens=512, force_real=force_real
+                )
             except Exception as e:
                 merged = f"[Error in aggregation by {aggregator}: {e}]"
         else:
             merged = "[No aggregator configured.]"
 
-        return {'question': question, 'data_summary': data_summary, 'rounds': conversation, 'aggregator': aggregator, 'merged': merged}
+        return {
+            'question': question,
+            'data_summary': data_summary,
+            'rounds': conversation,
+            'aggregator': aggregator,
+            'merged': merged
+        }
 
     def run_full_pipeline(self, df_live, force_real: Optional[bool] = None) -> Dict:
         """Run full LLM pipeline on a live-data snapshot.

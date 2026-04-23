@@ -71,6 +71,9 @@ def render_llm_console():
     def _get_orchestrator():
         try:
             import importlib
+            # Reload llm_integration FIRST so LLMClient picks up force_real param
+            import src.llm_integration as llm_int_mod
+            importlib.reload(llm_int_mod)
             import src.llm_orchestrator as llm_orch_mod
             importlib.reload(llm_orch_mod)
             return llm_orch_mod.LLMOrchestrator()
@@ -207,61 +210,60 @@ def render_llm_console():
     if 'convo' not in st.session_state:
         st.session_state['convo'] = []
 
-    col1, col2 = st.columns([3,1])
-    with col2:
-        if st.button('Démarrer la concertation'):
-            if not question.strip():
-                st.warning('Entrez une question.')
-            elif not providers:
-                st.warning('Aucun provider détecté. Vérifiez .env ou exécutez en mode simulation.')
-            else:
-                st.session_state['convo'] = []
-                include_data = st.sidebar.checkbox('Inclure contexte données live', value=True)
-                data_window_sec = st.sidebar.number_input('Fenêtre données (s)', min_value=60, max_value=86400, value=3600)
-                force_real = use_real
-                with st.spinner('Concertation en cours...'):
-                    try:
-                        res = orch.concert_and_merge(question, rounds=rounds, include_data=include_data, data_window_sec=int(data_window_sec), max_tokens=256, force_real=force_real)
-                    except Exception as e:
-                        st.error(f"Erreur pendant la concertation: {e}")
-                        res = None
-                if res:
-                    st.markdown('### Contexte de données')
-                    st.code(res.get('data_summary', ''))
-                    st.markdown('### Contributions par round')
-                    for msg in res.get('rounds', []):
-                        text = msg['text']
-                        # Style placeholder messages to make them clearly visible
-                        if text.startswith('['):
-                            # This is a placeholder (DISABLED, QUOTA, ERROR, etc.)
-                            st.warning(f"({msg['round']}) **{msg['provider']}**: {text}")
-                        else:
-                            st.success(f"({msg['round']}) **{msg['provider']}**: {text}")
-                    st.markdown('### Réponse fusionnée')
-                    merged = res.get('merged', '')
-                    if merged.startswith('['):
-                        st.warning(merged)
+    if st.button('Démarrer la concertation'):
+        if not question.strip():
+            st.warning('Entrez une question.')
+        elif not providers:
+            st.warning('Aucun provider détecté. Vérifiez .env ou exécutez en mode simulation.')
+        else:
+            st.session_state['convo'] = []
+            include_data = st.sidebar.checkbox('Inclure contexte données live', value=True)
+            data_window_sec = st.sidebar.number_input('Fenêtre données (s)', min_value=60, max_value=86400, value=3600)
+            force_real = use_real
+            with st.spinner('Concertation en cours...'):
+                try:
+                    res = orch.concert_and_merge(question, rounds=rounds, include_data=include_data, data_window_sec=int(data_window_sec), max_tokens=256, force_real=force_real)
+                except Exception as e:
+                    st.error(f"Erreur pendant la concertation: {e}")
+                    res = None
+            if res:
+                st.markdown('### Contexte de données')
+                st.code(res.get('data_summary', ''))
+
+                st.markdown('### Contributions par tour')
+                for msg in res.get('rounds', []):
+                    text = msg['text']
+                    # Style placeholder messages to make them clearly visible
+                    if text.startswith('['):
+                        st.warning(f"({msg['round']}) **{msg['provider']}**: {text}")
                     else:
-                        st.success(merged)
+                        st.success(f"({msg['round']}) **{msg['provider']}**: {text}")
 
-                    out_dir = project_root / 'reports'
-                    out_dir.mkdir(parents=True, exist_ok=True)
-                    ts = int(time.time())
-                    out_path = out_dir / f'llm_conversation_{ts}.json'
-                    out_path.write_text(json.dumps(res, ensure_ascii=False, indent=2))
-                    st.success(f'Conversation sauvegardée -> {out_path}')
+                st.markdown('### Réponse fusionnée')
+                merged = res.get('merged', '')
+                if merged.startswith('['):
+                    st.warning(merged)
+                else:
+                    st.info(merged)
 
-                    try:
-                        threshold_env = float(os.getenv('LLM_ALERT_HOURLY_THRESHOLD', '0'))
-                    except Exception:
-                        threshold_env = 0.0
-                    webhook_env = os.getenv('LLM_ALERT_WEBHOOK_URL', '').strip()
-                    if threshold_env and webhook_env:
-                        al_res = check_and_send_alert(threshold_env, webhook_env)
-                        if al_res.get('alert_sent'):
-                            st.warning(f"Alerte envoyée (coût dernière heure = {al_res.get('cost_last_hour'):.4f} USD)")
-                        else:
-                            st.info(f"Aucune alerte nécessaire (coût dernière heure = {al_res.get('cost_last_hour'):.4f} USD)")
+                out_dir = project_root / 'reports'
+                out_dir.mkdir(parents=True, exist_ok=True)
+                ts = int(time.time())
+                out_path = out_dir / f'llm_conversation_{ts}.json'
+                out_path.write_text(json.dumps(res, ensure_ascii=False, indent=2))
+                st.success(f'Conversation sauvegardée -> {out_path}')
+
+                try:
+                    threshold_env = float(os.getenv('LLM_ALERT_HOURLY_THRESHOLD', '0'))
+                except Exception:
+                    threshold_env = 0.0
+                webhook_env = os.getenv('LLM_ALERT_WEBHOOK_URL', '').strip()
+                if threshold_env and webhook_env:
+                    al_res = check_and_send_alert(threshold_env, webhook_env)
+                    if al_res.get('alert_sent'):
+                        st.warning(f"Alerte envoyée (coût dernière heure = {al_res.get('cost_last_hour'):.4f} USD)")
+                    else:
+                        st.info(f"Aucune alerte nécessaire (coût dernière heure = {al_res.get('cost_last_hour'):.4f} USD)")
 
     # show previous convo if present
     if st.session_state.get('convo'):
@@ -298,7 +300,7 @@ def render_llm_console():
         else:
             df_show = df_usage
         df_disp = df_show.sort_values('ts', ascending=False).head(n_rows)
-        st.dataframe(df_disp, use_container_width=True)
+        st.dataframe(df_disp, width='stretch')
         csv_bytes = df_show.to_csv(index=False).encode('utf-8')
         st.download_button("Télécharger historique CSV", csv_bytes, file_name='llm_usage_history.csv', mime='text/csv')
 
