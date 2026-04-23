@@ -40,13 +40,113 @@ def load_data():
 
 @st.cache_resource
 def load_models():
-    """Charge les modèles entraînés."""
+    """Charge les modèles entraînés. Supporte plusieurs formats de sauvegarde.
+
+    Retourne
+    -------
+    (reg_model, clf_model)
+    """
+    import joblib
+    import numpy as np
+
+    reg_model = None
+    clf_model = None
+
+    # Charger modèle de régression (si présent)
     try:
+        # Préférence : méthode de classe fournie par RegressionModel
         reg_model = RegressionModel.load("data/models/regression_model.pkl")
-        clf_model = ClassificationModel.load("data/models/classifier_model.pkl")
-        return reg_model, clf_model
-    except:
-        return None, None
+    except Exception:
+        try:
+            data = joblib.load("data/models/regression_model.pkl")
+            # Si c'est un dict structuré, réutiliser la méthode de chargement
+            if isinstance(data, dict) and 'model' in data:
+                reg_model = RegressionModel.load("data/models/regression_model.pkl")
+            else:
+                reg_model = None
+        except Exception:
+            reg_model = None
+
+    # Charger classifieur — plusieurs formats possibles
+    try:
+        # Si ClassificationModel définit une méthode load(), l'utiliser
+        if hasattr(ClassificationModel, 'load'):
+            clf_model = ClassificationModel.load("data/models/classifier_model.pkl")
+        else:
+            clf_raw = joblib.load("data/models/classifier_model.pkl")
+            # Charger scaler séparé si disponible
+            try:
+                scaler = joblib.load("data/models/scaler.pkl")
+            except Exception:
+                scaler = None
+
+            class _WrappedClassifier:
+                def __init__(self, model, scaler=None):
+                    self.model = model
+                    self.scaler = scaler
+
+                def _apply_scaler(self, X):
+                    if self.scaler is None:
+                        return X
+                    try:
+                        import pandas as _pd
+                        # If scaler stored feature names, subset DataFrame accordingly
+                        if hasattr(self.scaler, 'feature_names_in_') and isinstance(X, _pd.DataFrame):
+                            cols = list(self.scaler.feature_names_in_)
+                            # Keep only columns present
+                            cols_present = [c for c in cols if c in X.columns]
+                            X_sub = X[cols_present]
+                            try:
+                                return self.scaler.transform(X_sub)
+                            except Exception:
+                                return self.scaler.transform(X_sub.values)
+                        # General fallback
+                        try:
+                            return self.scaler.transform(X)
+                        except Exception:
+                            try:
+                                return self.scaler.transform(getattr(X, 'values', X))
+                            except Exception:
+                                return getattr(X, 'values', X)
+                    except Exception:
+                        try:
+                            return self.scaler.transform(getattr(X, 'values', X))
+                        except Exception:
+                            return getattr(X, 'values', X)
+
+                def predict(self, X):
+                    Xs = self._apply_scaler(X)
+                    return self.model.predict(Xs)
+
+                def predict_proba(self, X):
+                    Xs = self._apply_scaler(X)
+                    if hasattr(self.model, 'predict_proba'):
+                        proba = self.model.predict_proba(Xs)
+                        try:
+                            return proba[:, 1]
+                        except Exception:
+                            return proba
+                    elif hasattr(self.model, 'decision_function'):
+                        df = self.model.decision_function(Xs)
+                        return 1 / (1 + np.exp(-df))
+                    else:
+                        return self.model.predict(Xs)
+
+                def feature_importance(self, X=None):
+                    if hasattr(self.model, 'feature_importances_'):
+                        return self.model.feature_importances_
+                    if hasattr(self.model, 'coef_'):
+                        arr = np.abs(self.model.coef_)
+                        if arr.ndim > 1:
+                            arr = arr[0]
+                        return arr
+                    return None
+
+            clf_model = _WrappedClassifier(clf_raw, scaler)
+    except Exception:
+        clf_model = None
+
+    return reg_model, clf_model
 
 
 # ============================================================
@@ -280,14 +380,28 @@ elif page == "Modélisation":
             - AUC : Area Under ROC Curve
             """)
 
-            # Importance des features
-            if clf_model.feature_importance is not None:
-                st.markdown("### Importance des Variables")
-                importance_df = pd.DataFrame({
-                    'Variable': get_feature_matrix(load_data())[0].columns,
-                    'Importance': clf_model.feature_importance(load_data()[0])
-                }).sort_values('Importance', ascending=False)
-                st.dataframe(importance_df, use_container_width=True)
+            # Importance des features (si disponible)
+            try:
+                X_feat, _, _ = get_feature_matrix(load_data())
+                importances = None
+                if clf_model is not None:
+                    if callable(getattr(clf_model, 'feature_importance', None)):
+                        importances = clf_model.feature_importance(X_feat)
+                    else:
+                        importances = getattr(clf_model, 'feature_importance', None)
+
+                if importances is not None:
+                    try:
+                        importance_df = pd.DataFrame({
+                            'Variable': X_feat.columns,
+                            'Importance': importances
+                        }).sort_values('Importance', ascending=False)
+                        st.markdown("### Importance des Variables")
+                        st.dataframe(importance_df, use_container_width=True)
+                    except Exception:
+                        st.write("⚠️ Impossible d'afficher l'importance des variables.")
+            except Exception:
+                st.write("⚠️ Erreur lors du calcul de l'importance des variables.")
     else:
         st.error("❌ Modèles non disponibles. Veuillez les entraîner d'abord.")
 
