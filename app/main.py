@@ -223,7 +223,7 @@ if page == "Accueil":
 # PAGE COLLECTE
 # ============================================================
 elif page == "Collecte":
-    st.title("📝 Collecte de Données")
+    st.markdown(icon_html("pin",20) + " Collecte de Données", unsafe_allow_html=True)
 
     st.markdown("### Saisissez les données d'un nouvel étudiant")
 
@@ -297,12 +297,12 @@ elif page == "Collecte":
                 st.metric("Probabilité de réussite", f"{reussite_proba*100:.1f}%")
 
             if reussite_pred == 1:
-                st.success("🎉 Réussite prédite!")
+                st.markdown(icon_html("check",20) + " **Réussite prédite!**", unsafe_allow_html=True)
             else:
-                st.warning("⚠️ Risque d'échec - Consulter les recommandations")
+                st.markdown(icon_html("warning",20) + " **Risque d'échec - Consulter les recommandations**", unsafe_allow_html=True)
 
             # Recommandations
-            st.markdown("### 💡 Recommandations")
+            st.markdown(icon_html("search",16) + " ### Recommandations", unsafe_allow_html=True)
             if study_time < 10:
                 st.write("- 🔹 Augmenter le temps d'étude hebdomadaire")
             if exercises < 70:
@@ -317,27 +317,27 @@ elif page == "Collecte":
 # PAGE EDA
 # ============================================================
 elif page == "EDA":
-    st.title("📊 Analyse Exploratoire")
+    st.markdown(icon_html("chart",24) + " Analyse Exploratoire", unsafe_allow_html=True)
 
     df = load_data()
 
     # Statistiques globales
-    st.markdown("### 📈 Statistiques Descriptives")
+    st.markdown(icon_html("chart",16) + " ### Statistiques Descriptives", unsafe_allow_html=True)
     st.dataframe(df.describe().T, use_container_width=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("### 👥 Distribution par Genre")
+        st.markdown(icon_html("pin",14) + " ### Distribution par Genre", unsafe_allow_html=True)
         genre_counts = df['genre'].value_counts()
         st.bar_chart(genre_counts)
 
     with col2:
-        st.markdown("### 📚 Distribution par Niveau")
+        st.markdown(icon_html("chart",14) + " ### Distribution par Niveau", unsafe_allow_html=True)
         niveau_counts = df['niveau_etudes'].value_counts()
         st.bar_chart(niveau_counts)
 
-    st.markdown("### 🎯 Distribution des Notes")
+    st.markdown(icon_html("target",14) + " ### Distribution des Notes", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
 
     with col1:
@@ -354,9 +354,8 @@ elif page == "EDA":
     st.bar_chart(corr_with_success)
 
     # Live streaming quick demo (simulé)
-    st.markdown("""### Flux de données en temps réel (simulation)
-    Utilisez le simulateur pour injecter des données continues et rafraîchissez le graphique.
-    """)
+    st.markdown(icon_html("loop",16) + " ### Flux de données en temps réel (simulation)", unsafe_allow_html=True)
+    st.markdown("Utilisez le simulateur pour injecter des données continues et rafraîchissez le graphique.")
     col_a, col_b = st.columns([1,3])
     with col_a:
         if st.button("Démarrer simulateur de données"):
@@ -367,15 +366,44 @@ elif page == "EDA":
             st.success('Simulateur démarré (voir logs/streamer.log)')
         if st.button("Arrêter simulateur"):
             st.info('Arrêt manuel non implémenté; utilisez kill sur le processus (démo).')
+        auto_refresh = st.checkbox("Auto-refresh (rafraîchir automatiquement)", value=False)
+        refresh_interval = st.slider("Intervalle (s)", min_value=1, max_value=10, value=2)
+        csv_limit = st.number_input("Points affichés", min_value=50, max_value=10000, value=500, step=50)
+        if st.button("Exporter CSV live"):
+            from src.data_streaming import read_live_data
+            df_live = read_live_data(100000)
+            csv_bytes = df_live.to_csv(index=False).encode('utf-8')
+            st.download_button("Télécharger CSV live", csv_bytes, file_name='live_data.csv', mime='text/csv')
+        if st.button("Générer rapport périodique"):
+            from src.reporting import generate_report
+            from src.data_streaming import read_live_data
+            df_live = read_live_data(100000)
+            rpt_path = generate_report(df_live, out_dir='reports')
+            try:
+                with open(rpt_path, 'rb') as f:
+                    st.download_button("Télécharger rapport (ZIP)", f.read(), file_name=Path(rpt_path).name)
+            except Exception:
+                st.write('Erreur lors de la génération du rapport.')
     with col_b:
         from src.data_streaming import read_live_data
-        df_live = read_live_data(500)
+        df_live = read_live_data(csv_limit)
         if df_live.empty:
             st.write('Aucune donnée de streaming détectée. Cliquez sur "Démarrer simulateur de données".')
         else:
             import plotly.express as px
-            fig = px.line(df_live, x='t', y='value1', title='Courbe oscillante (value1)')
+            fig = px.line(df_live, x='t', y=['value1','value2'], title='Courbes oscillantes (value1 & value2)')
             st.plotly_chart(fig, use_container_width=True)
+            # annotate periodic points
+            from src.reporting import find_periodic_points
+            peaks = find_periodic_points(df_live, 't', 'value1')
+            if not peaks.empty:
+                st.markdown(icon_html('pin',12) + f" **Points périodiques détectés (value1):** {len(peaks)}", unsafe_allow_html=True)
+                st.dataframe(peaks)
+            # Auto refresh
+            if auto_refresh:
+                import time
+                time.sleep(refresh_interval)
+                st.experimental_rerun()
 
 
 
@@ -388,7 +416,7 @@ elif page == "Modélisation":
     reg_model, clf_model = load_models()
 
     if reg_model and clf_model:
-        st.success("✅ Modèles chargés avec succès!")
+        st.markdown(icon_html("check",20) + " Modèles chargés avec succès!", unsafe_allow_html=True)
 
         tab1, tab2 = st.tabs(["Régression", "Classification"])
 
@@ -441,18 +469,18 @@ elif page == "Modélisation":
                         st.markdown("### Importance des Variables")
                         st.dataframe(importance_df, use_container_width=True)
                     except Exception:
-                        st.write("⚠️ Impossible d'afficher l'importance des variables.")
+                        st.markdown(icon_html("warning",12) + " Impossible d'afficher l'importance des variables.", unsafe_allow_html=True)
             except Exception:
-                st.write("⚠️ Erreur lors du calcul de l'importance des variables.")
+                st.markdown(icon_html("warning",12) + " Erreur lors du calcul de l'importance des variables.", unsafe_allow_html=True)
     else:
-        st.error("❌ Modèles non disponibles. Veuillez les entraîner d'abord.")
+        st.markdown(icon_html("cross",20) + " <span style='color:#e74c3c;font-weight:bold'>Modèles non disponibles. Veuillez les entraîner d'abord.</span>", unsafe_allow_html=True)
 
 
 # ============================================================
 # PAGE VISUALISATION
 # ============================================================
 elif page == "Visualisation":
-    st.title("🎨 Réduction de Dimension")
+    st.markdown(icon_html("chart",24) + " Réduction de Dimension", unsafe_allow_html=True)
 
     st.markdown("""
     Cette page présente les techniques de réduction de dimension
