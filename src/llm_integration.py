@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Optional
 from urllib.error import URLError, HTTPError
 from urllib.request import Request, urlopen
+from src.llm_usage import ensure_usage_file, estimate_tokens, get_cost_per_1k, log_usage
 
 
 class LLMClient:
@@ -26,6 +27,10 @@ class LLMClient:
         self.max_calls_per_hour = int(os.getenv('LLM_MAX_CALLS_PER_HOUR', '60'))
         self.quota_file = Path('logs/llm_quota.json')
         self._ensure_quota_file()
+        try:
+            ensure_usage_file()
+        except Exception:
+            pass
 
     def _ensure_quota_file(self):
         if not self.quota_file.parent.exists():
@@ -110,6 +115,7 @@ class LLMClient:
     def summarize(self, text: str, max_tokens: int = 256) -> str:
         """Summarize text using the preferred provider if enabled and quota allows.
         Falls back to a deterministic placeholder.
+        This implementation records estimated token usage and approximate cost.
         """
         # refresh dynamic flags from env to allow runtime changes via UI
         self.enabled = os.getenv('LLM_CALLS_ENABLED', 'false').lower() in ('1', 'true', 'yes')
@@ -117,12 +123,48 @@ class LLMClient:
 
         provider = self.provider or 'none'
         s = text.strip().replace('\n', ' ')
+        prompt_tokens = estimate_tokens(text)
 
         if not self.enabled:
+            try:
+                log_usage(provider, 'summarize', prompt_tokens, 0, 0.0, {'skipped': 'disabled'})
+            except Exception:
+                pass
             return f"[LLM summary by {provider}] {s[:200]}..."
 
         if not self._acquire_quota():
+            try:
+                log_usage(provider, 'summarize', prompt_tokens, 0, 0.0, {'skipped': 'quota'})
+            except Exception:
+                pass
             return "[LLM skipped due to quota exhaustion]"
+
+        def _process_resp(resp):
+            out_text = None
+            if isinstance(resp, dict):
+                out_text = resp.get('output') or resp.get('text')
+                if not out_text and 'choices' in resp and isinstance(resp['choices'], list) and resp['choices']:
+                    first = resp['choices'][0]
+                    if isinstance(first, dict):
+                        out_text = first.get('text') or first.get('message') or None
+                    else:
+                        out_text = str(first)
+                if not out_text and 'body' in resp and isinstance(resp['body'], str):
+                    out_text = resp['body']
+            else:
+                out_text = str(resp)
+
+            completion_tokens = estimate_tokens(out_text) if out_text else 0
+            cost = (prompt_tokens + completion_tokens) / 1000.0 * get_cost_per_1k(provider)
+            success = not (isinstance(resp, dict) and 'error' in resp)
+            try:
+                log_usage(provider, 'summarize', prompt_tokens, completion_tokens, cost, {'success': success, 'error': resp.get('error') if isinstance(resp, dict) else None})
+            except Exception:
+                pass
+
+            if isinstance(resp, dict):
+                return resp.get('output') or resp.get('text') or (resp.get('choices')[0]['text'] if 'choices' in resp and resp.get('choices') and isinstance(resp.get('choices')[0], dict) and 'text' in resp.get('choices')[0] else str(resp))
+            return str(resp)
 
         # Prefer Mistral for summarization (if configured)
         if provider == 'mistral' or (provider is None and 'mistral' in self.available_providers()):
@@ -132,9 +174,7 @@ class LLMClient:
                 headers = {'Authorization': f'Bearer {key}', 'Content-Type': 'application/json'}
                 payload = {'input': text, 'max_tokens': max_tokens}
                 resp = self._http_post(url, headers, payload)
-                if isinstance(resp, dict):
-                    return resp.get('output') or resp.get('text') or str(resp)
-                return str(resp)
+                return _process_resp(resp)
 
         # Fallback: Gemini if configured
         if provider == 'gemini' or (provider is None and 'gemini' in self.available_providers()):
@@ -144,9 +184,7 @@ class LLMClient:
                 headers = {'Authorization': f'Bearer {key}', 'Content-Type': 'application/json'}
                 payload = {'prompt': text, 'max_tokens': max_tokens}
                 resp = self._http_post(url, headers, payload)
-                if isinstance(resp, dict):
-                    return resp.get('output') or resp.get('text') or str(resp)
-                return str(resp)
+                return _process_resp(resp)
 
         # Groq or other providers - generic attempt
         if provider == 'groq' or (provider is None and 'groq' in self.available_providers()):
@@ -156,28 +194,67 @@ class LLMClient:
                 headers = {'Authorization': f'Bearer {key}', 'Content-Type': 'application/json'}
                 payload = {'input': text, 'max_tokens': max_tokens}
                 resp = self._http_post(url, headers, payload)
-                if isinstance(resp, dict):
-                    return resp.get('output') or resp.get('text') or str(resp)
-                return str(resp)
+                return _process_resp(resp)
 
         # Otherwise fallback to placeholder
+        try:
+            log_usage(provider, 'summarize', prompt_tokens, 0, 0.0, {'skipped': 'no_provider'})
+        except Exception:
+            pass
         return f"[LLM summary by {provider}] {s[:200]}..."
 
     def generate_report_text(self, df_summary: dict) -> str:
         """Ask an LLM to craft a narrative report from a dict of summary statistics.
         Prefer Gemini for narrative generation (per routing decision).
+        Records estimated token usage and estimated cost.
         """
         # refresh dynamic flags from env to allow runtime changes via UI
         self.enabled = os.getenv('LLM_CALLS_ENABLED', 'false').lower() in ('1', 'true', 'yes')
         self.max_calls_per_hour = int(os.getenv('LLM_MAX_CALLS_PER_HOUR', '60'))
 
         text = "; ".join(f"{k}: {v}" for k, v in df_summary.items())
+        prompt_tokens = estimate_tokens(text)
 
         if not self.enabled:
+            try:
+                log_usage(self.provider or 'none', 'generate_report_text', prompt_tokens, 0, 0.0, {'skipped': 'disabled'})
+            except Exception:
+                pass
             return f"[Report by {self.provider or 'none'}] {text}"
 
         if not self._acquire_quota():
+            try:
+                log_usage(self.provider or 'none', 'generate_report_text', prompt_tokens, 0, 0.0, {'skipped': 'quota'})
+            except Exception:
+                pass
             return "[LLM skipped due to quota exhaustion]"
+
+        def _process_resp(resp):
+            out_text = None
+            if isinstance(resp, dict):
+                out_text = resp.get('output') or resp.get('text')
+                if not out_text and 'choices' in resp and isinstance(resp['choices'], list) and resp['choices']:
+                    first = resp['choices'][0]
+                    if isinstance(first, dict):
+                        out_text = first.get('text') or first.get('message') or None
+                    else:
+                        out_text = str(first)
+                if not out_text and 'body' in resp and isinstance(resp['body'], str):
+                    out_text = resp['body']
+            else:
+                out_text = str(resp)
+
+            completion_tokens = estimate_tokens(out_text) if out_text else 0
+            cost = (prompt_tokens + completion_tokens) / 1000.0 * get_cost_per_1k(self.provider or 'none')
+            success = not (isinstance(resp, dict) and 'error' in resp)
+            try:
+                log_usage(self.provider or 'none', 'generate_report_text', prompt_tokens, completion_tokens, cost, {'success': success, 'error': resp.get('error') if isinstance(resp, dict) else None})
+            except Exception:
+                pass
+
+            if isinstance(resp, dict):
+                return resp.get('output') or resp.get('text') or (resp.get('choices')[0]['text'] if 'choices' in resp and resp.get('choices') and isinstance(resp.get('choices')[0], dict) and 'text' in resp.get('choices')[0] else str(resp))
+            return str(resp)
 
         # Prefer Gemini for narrative generation
         if self.provider == 'gemini' or (self.provider is None and 'gemini' in self.available_providers()):
@@ -187,9 +264,7 @@ class LLMClient:
                 headers = {'Authorization': f'Bearer {key}', 'Content-Type': 'application/json'}
                 payload = {'prompt': text, 'max_tokens': 512}
                 resp = self._http_post(url, headers, payload)
-                if isinstance(resp, dict):
-                    return resp.get('output') or resp.get('text') or str(resp)
-                return str(resp)
+                return _process_resp(resp)
 
         # Fallback to Mistral or Groq
         if 'mistral' in self.available_providers():
@@ -199,8 +274,10 @@ class LLMClient:
                 headers = {'Authorization': f'Bearer {key}', 'Content-Type': 'application/json'}
                 payload = {'input': text, 'max_tokens': 512}
                 resp = self._http_post(url, headers, payload)
-                if isinstance(resp, dict):
-                    return resp.get('output') or resp.get('text') or str(resp)
-                return str(resp)
+                return _process_resp(resp)
 
+        try:
+            log_usage(self.provider or 'none', 'generate_report_text', prompt_tokens, 0, 0.0, {'skipped': 'no_provider'})
+        except Exception:
+            pass
         return f"[Report by {self.provider or 'none'}] {text}"

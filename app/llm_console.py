@@ -25,6 +25,37 @@ def render_llm_console():
     rounds = st.sidebar.slider('Nombre de rounds de concertation', 0, 3, 1)
     use_real = st.sidebar.checkbox('Activer appels réels (respecter quotas)', value=(os.getenv('LLM_CALLS_ENABLED', 'false').lower() in ('1','true','yes')))
 
+    # Usage summary (tokens / coût estimé)
+    usage_path = Path(os.getenv('LLM_USAGE_FILE', 'logs/llm_usage.json'))
+    try:
+        if usage_path.exists():
+            usage = json.loads(usage_path.read_text())
+        else:
+            usage = []
+    except Exception:
+        usage = []
+
+    total_calls = len(usage)
+    total_cost = sum(float(item.get('cost', 0.0)) for item in usage)
+    calls_by_provider = {}
+    for item in usage:
+        p = item.get('provider', 'unknown')
+        calls_by_provider[p] = calls_by_provider.get(p, 0) + 1
+
+    st.sidebar.markdown('---')
+    st.sidebar.markdown('### Usage LLM')
+    st.sidebar.metric('Appels totaux', total_calls)
+    st.sidebar.metric('Coût estimé', f"{total_cost:.4f} USD")
+    for p, cnt in calls_by_provider.items():
+        st.sidebar.write(f"- {p}: {cnt} appels")
+
+    if st.sidebar.button('Effacer logs usage'):
+        try:
+            usage_path.write_text('[]')
+            st.sidebar.success('Logs usage effacés')
+        except Exception:
+            st.sidebar.error('Impossible d\'effacer les logs')
+
     question = st.text_area('Question à adresser aux LLM', height=140)
 
     if 'convo' not in st.session_state:
