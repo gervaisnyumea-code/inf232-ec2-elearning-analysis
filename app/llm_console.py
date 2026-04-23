@@ -5,9 +5,53 @@ from pathlib import Path
 
 import streamlit as st
 import pandas as pd
+from urllib.request import Request, urlopen
+
+# Charger .env tôt pour que les clés et quotas soient disponibles
+try:
+    from src.env_loader import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
 
 from src.llm_integration import LLMClient
 from src.llm_orchestrator import LLMOrchestrator
+
+
+def send_webhook(url: str, payload: dict, timeout: int = 10) -> dict:
+    try:
+        req = Request(url, data=json.dumps(payload).encode('utf-8'), headers={'Content-Type': 'application/json'})
+        with urlopen(req, timeout=timeout) as resp:
+            raw = resp.read().decode('utf-8')
+            try:
+                return {'ok': True, 'resp': json.loads(raw)}
+            except Exception:
+                return {'ok': True, 'resp': raw}
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
+
+def check_and_send_alert(threshold: float, webhook_url: str) -> dict:
+    usage_path = Path(os.getenv('LLM_USAGE_FILE', 'logs/llm_usage.json'))
+    try:
+        entries = json.loads(usage_path.read_text()) if usage_path.exists() else []
+    except Exception:
+        entries = []
+    now = int(time.time())
+    last_hour = [e for e in entries if e.get('ts') and now - int(e.get('ts')) <= 3600]
+    cost_last_hour = sum(float(e.get('cost', 0.0)) for e in last_hour)
+    if cost_last_hour >= float(threshold):
+        payload = {'alert': 'LLM hourly cost exceeded', 'threshold': float(threshold), 'cost_last_hour': cost_last_hour, 'count_last_hour': len(last_hour)}
+        res = send_webhook(webhook_url, payload)
+        alert_log = Path('logs/llm_alerts.log')
+        try:
+            alert_log.parent.mkdir(parents=True, exist_ok=True)
+            prev = alert_log.read_text() if alert_log.exists() else ''
+            alert_log.write_text(prev + f"\n{int(time.time())} ALERT: {payload} -> {res}\n")
+        except Exception:
+            pass
+        return {'alert_sent': True, 'cost_last_hour': cost_last_hour, 'webhook_resp': res}
+    return {'alert_sent': False, 'cost_last_hour': cost_last_hour}
 
 
 def render_llm_console():
@@ -116,6 +160,19 @@ def render_llm_console():
                 out_path = out_dir / f'llm_conversation_{ts}.json'
                 out_path.write_text(json.dumps({'question': question, 'conversation': st.session_state['convo'], 'reconciliation': recon}, indent=2, ensure_ascii=False))
                 st.success(f'Conversation sauvegardée -> {out_path}')
+
+                # Vérification automatique des alertes (si configuré)
+                try:
+                    threshold_env = float(os.getenv('LLM_ALERT_HOURLY_THRESHOLD', '0'))
+                except Exception:
+                    threshold_env = 0.0
+                webhook_env = os.getenv('LLM_ALERT_WEBHOOK_URL', '').strip()
+                if threshold_env and webhook_env:
+                    al_res = check_and_send_alert(threshold_env, webhook_env)
+                    if al_res.get('alert_sent'):
+                        st.warning(f"Alerte envoyée (coût dernière heure = {al_res.get('cost_last_hour'):.4f} USD)")
+                    else:
+                        st.info(f"Aucune alerte nécessaire (coût dernière heure = {al_res.get('cost_last_hour'):.4f} USD)")
 
     # show previous convo if present
     if st.session_state.get('convo'):

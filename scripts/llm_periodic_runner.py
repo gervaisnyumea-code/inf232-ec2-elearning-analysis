@@ -9,6 +9,13 @@ from pathlib import Path
 
 import pandas as pd
 
+# Charger .env si présent
+try:
+    from src.env_loader import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
+
 from src.llm_orchestrator import LLMOrchestrator
 
 
