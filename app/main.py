@@ -175,7 +175,7 @@ st.sidebar.markdown("## Navigation")
 
 page = st.sidebar.radio(
     "Aller à",
-    ["Accueil", "Collecte", "EDA", "Modélisation", "Visualisation"]
+    ["Accueil", "Collecte", "EDA", "Modélisation", "Visualisation", "LLM BrainNet"]
 )
 
 st.sidebar.markdown("---")
@@ -633,6 +633,43 @@ elif page == "Visualisation":
 
         st.markdown("### LDA (Linear Discriminant Analysis)")
         st.info("LDA est une méthode supervisée qui maximise la séparabilité des classes")
+
+
+# ============================================================
+# PAGE LLM BRAINNET
+# ============================================================
+elif page == "LLM BrainNet":
+    st.markdown(icon_html("brain",24) + " LLM BrainNet", unsafe_allow_html=True)
+    st.markdown("Console centralisée pour orchestrer et questionner les LLM. Configurez la consommation ci-dessous.")
+
+    col_a, col_b = st.columns([2,3])
+    with col_a:
+        enable = st.checkbox("Activer appels LLM (globaux)", value=(os.getenv('LLM_CALLS_ENABLED','false').lower() in ('1','true','yes')))
+        max_calls = st.number_input("Max appels / heure", min_value=1, max_value=10000, value=int(os.getenv('LLM_MAX_CALLS_PER_HOUR','60')))
+        if st.button("Appliquer paramètres LLM"):
+            os.environ['LLM_CALLS_ENABLED'] = 'true' if enable else 'false'
+            os.environ['LLM_MAX_CALLS_PER_HOUR'] = str(max_calls)
+            st.success("Paramètres LLM appliqués pour ce processus.")
+
+    # Charger et exécuter la console (module importable)
+    try:
+        import importlib
+        llm_mod = None
+        try:
+            llm_mod = importlib.import_module('app.llm_console')
+        except Exception:
+            from importlib.util import spec_from_file_location, module_from_spec
+            spec = spec_from_file_location('llm_console', str(Path(__file__).parent / 'llm_console.py'))
+            llm_mod = module_from_spec(spec)
+            spec.loader.exec_module(llm_mod)
+    except Exception as e:
+        st.error(f"Impossible de charger le module LLM console: {e}")
+        llm_mod = None
+
+    if llm_mod and hasattr(llm_mod, 'render_llm_console'):
+        llm_mod.render_llm_console()
+    else:
+        st.info("LLM console non disponible. Exécutez app/llm_console.py séparément ou vérifiez app/llm_console.py")
 
 
 # ============================================================

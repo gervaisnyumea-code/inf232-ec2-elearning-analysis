@@ -21,6 +21,7 @@ from urllib.request import Request, urlopen
 class LLMClient:
     def __init__(self, provider: Optional[str] = None):
         self.provider = provider or self._select_provider()
+        # initial values (will be refreshed at call time)
         self.enabled = os.getenv('LLM_CALLS_ENABLED', 'false').lower() in ('1', 'true', 'yes')
         self.max_calls_per_hour = int(os.getenv('LLM_MAX_CALLS_PER_HOUR', '60'))
         self.quota_file = Path('logs/llm_quota.json')
@@ -69,27 +70,51 @@ class LLMClient:
             # if something goes wrong, be conservative and disallow network call
             return False
 
-    def _http_post(self, url: str, headers: dict, payload: dict, timeout: int = 30):
+    def _http_post(self, url: str, headers: dict, payload: dict, timeout: int = 30, retries: int = 2, backoff: float = 1.0):
+        """POST helper with simple retry/backoff for transient network errors."""
         body = json.dumps(payload).encode('utf-8')
         req = Request(url, data=body, headers=headers, method='POST')
-        try:
-            with urlopen(req, timeout=timeout) as resp:
-                raw = resp.read().decode('utf-8')
+        attempt = 0
+        while True:
+            try:
+                with urlopen(req, timeout=timeout) as resp:
+                    raw = resp.read().decode('utf-8')
+                    try:
+                        return json.loads(raw)
+                    except Exception:
+                        return raw
+            except HTTPError as e:
+                # Retry on server errors (5xx)
+                if 500 <= getattr(e, 'code', 0) < 600 and attempt < retries:
+                    attempt += 1
+                    time.sleep(backoff * (2 ** (attempt - 1)))
+                    continue
                 try:
-                    return json.loads(raw)
+                    body = e.read().decode('utf-8')
+                    return {'error': f'HTTPError {e.code}: {e.reason}', 'body': body}
                 except Exception:
-                    return raw
-        except HTTPError as e:
-            return {'error': f'HTTPError {e.code}: {e.reason}'}
-        except URLError as e:
-            return {'error': f'URLError: {e}'}
-        except Exception as e:
-            return {'error': f'Network error: {e}'}
+                    return {'error': f'HTTPError {e.code}: {e.reason}'}
+            except URLError as e:
+                if attempt < retries:
+                    attempt += 1
+                    time.sleep(backoff * (2 ** (attempt - 1)))
+                    continue
+                return {'error': f'URLError: {e}'}
+            except Exception as e:
+                if attempt < retries:
+                    attempt += 1
+                    time.sleep(backoff * (2 ** (attempt - 1)))
+                    continue
+                return {'error': f'Network error: {e}'}
 
     def summarize(self, text: str, max_tokens: int = 256) -> str:
         """Summarize text using the preferred provider if enabled and quota allows.
         Falls back to a deterministic placeholder.
         """
+        # refresh dynamic flags from env to allow runtime changes via UI
+        self.enabled = os.getenv('LLM_CALLS_ENABLED', 'false').lower() in ('1', 'true', 'yes')
+        self.max_calls_per_hour = int(os.getenv('LLM_MAX_CALLS_PER_HOUR', '60'))
+
         provider = self.provider or 'none'
         s = text.strip().replace('\n', ' ')
 
@@ -142,6 +167,10 @@ class LLMClient:
         """Ask an LLM to craft a narrative report from a dict of summary statistics.
         Prefer Gemini for narrative generation (per routing decision).
         """
+        # refresh dynamic flags from env to allow runtime changes via UI
+        self.enabled = os.getenv('LLM_CALLS_ENABLED', 'false').lower() in ('1', 'true', 'yes')
+        self.max_calls_per_hour = int(os.getenv('LLM_MAX_CALLS_PER_HOUR', '60'))
+
         text = "; ".join(f"{k}: {v}" for k, v in df_summary.items())
 
         if not self.enabled:
