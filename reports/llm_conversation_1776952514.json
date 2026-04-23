@@ -1,0 +1,38 @@
+{
+  "question": "Analyse les donnees \n",
+  "data_summary": "No live data available for analysis. Check: 1) live_data.csv exists, 2) timestamps are valid, 3) data_streaming module can access the file.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[Error calling mistral: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[Error calling gemini: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[Error calling groq: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[Error calling mistral: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[Error calling gemini: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[Error calling groq: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[Error in aggregation by groq: LLMClient.summarize() got an unexpected keyword argument 'force_real']"
+}

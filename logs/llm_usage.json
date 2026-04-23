@@ -1,0 +1,3071 @@
+[
+  {
+    "ts": 1776941542,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776941542,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 1,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776941542,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 1,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776941542,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 39,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776941542,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776941542,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 41,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776941542,
+    "provider": "groq",
+    "method": "generate_report_text",
+    "prompt_tokens": 268,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 20,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 20,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 20,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 98,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 98,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 99,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942175,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 338,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 34,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 34,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 34,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 140,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 140,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 141,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942339,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 394,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 25,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 25,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 25,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 113,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 114,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 115,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 164,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 164,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 165,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 164,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 164,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 165,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776942708,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 718,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 11,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 11,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 11,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 71,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 72,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 73,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944705,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 303,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 32,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 32,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 32,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 133,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 133,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 134,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776944747,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 385,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 35,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 35,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 35,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 144,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 145,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 146,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 174,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 175,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 176,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945891,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 579,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 42,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 42,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 42,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 164,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 165,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 166,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 181,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 181,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 182,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776945996,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 606,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 42,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 42,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 42,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 164,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 165,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 166,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 181,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 181,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 182,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946231,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 606,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 225,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 225,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 225,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 364,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 365,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 366,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 364,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 365,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 366,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776946442,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 814,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 13,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 13,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 13,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 78,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 79,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 80,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776947929,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 312,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 266,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 266,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 266,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 386,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 387,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 388,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948808,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 620,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776948822,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 257,
+    "cost": 0.000968,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948823,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 158,
+    "cost": 0.01155,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948826,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 0,
+    "cost": 0.004540000000000001,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948827,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 257,
+    "cost": 0.000968,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948827,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 257,
+    "cost": 0.000968,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948828,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 158,
+    "cost": 0.01155,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948832,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 0,
+    "cost": 0.004540000000000001,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948832,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 257,
+    "cost": 0.000968,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948832,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 257,
+    "cost": 0.000968,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948833,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 158,
+    "cost": 0.01155,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948836,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 0,
+    "cost": 0.004540000000000001,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948837,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 227,
+    "completion_tokens": 257,
+    "cost": 0.000968,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948837,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 378,
+    "cost": 0.001454,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948838,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 158,
+    "cost": 0.01521,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948841,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 0,
+    "cost": 0.00698,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948841,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 378,
+    "cost": 0.001454,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948843,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 378,
+    "cost": 0.001454,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948844,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 158,
+    "cost": 0.01521,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948847,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 0,
+    "cost": 0.00698,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948847,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 378,
+    "cost": 0.001454,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948848,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 379,
+    "cost": 0.001456,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948848,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 158,
+    "cost": 0.01521,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948852,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 0,
+    "cost": 0.00698,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948852,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 349,
+    "completion_tokens": 379,
+    "cost": 0.001456,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948852,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 583,
+    "completion_tokens": 613,
+    "cost": 0.002392,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776948853,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 583,
+    "completion_tokens": 158,
+    "cost": 0.02223,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 401: Unauthorized"
+    }
+  },
+  {
+    "ts": 1776948856,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 583,
+    "completion_tokens": 0,
+    "cost": 0.01166,
+    "extra": {
+      "success": false,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
+    }
+  },
+  {
+    "ts": 1776948857,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 583,
+    "completion_tokens": 613,
+    "cost": 0.002392,
+    "extra": {
+      "success": false,
+      "error": "HTTPError 422: Unprocessable Entity"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 158,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 158,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 159,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949153,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 418,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 44,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 171,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 172,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 173,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949179,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 436,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949608,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 746,
+    "completion_tokens": 256,
+    "cost": 0.002004,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 746,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 746,
+          "total_tokens": 1002,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949611,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 746,
+    "completion_tokens": 256,
+    "cost": 0.002004,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 746,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 746,
+          "total_tokens": 1002,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949612,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 746,
+    "completion_tokens": 256,
+    "cost": 0.002004,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 746,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 746,
+          "total_tokens": 1002,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949615,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1290,
+    "completion_tokens": 256,
+    "cost": 0.003092,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1290,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1290,
+          "total_tokens": 1546,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949617,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1287,
+    "completion_tokens": 229,
+    "cost": 0.003032,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1287,
+        "completion_tokens": 229,
+        "raw": {
+          "prompt_tokens": 1287,
+          "total_tokens": 1516,
+          "completion_tokens": 229,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949620,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1291,
+    "completion_tokens": 256,
+    "cost": 0.003094,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1291,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1291,
+          "total_tokens": 1547,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949624,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 2357,
+    "completion_tokens": 331,
+    "cost": 0.005376000000000001,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 2357,
+        "completion_tokens": 331,
+        "raw": {
+          "prompt_tokens": 2357,
+          "total_tokens": 2688,
+          "completion_tokens": 331,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949643,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 5,
+    "completion_tokens": 50,
+    "cost": 0.00011,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 5,
+        "completion_tokens": 50,
+        "raw": {
+          "prompt_tokens": 5,
+          "total_tokens": 55,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949645,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 5,
+    "completion_tokens": 50,
+    "cost": 0.00011,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 5,
+        "completion_tokens": 50,
+        "raw": {
+          "prompt_tokens": 5,
+          "total_tokens": 55,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949645,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 5,
+    "completion_tokens": 50,
+    "cost": 0.00011,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 5,
+        "completion_tokens": 50,
+        "raw": {
+          "prompt_tokens": 5,
+          "total_tokens": 55,
+          "completion_tokens": 50,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949661,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 755,
+    "completion_tokens": 256,
+    "cost": 0.002022,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 755,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 755,
+          "total_tokens": 1011,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949662,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 755,
+    "completion_tokens": 256,
+    "cost": 0.002022,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 755,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 755,
+          "total_tokens": 1011,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949665,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 755,
+    "completion_tokens": 256,
+    "cost": 0.002022,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 755,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 755,
+          "total_tokens": 1011,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949667,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1293,
+    "completion_tokens": 256,
+    "cost": 0.003098,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1293,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1293,
+          "total_tokens": 1549,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949669,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1293,
+    "completion_tokens": 174,
+    "cost": 0.0029340000000000004,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1293,
+        "completion_tokens": 174,
+        "raw": {
+          "prompt_tokens": 1293,
+          "total_tokens": 1467,
+          "completion_tokens": 174,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949671,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1294,
+    "completion_tokens": 179,
+    "cost": 0.0029460000000000003,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1294,
+        "completion_tokens": 179,
+        "raw": {
+          "prompt_tokens": 1294,
+          "total_tokens": 1473,
+          "completion_tokens": 179,
+          "prompt_tokens_details": {
+            "cached_tokens": 752
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949675,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 2221,
+    "completion_tokens": 494,
+    "cost": 0.00543,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 2221,
+        "completion_tokens": 494,
+        "raw": {
+          "prompt_tokens": 2221,
+          "total_tokens": 2715,
+          "completion_tokens": 494,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949699,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 726,
+    "completion_tokens": 256,
+    "cost": 0.001964,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 726,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 726,
+          "total_tokens": 982,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949701,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 726,
+    "completion_tokens": 256,
+    "cost": 0.001964,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 726,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 726,
+          "total_tokens": 982,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949703,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 726,
+    "completion_tokens": 256,
+    "cost": 0.001964,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 726,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 726,
+          "total_tokens": 982,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949705,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1272,
+    "completion_tokens": 256,
+    "cost": 0.003056,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1272,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1272,
+          "total_tokens": 1528,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949707,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1272,
+    "completion_tokens": 200,
+    "cost": 0.002944,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1272,
+        "completion_tokens": 200,
+        "raw": {
+          "prompt_tokens": 1272,
+          "total_tokens": 1472,
+          "completion_tokens": 200,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949712,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1272,
+    "completion_tokens": 256,
+    "cost": 0.003056,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1272,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1272,
+          "total_tokens": 1528,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949714,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1217,
+    "completion_tokens": 200,
+    "cost": 0.002834,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1217,
+        "completion_tokens": 200,
+        "raw": {
+          "prompt_tokens": 1217,
+          "total_tokens": 1417,
+          "completion_tokens": 200,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949715,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1272,
+    "completion_tokens": 189,
+    "cost": 0.002922,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1272,
+        "completion_tokens": 189,
+        "raw": {
+          "prompt_tokens": 1272,
+          "total_tokens": 1461,
+          "completion_tokens": 189,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949718,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1217,
+    "completion_tokens": 200,
+    "cost": 0.002834,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1217,
+        "completion_tokens": 200,
+        "raw": {
+          "prompt_tokens": 1217,
+          "total_tokens": 1417,
+          "completion_tokens": 200,
+          "prompt_tokens_details": {
+            "cached_tokens": 704
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949724,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 2943,
+    "completion_tokens": 335,
+    "cost": 0.006556,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 2943,
+        "completion_tokens": 335,
+        "raw": {
+          "prompt_tokens": 2943,
+          "total_tokens": 3278,
+          "completion_tokens": 335,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 40,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 158,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 159,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 160,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776949823,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 419,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "no_provider"
+    }
+  },
+  {
+    "ts": 1776951982,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 748,
+    "completion_tokens": 256,
+    "cost": 0.0020080000000000002,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 748,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 748,
+          "total_tokens": 1004,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776951984,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 748,
+    "completion_tokens": 256,
+    "cost": 0.0020080000000000002,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 748,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 748,
+          "total_tokens": 1004,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776951986,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 748,
+    "completion_tokens": 256,
+    "cost": 0.0020080000000000002,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 748,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 748,
+          "total_tokens": 1004,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 704
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776951989,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1281,
+    "completion_tokens": 256,
+    "cost": 0.003074,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1281,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1281,
+          "total_tokens": 1537,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776951990,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1287,
+    "completion_tokens": 256,
+    "cost": 0.0030859999999999998,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1287,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 1287,
+          "total_tokens": 1543,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776951990,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 656,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776951990,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 1453,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 259,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 259,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 259,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 391,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 391,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 392,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952207,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 646,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952222,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 756,
+    "completion_tokens": 256,
+    "cost": 0.002024,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 756,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 756,
+          "total_tokens": 1012,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952224,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 756,
+    "completion_tokens": 256,
+    "cost": 0.002024,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 756,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 756,
+          "total_tokens": 1012,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952227,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 756,
+    "completion_tokens": 256,
+    "cost": 0.002024,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 756,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 756,
+          "total_tokens": 1012,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 752
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952228,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1304,
+    "completion_tokens": 161,
+    "cost": 0.0029300000000000003,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1304,
+        "completion_tokens": 161,
+        "raw": {
+          "prompt_tokens": 1304,
+          "total_tokens": 1465,
+          "completion_tokens": 161,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952231,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1302,
+    "completion_tokens": 226,
+    "cost": 0.003056,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1302,
+        "completion_tokens": 226,
+        "raw": {
+          "prompt_tokens": 1302,
+          "total_tokens": 1528,
+          "completion_tokens": 226,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952233,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1304,
+    "completion_tokens": 206,
+    "cost": 0.00302,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1304,
+        "completion_tokens": 206,
+        "raw": {
+          "prompt_tokens": 1304,
+          "total_tokens": 1510,
+          "completion_tokens": 206,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952236,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 2217,
+    "completion_tokens": 458,
+    "cost": 0.00535,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 2217,
+        "completion_tokens": 458,
+        "raw": {
+          "prompt_tokens": 2217,
+          "total_tokens": 2675,
+          "completion_tokens": 458,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 267,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 267,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 267,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 398,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 399,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 400,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952319,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 654,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "disabled"
+    }
+  },
+  {
+    "ts": 1776952322,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 620,
+    "completion_tokens": 256,
+    "cost": 0.001752,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 620,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 620,
+          "total_tokens": 876,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952324,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 620,
+    "completion_tokens": 256,
+    "cost": 0.001752,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 620,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 620,
+          "total_tokens": 876,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952326,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 620,
+    "completion_tokens": 256,
+    "cost": 0.001752,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 620,
+        "completion_tokens": 256,
+        "raw": {
+          "prompt_tokens": 620,
+          "total_tokens": 876,
+          "completion_tokens": 256,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952327,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1174,
+    "completion_tokens": 165,
+    "cost": 0.002678,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1174,
+        "completion_tokens": 165,
+        "raw": {
+          "prompt_tokens": 1174,
+          "total_tokens": 1339,
+          "completion_tokens": 165,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952329,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1170,
+    "completion_tokens": 202,
+    "cost": 0.0027440000000000003,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1170,
+        "completion_tokens": 202,
+        "raw": {
+          "prompt_tokens": 1170,
+          "total_tokens": 1372,
+          "completion_tokens": 202,
+          "prompt_tokens_details": {
+            "cached_tokens": 576
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952330,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1170,
+    "completion_tokens": 117,
+    "cost": 0.002574,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1170,
+        "completion_tokens": 117,
+        "raw": {
+          "prompt_tokens": 1170,
+          "total_tokens": 1287,
+          "completion_tokens": 117,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952331,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 962,
+    "completion_tokens": 247,
+    "cost": 0.002418,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 962,
+        "completion_tokens": 247,
+        "raw": {
+          "prompt_tokens": 962,
+          "total_tokens": 1209,
+          "completion_tokens": 247,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952333,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 925,
+    "completion_tokens": 251,
+    "cost": 0.002352,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 925,
+        "completion_tokens": 251,
+        "raw": {
+          "prompt_tokens": 925,
+          "total_tokens": 1176,
+          "completion_tokens": 251,
+          "prompt_tokens_details": {
+            "cached_tokens": 576
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952334,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 1011,
+    "completion_tokens": 130,
+    "cost": 0.002282,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 1011,
+        "completion_tokens": 130,
+        "raw": {
+          "prompt_tokens": 1011,
+          "total_tokens": 1141,
+          "completion_tokens": 130,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952337,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 2626,
+    "completion_tokens": 382,
+    "cost": 0.0060160000000000005,
+    "extra": {
+      "success": true,
+      "api_usage": {
+        "prompt_tokens": 2626,
+        "completion_tokens": 382,
+        "raw": {
+          "prompt_tokens": 2626,
+          "total_tokens": 3008,
+          "completion_tokens": 382,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 256,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 256,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 256,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "mistral",
+    "method": "summarize",
+    "prompt_tokens": 376,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "gemini",
+    "method": "summarize",
+    "prompt_tokens": 377,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 378,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  },
+  {
+    "ts": 1776952383,
+    "provider": "groq",
+    "method": "summarize",
+    "prompt_tokens": 611,
+    "completion_tokens": 0,
+    "cost": 0.0,
+    "extra": {
+      "skipped": "quota"
+    }
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "question": "Analyse synthétique multi-rounds demandée par l'utilisateur.",
+  "data_summary": "No live data available.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Analyse synthétique multi-rounds demandée par l'utilisateur.  Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Analyse synthétique multi-rounds demandée par l'utilisateur.  Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Analyse synthétique multi-rounds demandée par l'utilisateur.  Data context: No live data available...."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Analyse synthétique multi-rounds demandée pa..."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Analyse synthétique multi-rounds demandée ..."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Analyse synthétique multi-rounds demandée ..."
+    },
+    {
+      "round": 2,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Question: Analyse synthétique multi-rounds d..."
+    },
+    {
+      "round": 2,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Question: Analyse synthétique multi-rounds..."
+    },
+    {
+      "round": 2,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Question: Analyse synthétique multi-rounds..."
+    },
+    {
+      "round": 3,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Question: Analyse synthétique multi-rounds d..."
+    },
+    {
+      "round": 3,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Question: Analyse synthétique multi-rounds..."
+    },
+    {
+      "round": 3,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Question: Analyse synthétique multi-rounds..."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summary by groq] You are a conciliator. Question: Analyse synthétique multi-rounds demandée par l'utilisateur. Data context: No live data available. Synthesize the contributions below, list agreements and disagreement..."
+}

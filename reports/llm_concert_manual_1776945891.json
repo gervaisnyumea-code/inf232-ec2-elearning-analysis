@@ -1,0 +1,53 @@
+{
+  "question": "Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français.",
+  "data_summary": "No live data available.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français.  Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français.  Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français.  Data context: No live data available...."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Veu..."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] V..."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] V..."
+    },
+    {
+      "round": 2,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Que..."
+    },
+    {
+      "round": 2,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Q..."
+    },
+    {
+      "round": 2,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Q..."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summary by groq] You are a conciliator. Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live. Répondez en français. Data context: No live data available. Synthesize the contribution..."
+}

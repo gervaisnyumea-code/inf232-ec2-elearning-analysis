@@ -1,0 +1,53 @@
+{
+  "question": "Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français.",
+  "data_summary": "rows=4\nt: mean=18081.250, std=1023.065, min=17195.0, max=18967.5\nvalue1: mean=0.892, std=0.045, min=0.8359788681031595, max=0.9351047010903484\nvalue2: mean=0.029, std=0.498, min=-0.4499139617174545, max=0.5189875005688825\nsample_rows=[{'timestamp': Timestamp('2026-04-23 12:14:01.310408'), 't': 17195.0, 'value1': 0.8783763975383954, 'value2': 0.5189875005688825}, {'timestamp': Timestamp('2026-04-23 12:14:01.310408'), 't': 18967.0, 'value1': 0.9351047010903484, 'value2': -0.4499139617174545}, {'timestamp': Timestamp('2026-04-23 12:14:01.810682'), 't': 17195.5, 'value1': 0.9198980885462394, 'value2': 0.3936164952692522}, {'timestamp': Timestamp('2026-04-23 12:14:01.810743'), 't': 18967.5, 'value1': 0.8359788681031595, 'value2': -0.3465287489591994}]",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français.  Data context: rows=4 t: mean=18081.250, std=1023.065, min=17195.0, max..."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français.  Data context: rows=4 t: mean=18081.250, std=1023.065, min=17195.0, max..."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français.  Data context: rows=4 t: mean=18081.250, std=1023.065, min=17195.0, max..."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250, std=1023.065, min=171..."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250, std=1023.065, min=171..."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250, std=1023.065, min=171..."
+    },
+    {
+      "round": 2,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250, std=1023.065, min=171..."
+    },
+    {
+      "round": 2,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250, std=1023.065, min=171..."
+    },
+    {
+      "round": 2,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250, std=1023.065, min=171..."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summary by groq] You are a conciliator. Question: Veuillez synthétiser et recommander actions pédagogiques pour le snapshot live (inclure données récentes). Répondez en français. Data context: rows=4 t: mean=18081.250..."
+}

@@ -1,0 +1,38 @@
+{
+  "question": "Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !\n\n",
+  "data_summary": "No live data available.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !    Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !    Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !    Data context: No live data available...."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !   Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Repond moi en fran..."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !   Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Repond moi en fr..."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !   Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Repond moi en fr..."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summary by groq] You are a conciliator. Question: Repond moi en francais ! quels est la courbe de variable qu'on etudie en ce moment !   Data context: No live data available. Synthesize the contributions below, list a..."
+}

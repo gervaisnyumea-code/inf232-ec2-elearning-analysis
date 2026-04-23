@@ -1,0 +1,44 @@
+{
+  "question": "Allo",
+  "conversation": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Allo...",
+      "ts": 1776941542
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Allo...",
+      "ts": 1776941542
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Allo...",
+      "ts": 1776941542
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Allo Contributions: gemini: [LLM summary by gemini] Allo... groq: [LLM summary by groq] Allo... Répond en tenant compte des autres points de vue....",
+      "ts": 1776941542
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Allo Contributions: mistral: [LLM summary by mistral] Allo... groq: [LLM summary by groq] Allo... Répond en tenant compte des autres points de vue....",
+      "ts": 1776941542
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Allo Contributions: mistral: [LLM summary by mistral] Allo... gemini: [LLM summary by gemini] Allo... Répond en tenant compte des autres points de vue....",
+      "ts": 1776941542
+    }
+  ],
+  "reconciliation": {
+    "groq": "[Report by groq] conversation: [{'round': 0, 'provider': 'mistral', 'text': '[LLM summary by mistral] Allo...', 'ts': 1776941542}, {'round': 0, 'provider': 'gemini', 'text': '[LLM summary by gemini] Allo...', 'ts': 1776941542}, {'round': 0, 'provider': 'groq', 'text': '[LLM summary by groq] Allo...', 'ts': 1776941542}, {'round': 1, 'provider': 'mistral', 'text': '[LLM summary by mistral] Question: Allo Contributions: gemini: [LLM summary by gemini] Allo... groq: [LLM summary by groq] Allo... Répond en tenant compte des autres points de vue....', 'ts': 1776941542}, {'round': 1, 'provider': 'gemini', 'text': '[LLM summary by gemini] Question: Allo Contributions: mistral: [LLM summary by mistral] Allo... groq: [LLM summary by groq] Allo... Répond en tenant compte des autres points de vue....', 'ts': 1776941542}, {'round': 1, 'provider': 'groq', 'text': '[LLM summary by groq] Question: Allo Contributions: mistral: [LLM summary by mistral] Allo... gemini: [LLM summary by gemini] Allo... Répond en tenant compte des autres points de vue....', 'ts': 1776941542}]; question: Allo"
+  }
+}

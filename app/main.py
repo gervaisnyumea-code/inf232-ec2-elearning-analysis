@@ -8,10 +8,17 @@ import pandas as pd
 import numpy as np
 import sys
 import os
+import time
 from pathlib import Path
 
 # Ajouter le chemin du projet
 sys.path.insert(0, str(Path(__file__).parent.parent))
+# Charger variables depuis .env (persistées) pour que les scripts et Streamlit héritent des mêmes valeurs
+try:
+    from src.env_loader import load_dotenv, persist_env
+    load_dotenv()
+except Exception:
+    pass
 
 from src.data_cleaning import load_raw_data, full_pipeline, get_feature_matrix
 from src.models import RegressionModel, ClassificationModel
@@ -180,6 +187,14 @@ page = st.sidebar.radio(
 )
 
 st.sidebar.markdown("---")
+
+# Contrôle d'auto-refresh global (injecte un petit JS pour recharger la page)
+autoref = st.sidebar.checkbox("Auto-refresh global (rafraîchir toutes les pages)", value=(os.getenv('GLOBAL_AUTORELOAD','false').lower() in ('1','true','yes')), key='global_autorefresh')
+if autoref:
+    interval = st.sidebar.number_input("Intervalle auto-refresh (s)", min_value=1, max_value=3600, value=int(os.getenv('GLOBAL_AUTORELOAD_INTERVAL','5')))
+    import streamlit.components.v1 as components
+    components.html(f"<script>setTimeout(()=>location.reload(), {int(interval)*1000});</script>", height=0)
+
 st.sidebar.markdown("**Projet:** Analyse de la performance académique")
 st.sidebar.markdown("**Problématique:** Quels comportements influencent la réussite?")
 
@@ -284,9 +299,18 @@ elif page == "Collecte":
 
         if reg_model and clf_model:
             # Prédiction
-            note_predite = reg_model.predict(new_student)[0]
-            reussite_proba = clf_model.predict_proba(new_student)[0]
-            reussite_pred = clf_model.predict(new_student)[0]
+            note_predite = float(reg_model.predict(new_student)[0])
+            # robust handling of predict_proba output
+            try:
+                proba_arr = clf_model.predict_proba(new_student)
+                # clf_model.predict_proba returns array-like (n,) or (n,2)
+                if hasattr(proba_arr[0], '__len__') and len(proba_arr.shape) > 1:
+                    positive_proba = float(proba_arr[0][1])
+                else:
+                    positive_proba = float(proba_arr[0])
+            except Exception:
+                positive_proba = 0.0
+            reussite_pred = int(clf_model.predict(new_student)[0])
 
             # Afficher les résultats
             st.markdown("---")
@@ -296,23 +320,73 @@ elif page == "Collecte":
                 st.metric("Note finale prédite", f"{note_predite:.1f}/20")
 
             with col2:
-                st.metric("Probabilité de réussite", f"{reussite_proba*100:.1f}%")
+                st.metric("Probabilité de réussite", f"{positive_proba*100:.1f}%")
 
             if reussite_pred == 1:
                 st.markdown(icon_html("check",20) + " **Réussite prédite!**", unsafe_allow_html=True)
             else:
                 st.markdown(icon_html("warning",20) + " **Risque d'échec - Consulter les recommandations**", unsafe_allow_html=True)
 
-            # Recommandations
+            # Recommandations statiques
             st.markdown(icon_html("search",16) + " ### Recommandations", unsafe_allow_html=True)
             if study_time < 10:
-                st.write("- 🔹 Augmenter le temps d'étude hebdomadaire")
+                st.markdown(icon_html('target',12) + " Augmenter le temps d'étude hebdomadaire", unsafe_allow_html=True)
             if exercises < 70:
-                st.write("- 🔹 Compléter plus d'exercices")
+                st.markdown(icon_html('target',12) + " Compléter plus d'exercices", unsafe_allow_html=True)
             if homework < 8:
-                st.write("- 🔹 Rendre plus de devoirs")
+                st.markdown(icon_html('target',12) + " Rendre plus de devoirs", unsafe_allow_html=True)
             if absences > 5:
-                st.write("- 🔹 Réduire les absences")
+                st.markdown(icon_html('target',12) + " Réduire les absences", unsafe_allow_html=True)
+
+            # Option IA: demander recommandations personnalisées via BrainNet
+            use_llm_rec = st.checkbox('Demander recommandation IA personnalisée pour cet étudiant', value=False, key='collect_llm')
+            if use_llm_rec:
+                rounds_llm = st.number_input('Rounds LLM pour cette recommandation', min_value=1, max_value=3, value=1, key='collect_llm_rounds')
+                st.info('Consultation IA en cours... (respect des quotas)')
+                try:
+                    import importlib
+                    import src.llm_orchestrator as llm_orch_mod
+                    importlib.reload(llm_orch_mod)
+                    orch = llm_orch_mod.LLMOrchestrator()
+                except Exception:
+                    try:
+                        from src.llm_orchestrator import LLMOrchestrator
+                        orch = LLMOrchestrator()
+                    except Exception as e:
+                        orch = None
+                        st.error(f'Orchestrateur LLM non disponible: {e}')
+
+                if orch:
+                    # build a concise prompt with the student profile and a short dataset summary
+                    profile = { 'age': age, 'genre': genre, 'niveau': niveau, 'connections': connections, 'study_time': study_time,
+                               'exercises': exercises, 'videos': videos, 'forums': forums, 'homework': homework,
+                               'revenus': revenus, 'motivation': motivation, 'absences': absences, 'internet': internet }
+                    # small dataset summary
+                    try:
+                        df_summary = load_data()
+                        dsum_lines = [f"rows={len(df_summary)}"]
+                        numc = df_summary.select_dtypes(include=['number']).columns.tolist()
+                        for c in numc[:4]:
+                            s = df_summary[c].describe()
+                            dsum_lines.append(f"{c}: mean={s['mean']:.2f}, std={s['std']:.2f}")
+                        data_summary_text = "\n".join(dsum_lines)
+                    except Exception:
+                        data_summary_text = 'Aucune donnée résumé disponible.'
+
+                    question = f"Profil étudiant: {profile}\nContexte: {data_summary_text}\nDonne 5 recommandations pédagogiques priorisées, actionnables et courtes."
+                    try:
+                        res = orch.concert_and_merge(question, rounds=int(rounds_llm), include_data=False, data_window_sec=3600, max_tokens=512, force_real=(os.getenv('LLM_CALLS_ENABLED','false').lower() in ('1','true','yes')))
+                        st.markdown('### Recommandations IA')
+                        st.write(res.get('merged', ''))
+                        # save conversation
+                        out_dir = Path(os.getenv('EXPORT_DIR', 'reports'))
+                        out_dir.mkdir(parents=True, exist_ok=True)
+                        ts = int(time.time())
+                        out_path = out_dir / f'llm_reco_collect_{ts}.json'
+                        out_path.write_text(json.dumps(res, ensure_ascii=False, indent=2))
+                        st.success(f'Recommandations sauvegardées -> {out_path}')
+                    except Exception as e:
+                        st.error(f'Erreur lors de la concertation IA: {e}')
 
 
 # ============================================================
@@ -350,7 +424,7 @@ elif page == "EDA":
         st.markdown("Note Finale")
         st.bar_chart(df['note_finale'].value_counts().sort_index())
 
-    st.markdown("### 🔗 Corrélations avec la Réussite")
+    st.markdown(icon_html("chart",16) + " Corrélations avec la Réussite", unsafe_allow_html=True)
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
     corr_with_success = df[numeric_cols].corr()['reussite'].sort_values(ascending=False)
     st.bar_chart(corr_with_success)
@@ -430,8 +504,13 @@ elif page == "EDA":
             st.write('Aucune donnée de streaming détectée. Cliquez sur "Démarrer simulateur de données".')
         else:
             import plotly.express as px
+            # Assurer que 't' est numérique et tri chronologique
+            if 't' in df_live.columns:
+                df_live['t'] = pd.to_numeric(df_live['t'], errors='coerce')
+                df_live = df_live.sort_values('t').reset_index(drop=True)
+
             fig = px.line(df_live, x='t', y=['value1','value2'], title='Courbes oscillantes (value1 & value2)')
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             # annotate periodic points
             from src.reporting import find_periodic_points
             peaks = find_periodic_points(df_live, 't', 'value1')
@@ -462,7 +541,7 @@ elif page == "EDA":
 # PAGE MODÉLISATION
 # ============================================================
 elif page == "Modélisation":
-    st.title("🤖 Modélisation Prédictive")
+    st.markdown(icon_html("brain",24) + " Modélisation Prédictive", unsafe_allow_html=True)
 
     reg_model, clf_model = load_models()
 
@@ -490,6 +569,24 @@ elif page == "Modélisation":
                     'Coefficient': reg_model.model.coef_
                 }).sort_values('Coefficient', key=abs, ascending=False)
                 st.dataframe(coef_df, use_container_width=True)
+
+                # Diagnostics supplémentaires pour la régression
+                try:
+                    df_all = load_data()
+                    X_all, y_reg_all, _ = get_feature_matrix(df_all)
+                    y_pred_all = reg_model.predict(X_all)
+                    import plotly.express as px
+                    fig_pred = px.scatter(x=y_reg_all, y=y_pred_all, labels={'x':'Vrai','y':'Prévu'}, title='Prédits vs Réels')
+                    fig_pred.add_shape(type='line', x0=min(y_reg_all), y0=min(y_reg_all), x1=max(y_reg_all), y1=max(y_reg_all), line=dict(color='red', dash='dash'))
+                    st.plotly_chart(fig_pred, use_container_width=True)
+                    residuals = y_reg_all - y_pred_all
+                    fig_res = px.histogram(residuals, nbins=50, title='Distribution des résidus')
+                    st.plotly_chart(fig_res, use_container_width=True)
+                    fig_res_vs_pred = px.scatter(x=y_pred_all, y=residuals, labels={'x':'Prévu','y':'Résidu'}, title='Résidus vs Prévu')
+                    fig_res_vs_pred.add_shape(type='line', x0=min(y_pred_all), x1=max(y_pred_all), y0=0, y1=0, line=dict(color='red', dash='dash'))
+                    st.plotly_chart(fig_res_vs_pred, use_container_width=True)
+                except Exception as e:
+                    st.info('Diagnostics de régression non disponibles: ' + str(e))
 
         with tab2:
             st.markdown("### Classification")
@@ -524,6 +621,26 @@ elif page == "Modélisation":
             except Exception:
                 st.markdown(icon_html("warning",12) + " Erreur lors du calcul de l'importance des variables.", unsafe_allow_html=True)
 
+            # Diagnostics classification (ROC, Confusion, PR, calibration)
+            try:
+                from src.visualization_extra import plot_classification_diagnostics
+                try:
+                    df_all = load_data()
+                    X_all, _, y_all = get_feature_matrix(df_all)
+                    figs = plot_classification_diagnostics(clf_model, X_all, y_all)
+                    if figs is None:
+                        st.info('Diagnostics classification non disponibles.')
+                    else:
+                        if isinstance(figs, list):
+                            for f in figs:
+                                if f is not None:
+                                    st.plotly_chart(f, use_container_width=True)
+                        else:
+                            st.plotly_chart(figs, use_container_width=True)
+                except Exception as e:
+                    st.info('Diagnostics classification non disponibles: ' + str(e))
+            except Exception:
+                pass
             # Orchestrateur BrainNet — configuration des poids
             try:
                 bn = BrainNet(auto_load=True)
@@ -635,6 +752,89 @@ elif page == "Visualisation":
         st.markdown("### LDA (Linear Discriminant Analysis)")
         st.info("LDA est une méthode supervisée qui maximise la séparabilité des classes")
 
+    # ============================================================
+    # GRAPHIQUES SUPPLÉMENTAIRES
+    # ============================================================
+    st.markdown(icon_html('chart',24) + ' Tous les Graphiques', unsafe_allow_html=True)
+    st.markdown('Visualisation multiple : camembert, barres, scatter, boxplot, heatmap, histogram, density')
+    import plotly.express as px
+
+    try:
+        df_viz = load_data()
+    except Exception:
+        df_viz = df
+
+    cat_cols = df_viz.select_dtypes(include=['object','category']).columns.tolist()
+    num_cols = df_viz.select_dtypes(include=[np.number]).columns.tolist()
+
+    chart_type = st.selectbox('Choisir un type de graphique', ['Camembert (Pie)','Barres','Scatter','Boxplot','Correlation Heatmap','Histogram','Density','Oscillating (Simulation)'])
+
+    if chart_type == 'Camembert (Pie)':
+        sel_col = st.selectbox('Variable catégorielle', cat_cols if cat_cols else ['niveau_etudes'])
+        counts = df_viz[sel_col].value_counts().reset_index()
+        counts.columns = [sel_col,'count']
+        fig = px.pie(counts, names=sel_col, values='count', title=f'Camembert - {sel_col}')
+        st.plotly_chart(fig, use_container_width=True)
+
+    elif chart_type == 'Barres':
+        sel_cat = st.selectbox('Catégorie (axe X)', cat_cols if cat_cols else ['niveau_etudes'])
+        sel_val = st.selectbox('Valeur (axe Y)', num_cols if num_cols else [num_cols[0]])
+        agg_df = df_viz.groupby(sel_cat)[sel_val].mean().reset_index()
+        fig = px.bar(agg_df, x=sel_cat, y=sel_val, title=f'Barres: moyenne {sel_val} par {sel_cat}')
+        st.plotly_chart(fig, use_container_width=True)
+
+    elif chart_type == 'Scatter':
+        if len(num_cols) >= 2:
+            xcol = st.selectbox('X', num_cols, index=0)
+            ycol = st.selectbox('Y', num_cols, index=1)
+            color = st.selectbox('Color by (optionnel)', [None] + cat_cols)
+            fig = px.scatter(df_viz, x=xcol, y=ycol, color=color, title=f'Scatter: {xcol} vs {ycol}')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info('Pas assez de colonnes numériques pour un scatter.')
+
+    elif chart_type == 'Boxplot':
+        if num_cols and cat_cols:
+            val = st.selectbox('Valeur numérique', num_cols)
+            by = st.selectbox('Group by', cat_cols)
+            fig = px.box(df_viz, x=by, y=val, title=f'Boxplot: {val} groupé par {by}')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info('Boxplot nécessite au moins une colonne numérique et une catégorielle.')
+
+    elif chart_type == 'Correlation Heatmap':
+        if len(num_cols) >= 2:
+            corr = df_viz[num_cols].corr()
+            fig = px.imshow(corr, text_auto=True, aspect='auto', title='Matrice de corrélation')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info('Pas assez de colonnes numériques pour une matrice de corrélation.')
+
+    elif chart_type == 'Histogram':
+        if num_cols:
+            colh = st.selectbox('Variable numérique', num_cols)
+            bins = st.slider('Bins', 5, 200, 30)
+            fig = px.histogram(df_viz, x=colh, nbins=bins, title=f'Histogramme {colh}')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info('Aucune colonne numérique trouvée.')
+
+    elif chart_type == 'Density':
+        if num_cols:
+            cold = st.selectbox('Variable numérique pour densité', num_cols)
+            fig = px.histogram(df_viz, x=cold, nbins=100, histnorm='density', title=f'Densité {cold}')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info('Aucune colonne numérique trouvée.')
+
+    elif chart_type == 'Oscillating (Simulation)':
+        n_students = st.slider('Nombre de courbes', 1, 20, 5)
+        col_choice = st.selectbox('Colonne de base (optionnel)', [None] + num_cols)
+        col_to_use = col_choice if col_choice else 'nb_connexions_semaine'
+        fig = plot_oscillating_progression(df_viz, col=col_to_use, n_students=n_students)
+        st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown('---')
 
 # ============================================================
 # PAGE LLM BRAINNET
@@ -656,42 +856,20 @@ elif page == "LLM BrainNet":
             os.environ['MISTRAL_COST_PER_1K'] = str(mistral_cost)
             os.environ['GEMINI_COST_PER_1K'] = str(gemini_cost)
             os.environ['GROQ_COST_PER_1K'] = str(groq_cost)
-            # Persist to .env
-            def _update_env_file(updates, path=Path(__file__).parent.parent / '.env'):
-                try:
-                    p = path
-                    if p.exists():
-                        lines = p.read_text().splitlines()
-                    else:
-                        lines = []
-                    new_lines = []
-                    found = set()
-                    for line in lines:
-                        if line.strip().startswith('#') or '=' not in line:
-                            new_lines.append(line)
-                            continue
-                        key = line.split('=',1)[0].strip()
-                        if key in updates:
-                            new_lines.append(f"{key}={updates[key]}")
-                            found.add(key)
-                        else:
-                            new_lines.append(line)
-                    for k,v in updates.items():
-                        if k not in found:
-                            new_lines.append(f"{k}={v}")
-                    p.write_text("\n".join(new_lines)+"\n")
-                    return True
-                except Exception as e:
-                    st.error(f"Impossible d'écrire .env: {e}")
-                    return False
+            # Persist to .env using helper
+            try:
+                from src.env_loader import persist_env
+                success = persist_env({
+                    'LLM_CALLS_ENABLED': 'true' if enable else 'false',
+                    'LLM_MAX_CALLS_PER_HOUR': str(max_calls),
+                    'MISTRAL_COST_PER_1K': str(mistral_cost),
+                    'GEMINI_COST_PER_1K': str(gemini_cost),
+                    'GROQ_COST_PER_1K': str(groq_cost)
+                }, path=Path(__file__).parent.parent / '.env')
+            except Exception as e:
+                st.error(f"Impossible d'écrire .env: {e}")
+                success = False
 
-            success = _update_env_file({
-                'LLM_CALLS_ENABLED': 'true' if enable else 'false',
-                'LLM_MAX_CALLS_PER_HOUR': str(max_calls),
-                'MISTRAL_COST_PER_1K': str(mistral_cost),
-                'GEMINI_COST_PER_1K': str(gemini_cost),
-                'GROQ_COST_PER_1K': str(groq_cost)
-            })
             if success:
                 st.success("Paramètres LLM appliqués et sauvegardés dans .env.")
             else:

@@ -1,0 +1,44 @@
+{
+  "question": "Hey ",
+  "conversation": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Hey...",
+      "ts": 1776937956
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Hey...",
+      "ts": 1776937956
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Hey...",
+      "ts": 1776937956
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Hey  Contributions: gemini: [LLM summary by gemini] Hey... groq: [LLM summary by groq] Hey... Répond en tenant compte des autres points de vue....",
+      "ts": 1776937956
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Hey  Contributions: mistral: [LLM summary by mistral] Hey... groq: [LLM summary by groq] Hey... Répond en tenant compte des autres points de vue....",
+      "ts": 1776937956
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Hey  Contributions: mistral: [LLM summary by mistral] Hey... gemini: [LLM summary by gemini] Hey... Répond en tenant compte des autres points de vue....",
+      "ts": 1776937956
+    }
+  ],
+  "reconciliation": {
+    "groq": "[Report by groq] conversation: [{'round': 0, 'provider': 'mistral', 'text': '[LLM summary by mistral] Hey...', 'ts': 1776937956}, {'round': 0, 'provider': 'gemini', 'text': '[LLM summary by gemini] Hey...', 'ts': 1776937956}, {'round': 0, 'provider': 'groq', 'text': '[LLM summary by groq] Hey...', 'ts': 1776937956}, {'round': 1, 'provider': 'mistral', 'text': '[LLM summary by mistral] Question: Hey  Contributions: gemini: [LLM summary by gemini] Hey... groq: [LLM summary by groq] Hey... Répond en tenant compte des autres points de vue....', 'ts': 1776937956}, {'round': 1, 'provider': 'gemini', 'text': '[LLM summary by gemini] Question: Hey  Contributions: mistral: [LLM summary by mistral] Hey... groq: [LLM summary by groq] Hey... Répond en tenant compte des autres points de vue....', 'ts': 1776937956}, {'round': 1, 'provider': 'groq', 'text': '[LLM summary by groq] Question: Hey  Contributions: mistral: [LLM summary by mistral] Hey... gemini: [LLM summary by gemini] Hey... Répond en tenant compte des autres points de vue....', 'ts': 1776937956}]; question: Hey "
+  }
+}

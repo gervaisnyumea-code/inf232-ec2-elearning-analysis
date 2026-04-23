@@ -38,14 +38,57 @@ class BrainNet:
     def _load_path(self, path: Path) -> Optional[Dict]:
         try:
             data = joblib.load(str(path))
+            model = None
+            scaler = None
+            feature_names = None
             if isinstance(data, dict) and 'model' in data:
                 model = data.get('model')
                 scaler = data.get('scaler', None)
                 feature_names = data.get('feature_names', None)
             else:
                 model = data
-                scaler = None
-                feature_names = None
+
+            # Support simple framework-wrapped model dicts saved as {'framework': 'keras'|'torch', 'model': <obj>}
+            try:
+                if isinstance(model, dict) and 'framework' in model:
+                    fw = str(model.get('framework')).lower()
+                    inner = model.get('model')
+                    if fw == 'keras':
+                        try:
+                            from tensorflow.keras.models import Model as KerasModel
+                            class KerasWrapper:
+                                def __init__(self, m):
+                                    self.m = m
+                                def predict(self, X):
+                                    arr = getattr(X, 'values', X)
+                                    return self.m.predict(arr)
+                                def predict_proba(self, X):
+                                    return self.predict(X)
+                            model = KerasWrapper(inner)
+                        except Exception as e:
+                            logger.warning('Keras wrapper not available: %s', e)
+                    elif fw == 'torch':
+                        try:
+                            import torch
+                            class TorchWrapper:
+                                def __init__(self, m):
+                                    self.m = m
+                                def predict(self, X):
+                                    import numpy as _np
+                                    arr = getattr(X, 'values', X)
+                                    self.m.eval()
+                                    with torch.no_grad():
+                                        t = torch.tensor(arr, dtype=torch.float32)
+                                        out = self.m(t).numpy()
+                                    return out
+                                def predict_proba(self, X):
+                                    return self.predict(X)
+                            model = TorchWrapper(inner)
+                        except Exception as e:
+                            logger.warning('Torch wrapper not available: %s', e)
+            except Exception:
+                pass
+
             return {'model': model, 'scaler': scaler, 'feature_names': feature_names, 'path': str(path)}
         except Exception as e:
             logger.exception('Failed to load model %s: %s', path, e)

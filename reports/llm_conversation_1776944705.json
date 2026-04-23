@@ -1,0 +1,38 @@
+{
+  "question": "hey\n",
+  "data_summary": "No live data available.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] hey   Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] hey   Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] hey   Data context: No live data available...."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: hey  Data context: No live data available. Contributions: gemini: [LLM summary by gemini] hey   Data context: No live data available.... groq: [LLM summary by groq] hey   Data context: No li..."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: hey  Data context: No live data available. Contributions: mistral: [LLM summary by mistral] hey   Data context: No live data available.... groq: [LLM summary by groq] hey   Data context: No ..."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: hey  Data context: No live data available. Contributions: mistral: [LLM summary by mistral] hey   Data context: No live data available.... gemini: [LLM summary by gemini] hey   Data context:..."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summary by groq] You are a conciliator. Question: hey  Data context: No live data available. Synthesize the contributions below, list agreements and disagreements, and produce a final consolidated recommendation.  Con..."
+}

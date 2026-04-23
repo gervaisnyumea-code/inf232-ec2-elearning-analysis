@@ -1,0 +1,44 @@
+{
+  "question": "Comment le flux de donnees est gere ?\n",
+  "conversation": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Comment le flux de donnees est gere ?...",
+      "ts": 1776937673
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Comment le flux de donnees est gere ?...",
+      "ts": 1776937673
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Comment le flux de donnees est gere ?...",
+      "ts": 1776937673
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Comment le flux de donnees est gere ?  Contributions: gemini: [LLM summary by gemini] Comment le flux de donnees est gere ?... groq: [LLM summary by groq] Comment le flux de donnees est gere...",
+      "ts": 1776937673
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Comment le flux de donnees est gere ?  Contributions: mistral: [LLM summary by mistral] Comment le flux de donnees est gere ?... groq: [LLM summary by groq] Comment le flux de donnees est ge...",
+      "ts": 1776937673
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Comment le flux de donnees est gere ?  Contributions: mistral: [LLM summary by mistral] Comment le flux de donnees est gere ?... gemini: [LLM summary by gemini] Comment le flux de donnees es...",
+      "ts": 1776937673
+    }
+  ],
+  "reconciliation": {
+    "groq": "[Report by groq] conversation: [{'round': 0, 'provider': 'mistral', 'text': '[LLM summary by mistral] Comment le flux de donnees est gere ?...', 'ts': 1776937673}, {'round': 0, 'provider': 'gemini', 'text': '[LLM summary by gemini] Comment le flux de donnees est gere ?...', 'ts': 1776937673}, {'round': 0, 'provider': 'groq', 'text': '[LLM summary by groq] Comment le flux de donnees est gere ?...', 'ts': 1776937673}, {'round': 1, 'provider': 'mistral', 'text': '[LLM summary by mistral] Question: Comment le flux de donnees est gere ?  Contributions: gemini: [LLM summary by gemini] Comment le flux de donnees est gere ?... groq: [LLM summary by groq] Comment le flux de donnees est gere...', 'ts': 1776937673}, {'round': 1, 'provider': 'gemini', 'text': '[LLM summary by gemini] Question: Comment le flux de donnees est gere ?  Contributions: mistral: [LLM summary by mistral] Comment le flux de donnees est gere ?... groq: [LLM summary by groq] Comment le flux de donnees est ge...', 'ts': 1776937673}, {'round': 1, 'provider': 'groq', 'text': '[LLM summary by groq] Question: Comment le flux de donnees est gere ?  Contributions: mistral: [LLM summary by mistral] Comment le flux de donnees est gere ?... gemini: [LLM summary by gemini] Comment le flux de donnees es...', 'ts': 1776937673}]; question: Comment le flux de donnees est gere ?\n"
+  }
+}

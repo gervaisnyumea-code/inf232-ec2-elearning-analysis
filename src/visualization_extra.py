@@ -170,3 +170,110 @@ def plot_radar_clusters(cluster_means: pd.DataFrame, features: List[str], title:
         showlegend=True
     )
     return fig
+
+
+# ----------------------
+# Diagnostics utilities
+# ----------------------
+
+def plot_regression_diagnostics(reg_model, X, y):
+    """Return a Plotly figure with three panels: Predicted vs Actual, Residuals histogram, Residuals vs Predicted."""
+    try:
+        import numpy as _np
+        from plotly.subplots import make_subplots
+        import plotly.graph_objects as _go
+        import plotly.express as _px
+
+        y_true = _np.array(y)
+        y_pred = _np.array(reg_model.predict(X))
+        residuals = y_true - y_pred
+
+        fig = make_subplots(rows=1, cols=3, subplot_titles=("Prédits vs Réels", "Distribution des résidus", "Résidus vs Prévu"))
+
+        # Pred vs Actual
+        scatter = _go.Scatter(x=y_true, y=y_pred, mode='markers', marker=dict(size=6, color='#1f77b4'), name='Pred vs Real')
+        fig.add_trace(scatter, row=1, col=1)
+        # y=x line
+        ymin, ymax = float(min(y_true.min(), y_pred.min())), float(max(y_true.max(), y_pred.max()))
+        fig.add_shape(type='line', x0=ymin, y0=ymin, x1=ymax, y1=ymax, line=dict(color='red', dash='dash'), row=1, col=1)
+        fig.update_xaxes(title_text='Vrai', row=1, col=1)
+        fig.update_yaxes(title_text='Prévu', row=1, col=1)
+
+        # Residuals histogram
+        hist = _go.Histogram(x=residuals, nbinsx=40, marker_color='#ff7f0e')
+        fig.add_trace(hist, row=1, col=2)
+        fig.update_xaxes(title_text='Résidu', row=1, col=2)
+
+        # Residuals vs Predicted
+        scatter2 = _go.Scatter(x=y_pred, y=residuals, mode='markers', marker=dict(size=6, color='#2ca02c'))
+        fig.add_trace(scatter2, row=1, col=3)
+        fig.add_shape(type='line', x0=y_pred.min(), y0=0, x1=y_pred.max(), y1=0, line=dict(color='red', dash='dash'), row=1, col=3)
+        fig.update_xaxes(title_text='Prévu', row=1, col=3)
+        fig.update_yaxes(title_text='Résidu', row=1, col=3)
+
+        fig.update_layout(height=420, width=1200, showlegend=False, title_text='Diagnostics Régression')
+        return fig
+    except Exception as e:
+        return None
+
+
+def plot_classification_diagnostics(clf_model, X, y):
+    """Return a list of Plotly figures: [ROC, Confusion Matrix, Precision-Recall]."""
+    try:
+        from sklearn.metrics import roc_curve, auc, confusion_matrix, precision_recall_curve
+        import plotly.graph_objects as _go
+        import plotly.express as _px
+        import numpy as _np
+
+        # score/proba
+        if hasattr(clf_model, 'predict_proba'):
+            y_score = clf_model.predict_proba(X)[:, 1]
+        elif hasattr(clf_model, 'decision_function'):
+            y_score = clf_model.decision_function(X)
+        else:
+            y_score = clf_model.predict(X)
+
+        # ROC
+        fpr, tpr, _ = roc_curve(y, y_score)
+        roc_auc = auc(fpr, tpr)
+        fig_roc = _go.Figure()
+        fig_roc.add_trace(_go.Scatter(x=fpr, y=tpr, mode='lines', name=f'ROC (AUC={roc_auc:.2f})', line=dict(color='#1f77b4')))
+        fig_roc.add_shape(type='line', x0=0, y0=0, x1=1, y1=1, line=dict(color='gray', dash='dash'))
+        fig_roc.update_layout(title='ROC Curve', xaxis_title='FPR', yaxis_title='TPR')
+
+        # Confusion matrix
+        y_pred = clf_model.predict(X)
+        cm = confusion_matrix(y, y_pred)
+        fig_cm = _go.Figure(data=_go.Heatmap(z=cm, x=['Pred 0', 'Pred 1'], y=['True 0', 'True 1'], colorscale='Blues'))
+        fig_cm.update_layout(title='Confusion Matrix')
+
+        # Precision-Recall
+        precision, recall, _ = precision_recall_curve(y, y_score)
+        pr_auc = auc(recall, precision)
+        fig_pr = _go.Figure()
+        fig_pr.add_trace(_go.Scatter(x=recall, y=precision, mode='lines', name=f'PR (AUC={pr_auc:.2f})', line=dict(color='#ff7f0e')))
+        fig_pr.update_layout(title='Precision-Recall', xaxis_title='Recall', yaxis_title='Precision')
+
+        # Feature importance (if available)
+        try:
+            importance = None
+            if hasattr(clf_model, 'feature_importances_'):
+                importance = clf_model.feature_importances_
+            elif hasattr(clf_model, 'coef_'):
+                importance = _np.abs(clf_model.coef_).ravel()
+            if importance is not None:
+                import pandas as _pd
+                cols = X.columns if hasattr(X, 'columns') else [f'f{i}' for i in range(len(importance))]
+                imp_df = _pd.DataFrame({'feature': cols, 'importance': importance}).sort_values('importance', ascending=False)
+                fig_imp = _px.bar(imp_df, x='importance', y='feature', orientation='h', title='Importance des features')
+            else:
+                fig_imp = None
+        except Exception:
+            fig_imp = None
+
+        figs = [fig_roc, fig_cm, fig_pr]
+        if fig_imp is not None:
+            figs.append(fig_imp)
+        return figs
+    except Exception as e:
+        return None

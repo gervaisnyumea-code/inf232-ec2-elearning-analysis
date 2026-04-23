@@ -1,0 +1,38 @@
+{
+  "question": "Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles.",
+  "data_summary": "No live data available.",
+  "rounds": [
+    {
+      "round": 0,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles.  Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles.  Data context: No live data available...."
+    },
+    {
+      "round": 0,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles.  Data context: No live data available...."
+    },
+    {
+      "round": 1,
+      "provider": "mistral",
+      "text": "[LLM summary by mistral] Question: Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles. Data context: No live data available. Contributions: gemini: [LLM summary by gemini] Fournis u..."
+    },
+    {
+      "round": 1,
+      "provider": "gemini",
+      "text": "[LLM summary by gemini] Question: Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Fournis..."
+    },
+    {
+      "round": 1,
+      "provider": "groq",
+      "text": "[LLM summary by groq] Question: Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles. Data context: No live data available. Contributions: mistral: [LLM summary by mistral] Fournis..."
+    }
+  ],
+  "aggregator": "groq",
+  "merged": "[LLM summary by groq] You are a conciliator. Question: Fournis une analyse synthétique des tendances actuelles et des recommandations opérationnelles. Data context: No live data available. Synthesize the contributions belo..."
+}
