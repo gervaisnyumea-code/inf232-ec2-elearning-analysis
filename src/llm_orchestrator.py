@@ -3,14 +3,13 @@
 Design / Strategy
 - Providers detected via environment keys (GEMINI_*, MISTRAL_*, GROQ_*).
 - Role assignment (where they'll intervene):
-    * GEMINI: fast summarization & anomaly extraction from periodic reports
-    * MISTRAL: narrative report generation, recommendations and user-facing text
+    * MISTRAL: summarization & anomaly extraction from periodic reports
+    * GEMINI: narrative report generation, recommendations and user-facing text
     * GROQ: reasoning, reconciliation across model outputs and meta-analysis
 - The orchestrator exposes a small API for: summarize_report, generate_narrative, reconcile_ensemble, run_full_pipeline
 
 Notes
-- This module uses src.llm_integration.LLMClient which currently contains safe placeholders.
-- When API keys are provided (.env), LLMClient will pick provider automatically; replace LLMClient methods with real API calls as needed.
+- This module uses src.llm_integration.LLMClient which will call real APIs if enabled in .env.
 """
 
 import os
@@ -22,8 +21,8 @@ logger = logging.getLogger(__name__)
 
 # mapping of provider -> role for documentation and routing
 PROVIDER_ROLES = {
-    'gemini': 'summarization',
-    'mistral': 'narrative',
+    'mistral': 'summarization',
+    'gemini': 'narrative',
     'groq': 'reasoning',
 }
 
@@ -34,9 +33,6 @@ class LLMOrchestrator:
     Usage:
         orch = LLMOrchestrator()
         res = orch.run_full_pipeline(df_live)
-
-    The implementation is intentionally lightweight and provider-agnostic; replace
-    LLMClient.summarize / generate_report_text with real API calls when keys are configured.
     """
 
     def __init__(self):
@@ -44,15 +40,15 @@ class LLMOrchestrator:
         self._discover_providers()
 
     def _discover_providers(self):
-        # instantiate clients for available providers (order of preference)
-        # GEMINI
-        if os.getenv('GEMINI_API_KEY_1') or os.getenv('GEMINI_API_KEY_2'):
-            self.clients['gemini'] = LLMClient('gemini')
-            logger.info('Gemini client initialized')
+        # instantiate clients for available providers (prefer Mistral for summarization)
         # MISTRAL
         if os.getenv('MISTRAL_API_KEY_1') or os.getenv('MISTRAL_API_KEY_2'):
             self.clients['mistral'] = LLMClient('mistral')
             logger.info('Mistral client initialized')
+        # GEMINI
+        if os.getenv('GEMINI_API_KEY_1') or os.getenv('GEMINI_API_KEY_2'):
+            self.clients['gemini'] = LLMClient('gemini')
+            logger.info('Gemini client initialized')
         # GROQ
         if os.getenv('GROQ_API_KEY_1') or os.getenv('GROQ_API_KEY_2'):
             self.clients['groq'] = LLMClient('groq')
@@ -62,33 +58,33 @@ class LLMOrchestrator:
         return list(self.clients.keys())
 
     def summarize_report(self, text: str, max_tokens: int = 256) -> Dict[str, str]:
-        """Produce summaries using GEMINI (preferred) and fallback providers.
+        """Produce summaries using MISTRAL (preferred) and fallback providers.
 
         Returns a dict mapping provider->summary.
         """
         out = {}
-        # try gemini first
-        if 'gemini' in self.clients:
-            out['gemini'] = self.clients['gemini'].summarize(text, max_tokens=max_tokens)
-        # fallback to mistral
+        # try mistral first
         if 'mistral' in self.clients:
             out['mistral'] = self.clients['mistral'].summarize(text, max_tokens=max_tokens)
+        # fallback to gemini
+        if 'gemini' in self.clients:
+            out['gemini'] = self.clients['gemini'].summarize(text, max_tokens=max_tokens)
         # minimal groq usage for short summaries
         if 'groq' in self.clients:
             out['groq'] = self.clients['groq'].summarize(text, max_tokens=max_tokens)
         return out
 
     def generate_narrative(self, summary_text: str) -> Dict[str, str]:
-        """Generate a narrative / recommendations using Mistral (preferred).
+        """Generate a narrative / recommendations using GEMINI (preferred).
 
         Returns provider->text mapping.
         """
         out = {}
-        if 'mistral' in self.clients:
-            out['mistral'] = self.clients['mistral'].generate_report_text({'summary': summary_text})
-        # fallback to gemini if mistral not available
-        if 'gemini' in self.clients and 'mistral' not in out:
+        if 'gemini' in self.clients:
             out['gemini'] = self.clients['gemini'].generate_report_text({'summary': summary_text})
+        # fallback to mistral if gemini not available
+        if 'mistral' in self.clients and 'gemini' not in out:
+            out['mistral'] = self.clients['mistral'].generate_report_text({'summary': summary_text})
         # groq can be asked to reconcile recommendations
         if 'groq' in self.clients:
             out['groq'] = self.clients['groq'].generate_report_text({'summary': summary_text})
@@ -120,8 +116,8 @@ class LLMOrchestrator:
         # build a tiny text summary
         text = f"rows={len(df_live)}; mean_v1={df_live['value1'].mean():.4f}; mean_v2={df_live['value2'].mean():.4f}"
         summaries = self.summarize_report(text)
-        # pick best summary (prefer gemini)
-        preferred = summaries.get('gemini') or next(iter(summaries.values()), '')
+        # pick best summary (prefer mistral)
+        preferred = summaries.get('mistral') or next(iter(summaries.values()), '')
         narratives = self.generate_narrative(preferred)
 
         # try to extract ensemble meta if present in df_live attrs
